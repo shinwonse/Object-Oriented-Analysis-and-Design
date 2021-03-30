@@ -1,0 +1,12 @@
+v&v 사용
+
+ide - intelli J
+unit test - JUnit
+build - Gradle
+형상관리 - 깃허브
+bug tracking & project management - redmine
+CI tool - Jenkins
+static analysis - onarqube & pmd & findbugs checkstyle
+server - aws, docker
+system testing - test link 
+communication tool - slack
