@@ -13,4 +13,4 @@ communication tool - slack
 
 
 
-##일감추가(resolve)
+##일감변경(#1resolve)
