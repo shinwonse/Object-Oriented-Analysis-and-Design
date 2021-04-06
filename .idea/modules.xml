@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SoftwareV-V.iml" filepath="$PROJECT_DIR$/.idea/SoftwareV-V.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CTIP_SMA_6.iml" filepath="$PROJECT_DIR$/CTIP_SMA_6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CTIP_SMA_6.main.iml" filepath="$PROJECT_DIR$/.idea/modules/CTIP_SMA_6.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CTIP_SMA_6.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CTIP_SMA_6.test.iml" />
     </modules>
   </component>
 </project>
