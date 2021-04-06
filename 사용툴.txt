@@ -10,3 +10,7 @@ static analysis - onarqube & pmd & findbugs checkstyle
 server - aws, docker
 system testing - test link 
 communication tool - slack
+
+
+
+##일감추가(resolve)
