@@ -9,6 +9,8 @@ public class TestHello {
         System.out.println("poll check");
         System.out.println("restart jenkins");
         System.out.println("pull request");
+
+        System.out.println("Test Test Test");
     }
 
 }
