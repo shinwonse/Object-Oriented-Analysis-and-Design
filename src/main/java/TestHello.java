@@ -7,6 +7,7 @@ public class TestHello {
         System.out.println("pull request");
         System.out.println("poll uncheck");
         System.out.println("poll check");
+        System.out.println("restart jenkins");
     }
 
 }
