@@ -7,6 +7,8 @@ public class TestHello {
         System.out.println("new fork");
 
         System.out.println("testetsetest");
+
+        System.out.println("testelkjtslaljs");
     }
 
 }
