@@ -21,6 +21,8 @@ public class TestHello {
         System.out.println("keljrlskf");
 
         System.out.println("re_fork");
+
+        System.out.println("test");
     }
 
 }
