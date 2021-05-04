@@ -47,7 +47,8 @@ class MyFrame extends JFrame {
             pDial.add(dialButton_list[i]);
         }
 
-        showAccessibleDVMList(pScreen, dvmList);
+        showAllDVMList(pScreen); // 초기 전체 DVM 출력
+        //showAccessibleDVMList(pScreen, dvmList);
         // 루트 프레임에 screen JPanel add
         panelDown.setLayout(grid);
         // 루트 프레임에 button들 JPanel add
@@ -76,6 +77,27 @@ class MyFrame extends JFrame {
 
         setLocationRelativeTo(null); // 프레임 실행시 위치 중앙
 
+    }
+
+    private void showAllDVMList(JPanel pScreen) {
+        pScreen.setLayout(grid);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 4; j++) {
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/icon/vm_image.png")
+                                            .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                int num = i * 4 + j + 1;
+                labelList.add(new JLabel(num + ". DVM " + num, imageIcon, JLabel.CENTER));
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 4; j++) {
+                gbc(labelList.get(i * 4 + j), j, i, 1, 1);
+                //labelList.get(i * 4 + j).setHorizontalAlignment(SwingConstants.CENTER);
+            }
+        }
+        for (int i = 0; i < dvmList.length; i++) {
+            pScreen.add(labelList.get(i));
+        }
     }
 
     private void setDialButton(JButton[] dialButton_list) {
