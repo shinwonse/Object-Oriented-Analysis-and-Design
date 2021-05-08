@@ -26,8 +26,10 @@ class MyFrame extends JFrame {
     GridBagLayout grid = new GridBagLayout();
     GridBagConstraints gbc = new GridBagConstraints();
 
-    /////////////// Controller가 가져야되는 dvmList //////////////
-    ArrayList<DVM> dvmList = new ArrayList<>();
+    // controller 객체
+    Controller controller = new Controller();
+
+    int[] dvmAddresses = {101, 202, 303, 404, 505, 606, 707, 808};
 
     MyFrame() {
         init();
@@ -35,36 +37,6 @@ class MyFrame extends JFrame {
 
 
     private void init() {
-        //1번 DVM 음료 등록//
-        ArrayList<Drink> drinkArrayList = new ArrayList<>(); // 전체 음료수 리스트
-        drinkArrayList.add(new Drink("코카콜라", 1500, 10, "src/main/resources/image/1.jpg"));
-        drinkArrayList.add(new Drink("펩시콜라", 1500, 10, "src/main/resources/image/2.jpg"));
-        drinkArrayList.add(new Drink("칠성사이다", 1500, 10, "src/main/resources/image/3.jpg"));
-        drinkArrayList.add(new Drink("스프라이트", 1500, 10, "src/main/resources/image/4.jpg"));
-        drinkArrayList.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
-        drinkArrayList.add(new Drink("환타포도", 1500, 10, "src/main/resources/image/6.jpg"));
-        drinkArrayList.add(new Drink("핫식스", 1500, 10, "src/main/resources/image/7.jpg"));
-        drinkArrayList.add(new Drink("레드불", 1500, 10, "src/main/resources/image/8.jpg"));
-        drinkArrayList.add(new Drink("몬스터드링크", 1500, 10, "src/main/resources/image/9.jpg"));
-        drinkArrayList.add(new Drink("빡텐션", 1500, 10, "src/main/resources/image/10.jpg"));
-        drinkArrayList.add(new Drink("포카리스웨트", 1500, 10, "src/main/resources/image/11.jpg"));
-        drinkArrayList.add(new Drink("게토레이", 1500, 10, "src/main/resources/image/12.jpg"));
-        drinkArrayList.add(new Drink("파워에이드", 1500, 10, "src/main/resources/image/13.jpg"));
-        drinkArrayList.add(new Drink("밀키스", 1500, 10, "src/main/resources/image/14.jpg"));
-        drinkArrayList.add(new Drink("레쓰비", 1500, 10, "src/main/resources/image/15.jpg"));
-        drinkArrayList.add(new Drink("스파클링", 1500, 10, "src/main/resources/image/16.jpg"));
-        drinkArrayList.add(new Drink("비락식혜", 1500, 10, "src/main/resources/image/17.jpg"));
-        drinkArrayList.add(new Drink("솔의눈", 1500, 10, "src/main/resources/image/18.jpg"));
-        drinkArrayList.add(new Drink("데자와", 1500, 10, "src/main/resources/image/19.jpg"));
-        drinkArrayList.add(new Drink("마운틴듀", 1500, 10, "src/main/resources/image/20.jpg"));
-
-        //DVMList 초기화 작업
-        for(int i = 0; i < 8; i++){
-            DVM tempDVM = new DVM(true, new ArrayList<Drink>(), i + 1, i + 1);
-            tempDVM.setDrink_list((drinkArrayList));
-            dvmList.add(i, tempDVM);
-        }
-
         setTitle("초기화면");
         setLayout(new GridLayout(2, 1)); // 전체 화면을 그리드형태로 위(스크린) 아래(버튼) 분할
 
@@ -120,8 +92,8 @@ class MyFrame extends JFrame {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/image/vm_image.png")
                         .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
                 int num = i * 4 + j;
-                int id = dvmList.get(num).getId();
-                int address = dvmList.get(num).getAddress();
+                int id = num + 1;
+                int address = dvmAddresses[num];
                 labelList.add(new JLabel("<html>"+ (num + 1) + ". DVM" + id + "<br>주소: " + address + "</html>", imageIcon, JLabel.CENTER));
             }
         }
@@ -139,19 +111,21 @@ class MyFrame extends JFrame {
 
     //자판기 음료수 출력//
 
-    private void showDVMDrinkList(JPanel pScreen, int index) {
+    private void showDVMDrinkList(JPanel pScreen, int num) {
         ArrayList<JLabel> label_drink = new ArrayList<>();
         pScreen.setLayout(grid);
-        ArrayList<Drink> currentDrinkList = dvmList.get(index).getDrink_list();
+        DVM currentDVM = controller.selectDVM(num);
+        ArrayList<Drink> currentDrinkList = currentDVM.getDrink_list();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
-                int num = i * 5 + j;
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(currentDrinkList.get(num).getImgURL())
+                int index = i * 5 + j;
+                Drink drink = currentDrinkList.get(index);
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(drink.getImgURL())
                         .getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT));
-                String name = currentDrinkList.get(num).getName();
-                int price = currentDrinkList.get(num).getPrice();
-                int stock = currentDrinkList.get(num).getStock();
-                label_drink.add(new JLabel("<html>"+ (num + 1) + "." + name + "<br>" + price + "원 (" + stock + "개)</html>", imageIcon, JLabel.LEFT));
+                String name = drink.getName();
+                int price = drink.getPrice();
+                int stock = drink.getStock();
+                label_drink.add(new JLabel("<html>"+ (index + 1) + "." + name + "<br>" + price + "원 (" + stock + "개)</html>", imageIcon, JLabel.LEFT));
             }
         }
         for (int i = 0; i < 4; i++) {
@@ -194,10 +168,6 @@ class MyFrame extends JFrame {
 
         public void actionPerformed(ActionEvent event) {
             String eventText = event.getActionCommand();
-            JButton btn1 = new JButton("카드결제");
-            JButton btn2 = new JButton("코드결제");
-//            System.out.println("input은 "+input);
-//            System.out.println("input num 은" + inputNum);
 
             if(inputTemp == 0){
                 if(eventText.equals("확인")){
@@ -205,20 +175,21 @@ class MyFrame extends JFrame {
                     inputText.setText("");
                     // 선택완료 메시지
                     JOptionPane aa=new JOptionPane();
-                    if(inputNum>=1 && inputNum<=8 ) {
-                        aa.showMessageDialog(null, inputNum + "번 DVM을 선택하셨습니다.");
+                    if(inputNum >=1 && inputNum <= 8) {
+                        JOptionPane.showMessageDialog(null, inputNum + "번 DVM을 선택하셨습니다.");
                         pScreen.removeAll();
                         showDVMDrinkList(pScreen, inputNum);
                         pScreen.updateUI();
                     }
                     else
-                        aa.showMessageDialog(null, "올바른 번호를 선택해 주십시오 (1~8)");
+                        JOptionPane.showMessageDialog(null, "올바른 번호를 선택해 주십시오 (1~8)");
                 }else if(eventText.equals("←")) {
                     inputTemp = 0;
                     inputText.setText("");
                 }else {                                           //0~9 사이의 숫자 input
                     inputTemp = Integer.parseInt(eventText);
-                    inputText.setText(String.valueOf(inputTemp));
+                    String temp = inputText.getText();
+                    inputText.setText(temp + eventText);
                 }
             }
             // 십의자리수 이상의 input 컨트롤
@@ -227,34 +198,105 @@ class MyFrame extends JFrame {
                     inputNum = inputTemp;
                     inputTemp = 0;
                     inputText.setText("");
-                    JOptionPane aa=new JOptionPane();
+                    //JOptionPane aa=new JOptionPane();
                     switch(stage) {
                         case 0: // DVM 선택
                             if(inputNum>=1 && inputNum<=8) {
-                                aa.showMessageDialog(null, inputNum + "번 DVM을 선택하셨습니다.");
+                                JOptionPane.showMessageDialog(null, inputNum + "번 DVM을 선택하셨습니다.");
                                 pScreen.removeAll();
                                 showDVMDrinkList(pScreen, inputNum);
                                 pScreen.updateUI();
                                 stage=1;
                             }
                             else{
-                                aa.showMessageDialog(null, inputNum + "번은 존재하지않습니다. 올바른 번호를 선택해 주십시오 (1~8)");
+                                JOptionPane.showMessageDialog(null, inputNum + "번은 존재하지않습니다. 올바른 번호를 선택해 주십시오 (1~8)");
                             }
                             break;
                         case 1: // Drink 선택
                             if(inputNum>=1 && inputNum<=7) {
-                                aa.showMessageDialog(null,inputNum + "번 음료를 선택하셨습니다.");
+                                JOptionPane.showMessageDialog(null,inputNum + "번 음료를 선택하셨습니다.");
                                 pScreen.removeAll();
-                                add(btn1);
-                                add(btn2);
-                                PayMenuListener payMenuListener = new PayMenuListener();
-                                payMenuListener.actionPerformed(btn1);
+                                proceedCurrentDrink(pScreen, inputNum);
+                                pScreen.updateUI();
+
+                            }
+                            else if(inputNum >= 8 && inputNum <= 20){
+                                // 현재 DVM에 없는 음료를 선택한 경우, 선결제 진행
+                                // 다른 DVM에 재고 확인 요청 후 재고가 있는 DVM 출력
+                                //JOptionPane.showMessageDialog(null,inputNum + "번 음료는 현재 자판기에 존재하지 않습니다. 선결제를 진행합니다.");
+                                pScreen.removeAll();
+                                proceedOtherDrink(pScreen, inputNum);
+                                pScreen.updateUI();
+                            }
+                            else
+                                JOptionPane.showMessageDialog(null, "번호를 잘못 입력했습니다. 1 or 2를 입력해주세요.");
+                            break;
+                        case 2: // 결제방법 선택
+                            if(inputNum == 1) {
+                                JOptionPane.showMessageDialog(null, "카드 결제를 선택하셨습니다.");
+                                pScreen.removeAll();
+                                showCardInput(pScreen);
+                                pScreen.updateUI();
+                                stage = 3;
+                            }
+                            else if(inputNum == 2){
+                                JOptionPane.showMessageDialog(null, "코드 결제를 선택하셨습니다.");
+                                pScreen.removeAll();
+                                showInputCode();
+                                pScreen.updateUI();
+                                stage = 4;
+                            }
+                            else
+                                JOptionPane.showMessageDialog(null, "번호를 잘못 입력했습니다. 1 or 2를 입력해주세요.");
+                            break;
+                        case 3: // 카드 선택
+//                            aa.showMessageDialog(null, "카드를 선택해주세요.");
+                            // 카드 목록 출력
+                            String result = controller.insertCard(inputNum, false);
+                            if(result.equals("")){
+                                JOptionPane.showMessageDialog(null, "결제를 취소합니다. 초기화면으로 돌아갑니다.");
+                                // 초기 화면으로 돌아감
+                                stage = 0;
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, result);
+                                // 음료수 지급, 음료수 재고 업데이트
+                                // 초기 화면으로 돌아감
+                                stage = 0;
+                                showAllDVMList(pScreen);
                                 pScreen.updateUI();
                             }
                             break;
-                        case 2:
+                        case 4: // 코드 입력
+                            String prepaymentResult = controller.enterCode(inputNum);
+                            if(prepaymentResult.equals("")){
+                                JOptionPane.showMessageDialog(null, "유효하지 않은 코드입니다. 초기화면으로 돌아갑니다.");
+                                // 초기 화면으로 돌아감
+                                stage = 0;
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, prepaymentResult);
+                                stage = 0;
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
                             break;
-                        case 3:
+                        case 5: // 선결제 진행
+                            String prePaymentResult = controller.insertCard(inputNum, true);
+                            JOptionPane.showMessageDialog(null, prePaymentResult);
+                            stage = 0;
+                            showAllDVMList(pScreen);
+                            pScreen.updateUI();
+                            break;
+                        case 6: // 재고 있는 DVM 위치 출력
+                            //showAccessibleDVMList(pScreen);
+                            stage = 0;
+                            showAllDVMList(pScreen);
+                            pScreen.updateUI();
                             break;
 
                     }
@@ -269,11 +311,24 @@ class MyFrame extends JFrame {
                 }else{                                                              //0~9 사이의 숫자 input
                     inputTemp = inputTemp*10 + Integer.parseInt(eventText);
                     inputText.setText(String.valueOf(inputTemp));
+
                 }
             }
 
         }
 
+
+
+    }
+
+    private void showInputCode() {
+        pScreen.setLayout(grid);
+        pScreen.add(new JLabel("<html>"+ "코드 번호를 입력해주세요."+"<br>" + "(코드 번호는 5자리 숫자입니다.)</html>"));
+    }
+
+    private void showCardInput(JPanel pScreen) {
+        pScreen.setLayout(grid);
+        pScreen.add(new JLabel("<html>"+ "카드 일련번호를 입력해주세요."+"<br>" + "(성공 번호: 1234 1234)</html>"));
     }
 
     private void showAccessibleDVMList(JPanel p2, String[] dvmList) {
@@ -306,7 +361,57 @@ class MyFrame extends JFrame {
         gbc.gridheight = height;
         grid.setConstraints(j, gbc);
     }
+
+    private void proceedCurrentDrink(JPanel pScreen, int inputNum) {
+        int drink_status = controller.selectDrink(inputNum);
+        if(drink_status == 0){ // EMPTY_ALL_STOCK : 모든 DVM 의 재고가 0임
+            JOptionPane.showMessageDialog(null, "모든 DVM에 해당 음료의 재고가 없습니다. 초기화면으로 돌아갑니다.");
+            // 인증 코드 메시지 출력
+            stage = 0;
+            showAllDVMList(pScreen);
+            pScreen.updateUI();
+        }
+        else if(drink_status == 1){ // CUR_IN_STOCK : 현재 자판기에 재고가 있음
+            ArrayList<JLabel> pay_label = new ArrayList<>();
+            pScreen.setLayout(grid);
+            pay_label.add(new JLabel("1. 카드결제",JLabel.CENTER));
+            pay_label.add(new JLabel("2. 코드결제",JLabel.CENTER));
+
+            for (int i = 0; i < 2; i++) {
+                for(int j = 0; j < 1; j++) {
+                    gbc(pay_label.get(i + j), j, i, 1, 1);
+                }
+            }
+
+            for (int i = 0; i < 2; i++) {
+                pScreen.add(pay_label.get(i));
+            }
+            stage = 2;
+        }
+        else{ // OTHER_IN_STOCK : 다른 자판기에 재고가 있음
+            JOptionPane.showMessageDialog(null, "현재 DVM에 해당 음료의 재고가 없지만 다른 DVM에 재고가 존재합니다. 선결제로 넘어갑니다.");
+            showCardInput(pScreen);
+            stage = 5;
+        }
+    }
+
+    private void proceedOtherDrink(JPanel pScreen, int inputNum) {
+        int drink_status = controller.selectDrink(inputNum);
+        if(drink_status == 0){ // 모든 DVM에 재고가 없음
+            JOptionPane.showMessageDialog(null, "모든 DVM에 해당 음료의 재고가 없습니다. 초기화면으로 돌아갑니다.");
+            // 인증 코드 메시지 출력
+            stage = 0;
+            showAllDVMList(pScreen);
+            pScreen.updateUI();
+        }
+        else{ // OHTER_IN_STOCK : 다른 자판기에 재고가 있음
+            JOptionPane.showMessageDialog(null, "현재 DVM에 해당 음료의 재고가 없지만 다른 DVM에 재고가 존재합니다. 선결제로 넘어갑니다.");
+            showCardInput(pScreen);
+            stage = 5;
+        }
+    }
 }
+
 class PayMenuListener implements ActionListener {
 
     @Override

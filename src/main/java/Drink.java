@@ -32,7 +32,7 @@ public class Drink {
         this.price = price;
     }
 
-    public int getStock() {
+    public int getStock(){
         return stock;
     }
 
@@ -40,8 +40,8 @@ public class Drink {
         this.stock = stock;
     }
 
-    public void updateStock(int count){
-
+    public void updateStock(){
+        this.stock--;
     }
 
     public int getStock(Drink drink_info){
