@@ -14,9 +14,9 @@ public class CardPayment {
 
     private void init() {
         int[] basicCardNameList = {12341234,11111111, 10000000};
-        Card card1 = new Card(basicCardNameList[0], 10000, true);
-        Card card2 = new Card(basicCardNameList[1], 0, true);
-        Card card3 = new Card(basicCardNameList[2], 10000, false);
+        Card card1 = new Card(basicCardNameList[0], 10000);
+        Card card2 = new Card(basicCardNameList[1], 0);
+        Card card3 = new Card(basicCardNameList[2], 10000);
         ArrayList<Card> tempList = new ArrayList<>();
         tempList.add(card1);
         tempList.add(card2);
@@ -30,26 +30,6 @@ public class CardPayment {
 
     public void setIsPrePayment(boolean tf){
         this.isPrePayment = tf;
-    }
-
-    public Boolean cardPayment(Card card_info, Drink drink_info){
-        if (card_info.getCard_available()){
-            //available 한 카드
-            int balance = card_info.getBalance();
-            int price = drink_info.getPrice();
-            if (balance >= price){
-                //잔액 결제 가능
-                card_info.updateBalance(price);
-                return true;
-            }else{
-                System.out.println("잔액 부족 결제 취소");
-                return false;
-            }
-        }
-        else{
-            System.out.println("available하지 않은 카드");
-            return false;
-        }
     }
 
     public Code generateCode(Drink selected_drink){
@@ -67,5 +47,13 @@ public class CardPayment {
             }
         }
         return null;
+    }
+
+    public Boolean getCard_available(int card_num) {
+        for (Card card : basicCardList) {
+            if(card.getCard_num() == card_num)
+                return true;
+        }
+        return false;
     }
 }

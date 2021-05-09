@@ -46,11 +46,11 @@ public class Controller {
     }
 
     String insertCard(int card_num, boolean isPrepayment){
-        Card card = cardPayment.getCard(card_num);
-        Boolean card_available = card.getCard_available();
+        Boolean card_available = cardPayment.getCard_available(card_num);
         if(!card_available){
             return "";
         }
+        Card card = cardPayment.getCard(card_num);
         int balance = card.getBalance();
         int price = selected_drink.getPrice();
         if(balance < price){
