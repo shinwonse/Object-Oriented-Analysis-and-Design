@@ -92,7 +92,7 @@ public class DVM {
         return message.createMessage(getId(), dst_id, MsgType.RESPONSE_STOCK, stockMsg);
     }
 
-    public int responseStockMessage(OtherDVMs.Network network, Message message) {
+    public int responseStockMessage(Network network, Message message) {
         return network.responseBroadcastMessage(message);
     }
 
@@ -110,7 +110,7 @@ public class DVM {
         return message.createMessage(getId(), src_id, MsgType.RESPONSE_LOCATION, Integer.toString(address));
     }
 
-    public int responseLocationMessage(OtherDVMs.Network network, Message message){
+    public int responseLocationMessage(Network network, Message message){
         return network.responseNormalMessage(message);
     }
 

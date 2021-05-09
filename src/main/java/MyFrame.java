@@ -254,7 +254,7 @@ class MyFrame extends JFrame {
                             // 카드 목록 출력
                             String result = controller.insertCard(inputNum, false);
                             if(result.equals("")){
-                                JOptionPane.showMessageDialog(null, "결제를 취소합니다. 초기화면으로 돌아갑니다.");
+                                JOptionPane.showMessageDialog(null, "유효하지 않은 카드입니다. 초기화면으로 돌아갑니다.");
                                 // 초기 화면으로 돌아감
                                 stage = 0;
                                 showAllDVMList(pScreen);
