@@ -129,14 +129,14 @@ public class OtherDVMs {
         drinkArrayList3.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
         drinkArrayList3.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
 
-        DVM dvm1 = new DVM(true, drinkArrayList, 0, 101);
-        DVM dvm2 = new DVM(true, drinkArrayList2, 1, 202);
-        DVM dvm3 = new DVM(true, drinkArrayList3, 2, 303);
-        DVM dvm4 = new DVM(true, drinkArrayList3, 3, 404);
-        DVM dvm5 = new DVM(true, drinkArrayList3, 4, 505);
-        DVM dvm6 = new DVM(true, drinkArrayList3, 5, 606);
-        DVM dvm7 = new DVM(true, drinkArrayList3, 6, 707);
-        DVM dvm8 = new DVM(true, drinkArrayList3, 7, 808);
+        DVM dvm1 = new DVM(drinkArrayList, 0, 101);
+        DVM dvm2 = new DVM(drinkArrayList2, 1, 202);
+        DVM dvm3 = new DVM(drinkArrayList3, 2, 303);
+        DVM dvm4 = new DVM(drinkArrayList3, 3, 404);
+        DVM dvm5 = new DVM(drinkArrayList3, 4, 505);
+        DVM dvm6 = new DVM(drinkArrayList3, 5, 606);
+        DVM dvm7 = new DVM(drinkArrayList3, 6, 707);
+        DVM dvm8 = new DVM( drinkArrayList3, 7, 808);
         ArrayList<DVM> tempList = new ArrayList<DVM>();
         tempList.add(dvm1);
         tempList.add(dvm2);

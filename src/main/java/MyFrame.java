@@ -257,6 +257,7 @@ class MyFrame extends JFrame {
                                 JOptionPane.showMessageDialog(null, "유효하지 않은 카드입니다. 초기화면으로 돌아갑니다.");
                                 // 초기 화면으로 돌아감
                                 stage = 0;
+                                pScreen.removeAll();
                                 showAllDVMList(pScreen);
                                 pScreen.updateUI();
                             }
@@ -265,6 +266,7 @@ class MyFrame extends JFrame {
                                 // 음료수 지급, 음료수 재고 업데이트
                                 // 초기 화면으로 돌아감
                                 stage = 0;
+                                pScreen.removeAll();
                                 showAllDVMList(pScreen);
                                 pScreen.updateUI();
                             }
@@ -275,12 +277,14 @@ class MyFrame extends JFrame {
                                 JOptionPane.showMessageDialog(null, "유효하지 않은 코드입니다. 초기화면으로 돌아갑니다.");
                                 // 초기 화면으로 돌아감
                                 stage = 0;
+                                pScreen.removeAll();
                                 showAllDVMList(pScreen);
                                 pScreen.updateUI();
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, prepaymentResult);
                                 stage = 0;
+                                pScreen.removeAll();
                                 showAllDVMList(pScreen);
                                 pScreen.updateUI();
                             }
@@ -289,12 +293,14 @@ class MyFrame extends JFrame {
                             String prePaymentResult = controller.insertCard(inputNum, true);
                             JOptionPane.showMessageDialog(null, prePaymentResult);
                             stage = 0;
+                            pScreen.removeAll();
                             showAllDVMList(pScreen);
                             pScreen.updateUI();
                             break;
                         case 6: // 재고 있는 DVM 위치 출력
                             //showAccessibleDVMList(pScreen);
                             stage = 0;
+                            pScreen.removeAll();
                             showAllDVMList(pScreen);
                             pScreen.updateUI();
                             break;
@@ -314,11 +320,7 @@ class MyFrame extends JFrame {
 
                 }
             }
-
         }
-
-
-
     }
 
     private void showInputCode() {
@@ -408,19 +410,6 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "현재 DVM에 해당 음료의 재고가 없지만 다른 DVM에 재고가 존재합니다. 선결제로 넘어갑니다.");
             showCardInput(pScreen);
             stage = 5;
-        }
-    }
-}
-
-class PayMenuListener implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton payMenu = (JButton) e.getSource();
-        if (payMenu.getText().equals("카드결제")) {
-            System.out.println("카드결제 선택");
-        } else {
-            System.out.println("코드결제 선택");
         }
     }
 }

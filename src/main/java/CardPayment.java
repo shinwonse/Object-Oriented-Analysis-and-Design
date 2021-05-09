@@ -24,14 +24,6 @@ public class CardPayment {
         basicCardList = tempList;
     }
 
-    public boolean getIsPrePayment() {
-        return isPrePayment;
-    }
-
-    public void setIsPrePayment(boolean tf){
-        this.isPrePayment = tf;
-    }
-
     public Code generateCode(Drink selected_drink){
         //5자리 코드 생성 후, 음료 객체랑 합쳐서 코드 객체 생성
         drink_info = selected_drink;
