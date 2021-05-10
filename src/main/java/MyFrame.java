@@ -9,23 +9,23 @@ class MyFrame extends JFrame {
     int stage = 0;
     int inputNum = 0;
     int inputTemp = 0;
-    JTextField inputText = new JTextField("          ", SwingConstants.CENTER); // »ç¿ëÀÚ ÀÔ·ÂÀ» ¹Ş´Â ÅØ½ºÆ® ÇÊµå;
-    String[] num_list = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "¡ç", "È®ÀÎ"};
+    JTextField inputText = new JTextField("          ", SwingConstants.CENTER); // ì‚¬ìš©ì ì…ë ¥ì„ ë°›ëŠ” í…ìŠ¤íŠ¸ í•„ë“œ;
+    String[] num_list = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "â†", "í™•ì¸"};
     JButton[] dialButton_list = new JButton[12];
     ArrayList<JLabel> labelList = new ArrayList<JLabel>();
 
-    /////////////// panel µé ///////////////
+    /////////////// panel ë“¤ ///////////////
     JPanel pDial = new JPanel();
     JPanel panelDown = new JPanel();
     JPanel pTemp = new JPanel();
     JPanel pScreen = new JPanel();
     JPanel pInput = new JPanel();
 
-    /////////////// gridBagLayout ÆíÇÏ°Ô »ç¿ëÇÏ·Á°í Àü¿ªÀ¸·Î ¼±¾ğ ///////////////
+    /////////////// gridBagLayout í¸í•˜ê²Œ ì‚¬ìš©í•˜ë ¤ê³  ì „ì—­ìœ¼ë¡œ ì„ ì–¸ ///////////////
     GridBagLayout grid = new GridBagLayout();
     GridBagConstraints gbc = new GridBagConstraints();
 
-    // controller °´Ã¼
+    // controller ê°ì²´
     Controller controller = new Controller();
 
     int[] dvmAddresses = {101, 202, 303, 404, 505, 606, 707, 808};
@@ -36,8 +36,8 @@ class MyFrame extends JFrame {
 
 
     private void init() {
-        setTitle("ÃÊ±âÈ­¸é");
-        setLayout(new GridLayout(2, 1)); // ÀüÃ¼ È­¸éÀ» ±×¸®µåÇüÅÂ·Î À§(½ºÅ©¸°) ¾Æ·¡(¹öÆ°) ºĞÇÒ
+        setTitle("ì´ˆê¸°í™”ë©´");
+        setLayout(new GridLayout(2, 1)); // ì „ì²´ í™”ë©´ì„ ê·¸ë¦¬ë“œí˜•íƒœë¡œ ìœ„(ìŠ¤í¬ë¦°) ì•„ë˜(ë²„íŠ¼) ë¶„í• 
 
         pDial.setLayout(grid);
 
@@ -47,16 +47,16 @@ class MyFrame extends JFrame {
 
         setDialButton(dialButton_list);
 
-        // JPanel¿¡ ¹öÆ°µé add
+        // JPanelì— ë²„íŠ¼ë“¤ add
         for (int i = 0; i < num_list.length; i++) {
             pDial.add(dialButton_list[i]);
         }
 
-        showAllDVMList(pScreen); // ÃÊ±â ÀüÃ¼ DVM Ãâ·Â
+        showAllDVMList(pScreen); // ì´ˆê¸° ì „ì²´ DVM ì¶œë ¥
         //showAccessibleDVMList(pScreen, dvmList);
-        // ·çÆ® ÇÁ·¹ÀÓ¿¡ screen JPanel add
+        // ë£¨íŠ¸ í”„ë ˆì„ì— screen JPanel add
         panelDown.setLayout(grid);
-        // ·çÆ® ÇÁ·¹ÀÓ¿¡ buttonµé JPanel add
+        // ë£¨íŠ¸ í”„ë ˆì„ì— buttonë“¤ JPanel add
 
         pInput.setLayout(new BorderLayout());
         pInput.add(inputText,BorderLayout.CENTER);
@@ -74,13 +74,13 @@ class MyFrame extends JFrame {
         add(panelDown);
 
         // ------------------------------------------------
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ÇÁ·¹ÀÓÀÇ x¹öÆ°À» È°¼ºÈ­ÇÏ¿© ´İ±â¹öÆ°ÀÌ ½ÇÇà°¡´ÉÇØÁü
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // í”„ë ˆì„ì˜ xë²„íŠ¼ì„ í™œì„±í™”í•˜ì—¬ ë‹«ê¸°ë²„íŠ¼ì´ ì‹¤í–‰ê°€ëŠ¥í•´ì§
 
-        setSize(600, 800); // ÇÁ·¹ÀÓ »çÀÌÁî ÁöÁ¤
+        setSize(600, 800); // í”„ë ˆì„ ì‚¬ì´ì¦ˆ ì§€ì •
 
-        setVisible(true); // ÇÁ·¹ÀÓÀ» º¸ÀÌ°Ô ÇÔ
+        setVisible(true); // í”„ë ˆì„ì„ ë³´ì´ê²Œ í•¨
 
-        setLocationRelativeTo(null); // ÇÁ·¹ÀÓ ½ÇÇà½Ã À§Ä¡ Áß¾Ó
+        setLocationRelativeTo(null); // í”„ë ˆì„ ì‹¤í–‰ì‹œ ìœ„ì¹˜ ì¤‘ì•™
 
     }
 
@@ -94,9 +94,9 @@ class MyFrame extends JFrame {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/image/vm_image.png")
                         .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
                 int num = i * 4 + j;
-                int id = dvmInfo.get(num).get(0)+1;
+                int id = dvmInfo.get(num).get(0);
                 int address = dvmInfo.get(num).get(1);
-                labelList.add(new JLabel("<html>"+ (num + 1) + ". DVM" + id + "<br>ÁÖ¼Ò: " + address + "</html>", imageIcon, JLabel.CENTER));
+                labelList.add(new JLabel("<html>"+ (num + 1) + ". DVM" + id + "<br>ì£¼ì†Œ: " + address + "</html>", imageIcon, JLabel.CENTER));
             }
         }
         for (int i = 0; i < 2; i++) {
@@ -111,7 +111,7 @@ class MyFrame extends JFrame {
     }
 
 
-    //ÀÚÆÇ±â À½·á¼ö Ãâ·Â//
+    //ìíŒê¸° ìŒë£Œìˆ˜ ì¶œë ¥//
 
     private void showDVMDrinkList(JPanel pScreen, int num) {
         ArrayList<JLabel> label_drink = new ArrayList<>();
@@ -127,7 +127,7 @@ class MyFrame extends JFrame {
                 String name = drink.getName();
                 int price = drink.getPrice();
                 int stock = drink.getStock();
-                label_drink.add(new JLabel("<html>"+ (index + 1) + "." + name + "<br>" + price + "¿ø (" + stock + "°³)</html>", imageIcon, JLabel.LEFT));
+                label_drink.add(new JLabel("<html>"+ (index + 1) + "." + name + "<br>" + price + "ì› (" + stock + "ê°œ)</html>", imageIcon, JLabel.LEFT));
             }
         }
         for (int i = 0; i < 4; i++) {
@@ -141,29 +141,29 @@ class MyFrame extends JFrame {
     }
 
     private void setDialButton(JButton[] dialButton_list) {
-        for (int i = 0; i < 3; i++) { // 1 ~ 9 ¹öÆ°
+        for (int i = 0; i < 3; i++) { // 1 ~ 9 ë²„íŠ¼
             for (int j = 0; j < 3; j++) {
                 dialButton_list[i * 3 + j] = new  JButton(num_list[i * 3 + j]);
                 gbc(dialButton_list[i * 3 + j], j, i, 1, 1);
 
-                MyFrame.PadInput handler = new MyFrame.PadInput(); // Å°ÆĞµå ÀÌº¥Æ®¸¦ ¹ß»ı ½ÃÅ°±â À§ÇØ handler »ı¼º
-                dialButton_list[i * 3 + j].addActionListener(handler); // ÀÌº¥Æ® µî·Ï
+                MyFrame.PadInput handler = new MyFrame.PadInput(); // í‚¤íŒ¨ë“œ ì´ë²¤íŠ¸ë¥¼ ë°œìƒ ì‹œí‚¤ê¸° ìœ„í•´ handler ìƒì„±
+                dialButton_list[i * 3 + j].addActionListener(handler); // ì´ë²¤íŠ¸ ë“±ë¡
             }
         }
-        dialButton_list[9] = new JButton(num_list[9]);     // 0 ¹öÆ°
+        dialButton_list[9] = new JButton(num_list[9]);     // 0 ë²„íŠ¼
         gbc(dialButton_list[9], 0, 3, 2, 1);
-        PadInput handler9 = new PadInput(); // Å°ÆĞµå ÀÌº¥Æ®¸¦ ¹ß»ı ½ÃÅ°±â À§ÇØ handler »ı¼º
-        dialButton_list[9].addActionListener(handler9); // ÀÌº¥Æ® µî·Ï
+        PadInput handler9 = new PadInput(); // í‚¤íŒ¨ë“œ ì´ë²¤íŠ¸ë¥¼ ë°œìƒ ì‹œí‚¤ê¸° ìœ„í•´ handler ìƒì„±
+        dialButton_list[9].addActionListener(handler9); // ì´ë²¤íŠ¸ ë“±ë¡
 
-        dialButton_list[10] = new JButton(num_list[10]);   // ¡ç ¹öÆ°
+        dialButton_list[10] = new JButton(num_list[10]);   // â† ë²„íŠ¼
         gbc(dialButton_list[10], 2, 3, 1, 1);
-        PadInput handler10 = new PadInput(); // Å°ÆĞµå ÀÌº¥Æ®¸¦ ¹ß»ı ½ÃÅ°±â À§ÇØ handler »ı¼º
-        dialButton_list[10].addActionListener(handler10); // ÀÌº¥Æ® µî·Ï
+        PadInput handler10 = new PadInput(); // í‚¤íŒ¨ë“œ ì´ë²¤íŠ¸ë¥¼ ë°œìƒ ì‹œí‚¤ê¸° ìœ„í•´ handler ìƒì„±
+        dialButton_list[10].addActionListener(handler10); // ì´ë²¤íŠ¸ ë“±ë¡
 
-        dialButton_list[11] = new JButton(num_list[11]);   // È®ÀÎ ¹öÆ°
+        dialButton_list[11] = new JButton(num_list[11]);   // í™•ì¸ ë²„íŠ¼
         gbc(dialButton_list[11], 3, 0, 1, 4);
-        PadInput handler11 = new PadInput(); // Å°ÆĞµå ÀÌº¥Æ®¸¦ ¹ß»ı ½ÃÅ°±â À§ÇØ handler »ı¼º
-        dialButton_list[11].addActionListener(handler11); // ÀÌº¥Æ® µî·Ï
+        PadInput handler11 = new PadInput(); // í‚¤íŒ¨ë“œ ì´ë²¤íŠ¸ë¥¼ ë°œìƒ ì‹œí‚¤ê¸° ìœ„í•´ handler ìƒì„±
+        dialButton_list[11].addActionListener(handler11); // ì´ë²¤íŠ¸ ë“±ë¡
     }
 
     private class PadInput implements ActionListener {
@@ -172,92 +172,92 @@ class MyFrame extends JFrame {
             String eventText = event.getActionCommand();
 
             if(inputTemp == 0){
-                if(eventText.equals("È®ÀÎ")){
+                if(eventText.equals("í™•ì¸")){
                     inputNum = inputTemp;
                     inputText.setText("");
-                    // ¼±ÅÃ¿Ï·á ¸Ş½ÃÁö
+                    // ì„ íƒì™„ë£Œ ë©”ì‹œì§€
                     JOptionPane aa=new JOptionPane();
                     if(inputNum >=1 && inputNum <= 8) {
-                        JOptionPane.showMessageDialog(null, inputNum + "¹ø DVMÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.");
+                        JOptionPane.showMessageDialog(null, inputNum + "ë²ˆ DVMì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤.");
                         pScreen.removeAll();
                         showDVMDrinkList(pScreen, inputNum);
                         pScreen.updateUI();
                     }
                     else
-                        JOptionPane.showMessageDialog(null, "¿Ã¹Ù¸¥ ¹øÈ£¸¦ ¼±ÅÃÇØ ÁÖ½Ê½Ã¿À (1~8)");
-                }else if(eventText.equals("¡ç")) {
+                        JOptionPane.showMessageDialog(null, "ì˜¬ë°”ë¥¸ ë²ˆí˜¸ë¥¼ ì„ íƒí•´ ì£¼ì‹­ì‹œì˜¤ (1~8)");
+                }else if(eventText.equals("â†")) {
                     inputTemp = 0;
                     inputText.setText("");
-                }else {                                           //0~9 »çÀÌÀÇ ¼ıÀÚ input
+                }else {                                           //0~9 ì‚¬ì´ì˜ ìˆ«ì input
                     inputTemp = Integer.parseInt(eventText);
                     String temp = inputText.getText();
                     inputText.setText(temp + eventText);
                 }
             }
-            // ½ÊÀÇÀÚ¸®¼ö ÀÌ»óÀÇ input ÄÁÆ®·Ñ
+            // ì‹­ì˜ìë¦¬ìˆ˜ ì´ìƒì˜ input ì»¨íŠ¸ë¡¤
             else{
-                if(eventText.equals("È®ÀÎ")){
+                if(eventText.equals("í™•ì¸")){
                     inputNum = inputTemp;
                     inputTemp = 0;
                     inputText.setText("");
                     //JOptionPane aa=new JOptionPane();
                     switch(stage) {
-                        case 0: // DVM ¼±ÅÃ
+                        case 0: // DVM ì„ íƒ
                             if(inputNum>=1 && inputNum<=8) {
-                                JOptionPane.showMessageDialog(null, inputNum + "¹ø DVMÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.");
+                                JOptionPane.showMessageDialog(null, inputNum + "ë²ˆ DVMì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤.");
                                 pScreen.removeAll();
                                 showDVMDrinkList(pScreen, inputNum);
                                 pScreen.updateUI();
                                 stage=1;
                             }
                             else{
-                                JOptionPane.showMessageDialog(null, inputNum + "¹øÀº Á¸ÀçÇÏÁö¾Ê½À´Ï´Ù. ¿Ã¹Ù¸¥ ¹øÈ£¸¦ ¼±ÅÃÇØ ÁÖ½Ê½Ã¿À (1~8)");
+                                JOptionPane.showMessageDialog(null, inputNum + "ë²ˆì€ ì¡´ì¬í•˜ì§€ì•ŠìŠµë‹ˆë‹¤. ì˜¬ë°”ë¥¸ ë²ˆí˜¸ë¥¼ ì„ íƒí•´ ì£¼ì‹­ì‹œì˜¤ (1~8)");
                             }
                             break;
-                        case 1: // Drink ¼±ÅÃ
+                        case 1: // Drink ì„ íƒ
                             if(inputNum>=1 && inputNum<=7) {
-                                JOptionPane.showMessageDialog(null,inputNum + "¹ø À½·á¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.");
+                                JOptionPane.showMessageDialog(null,inputNum + "ë²ˆ ìŒë£Œë¥¼ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤.");
                                 pScreen.removeAll();
                                 proceedCurrentDrink(pScreen, inputNum);
                                 pScreen.updateUI();
 
                             }
                             else if(inputNum >= 8 && inputNum <= 20){
-                                // ÇöÀç DVM¿¡ ¾ø´Â À½·á¸¦ ¼±ÅÃÇÑ °æ¿ì, ¼±°áÁ¦ ÁøÇà
-                                // ´Ù¸¥ DVM¿¡ Àç°í È®ÀÎ ¿äÃ» ÈÄ Àç°í°¡ ÀÖ´Â DVM Ãâ·Â
-                                //JOptionPane.showMessageDialog(null,inputNum + "¹ø À½·á´Â ÇöÀç ÀÚÆÇ±â¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. ¼±°áÁ¦¸¦ ÁøÇàÇÕ´Ï´Ù.");
+                                // í˜„ì¬ DVMì— ì—†ëŠ” ìŒë£Œë¥¼ ì„ íƒí•œ ê²½ìš°, ì„ ê²°ì œ ì§„í–‰
+                                // ë‹¤ë¥¸ DVMì— ì¬ê³  í™•ì¸ ìš”ì²­ í›„ ì¬ê³ ê°€ ìˆëŠ” DVM ì¶œë ¥
+                                //JOptionPane.showMessageDialog(null,inputNum + "ë²ˆ ìŒë£ŒëŠ” í˜„ì¬ ìíŒê¸°ì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ì„ ê²°ì œë¥¼ ì§„í–‰í•©ë‹ˆë‹¤.");
                                 pScreen.removeAll();
                                 proceedOtherDrink(pScreen, inputNum);
                                 pScreen.updateUI();
                             }
                             else
-                                JOptionPane.showMessageDialog(null, "¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù. 1 or 2¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+                                JOptionPane.showMessageDialog(null, "ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í–ˆìŠµë‹ˆë‹¤. 1 or 2ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
                             break;
-                        case 2: // °áÁ¦¹æ¹ı ¼±ÅÃ
+                        case 2: // ê²°ì œë°©ë²• ì„ íƒ
                             if(inputNum == 1) {
-                                JOptionPane.showMessageDialog(null, "Ä«µå °áÁ¦¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.");
+                                JOptionPane.showMessageDialog(null, "ì¹´ë“œ ê²°ì œë¥¼ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤.");
                                 pScreen.removeAll();
                                 showCardInput(pScreen);
                                 pScreen.updateUI();
                                 stage = 3;
                             }
                             else if(inputNum == 2){
-                                JOptionPane.showMessageDialog(null, "ÄÚµå °áÁ¦¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.");
+                                JOptionPane.showMessageDialog(null, "ì½”ë“œ ê²°ì œë¥¼ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤.");
                                 pScreen.removeAll();
                                 showInputCode();
                                 pScreen.updateUI();
                                 stage = 4;
                             }
                             else
-                                JOptionPane.showMessageDialog(null, "¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù. 1 or 2¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+                                JOptionPane.showMessageDialog(null, "ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í–ˆìŠµë‹ˆë‹¤. 1 or 2ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
                             break;
-                        case 3: // Ä«µå ¼±ÅÃ
-//                            aa.showMessageDialog(null, "Ä«µå¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
-                            // Ä«µå ¸ñ·Ï Ãâ·Â
+                        case 3: // ì¹´ë“œ ì„ íƒ
+//                            aa.showMessageDialog(null, "ì¹´ë“œë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
+                            // ì¹´ë“œ ëª©ë¡ ì¶œë ¥
                             String result = controller.insertCard(inputNum, false);
                             if(result.equals("")){
-                                JOptionPane.showMessageDialog(null, "À¯È¿ÇÏÁö ¾ÊÀº Ä«µåÀÔ´Ï´Ù. ÃÊ±âÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
-                                // ÃÊ±â È­¸éÀ¸·Î µ¹¾Æ°¨
+                                JOptionPane.showMessageDialog(null, "ìœ íš¨í•˜ì§€ ì•Šì€ ì¹´ë“œì…ë‹ˆë‹¤. ì´ˆê¸°í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+                                // ì´ˆê¸° í™”ë©´ìœ¼ë¡œ ëŒì•„ê°
                                 stage = 0;
                                 pScreen.removeAll();
                                 showAllDVMList(pScreen);
@@ -265,19 +265,19 @@ class MyFrame extends JFrame {
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, result);
-                                // À½·á¼ö Áö±Ş, À½·á¼ö Àç°í ¾÷µ¥ÀÌÆ®
-                                // ÃÊ±â È­¸éÀ¸·Î µ¹¾Æ°¨
+                                // ìŒë£Œìˆ˜ ì§€ê¸‰, ìŒë£Œìˆ˜ ì¬ê³  ì—…ë°ì´íŠ¸
+                                // ì´ˆê¸° í™”ë©´ìœ¼ë¡œ ëŒì•„ê°
                                 stage = 0;
                                 pScreen.removeAll();
                                 showAllDVMList(pScreen);
                                 pScreen.updateUI();
                             }
                             break;
-                        case 4: // ÄÚµå ÀÔ·Â
+                        case 4: // ì½”ë“œ ì…ë ¥
                             String prepaymentResult = controller.enterCode(inputNum);
                             if(prepaymentResult.equals("")){
-                                JOptionPane.showMessageDialog(null, "À¯È¿ÇÏÁö ¾ÊÀº ÄÚµåÀÔ´Ï´Ù. ÃÊ±âÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
-                                // ÃÊ±â È­¸éÀ¸·Î µ¹¾Æ°¨
+                                JOptionPane.showMessageDialog(null, "ìœ íš¨í•˜ì§€ ì•Šì€ ì½”ë“œì…ë‹ˆë‹¤. ì´ˆê¸°í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+                                // ì´ˆê¸° í™”ë©´ìœ¼ë¡œ ëŒì•„ê°
                                 stage = 0;
                                 pScreen.removeAll();
                                 showAllDVMList(pScreen);
@@ -291,7 +291,7 @@ class MyFrame extends JFrame {
                                 pScreen.updateUI();
                             }
                             break;
-                        case 5: // ¼±°áÁ¦ ÁøÇà
+                        case 5: // ì„ ê²°ì œ ì§„í–‰
                             String prePaymentResult = controller.insertCard(inputNum, true);
                             JOptionPane.showMessageDialog(null, prePaymentResult);
                             stage = 0;
@@ -299,7 +299,7 @@ class MyFrame extends JFrame {
                             showAllDVMList(pScreen);
                             pScreen.updateUI();
                             break;
-                        case 6: // Àç°í ÀÖ´Â DVM À§Ä¡ Ãâ·Â
+                        case 6: // ì¬ê³  ìˆëŠ” DVM ìœ„ì¹˜ ì¶œë ¥
                             //showAccessibleDVMList(pScreen);
                             stage = 0;
                             pScreen.removeAll();
@@ -308,15 +308,15 @@ class MyFrame extends JFrame {
                             break;
 
                     }
-                }else if(eventText.equals("¡ç")) {
+                }else if(eventText.equals("â†")) {
 //                    int tmp= inputTemp % 10;
-//                    inputTemp = (inputTemp - tmp)/10;   ÀÌ·¸°ÔÇÏ·Á´Ù°¡ »ı°¢ÇØº¸´Ï °Á 10À¸·Î ³ª´©¸éµÉµí
+//                    inputTemp = (inputTemp - tmp)/10;   ì´ë ‡ê²Œí•˜ë ¤ë‹¤ê°€ ìƒê°í•´ë³´ë‹ˆ ê± 10ìœ¼ë¡œ ë‚˜ëˆ„ë©´ë ë“¯
                     inputTemp = inputTemp/10;
                     if(inputTemp == 0)
                         inputText.setText("");
                     else
                         inputText.setText(String.valueOf(inputTemp));
-                }else{                                                              //0~9 »çÀÌÀÇ ¼ıÀÚ input
+                }else{                                                              //0~9 ì‚¬ì´ì˜ ìˆ«ì input
                     inputTemp = inputTemp*10 + Integer.parseInt(eventText);
                     inputText.setText(String.valueOf(inputTemp));
 
@@ -327,12 +327,12 @@ class MyFrame extends JFrame {
 
     private void showInputCode() {
         pScreen.setLayout(grid);
-        pScreen.add(new JLabel("<html>"+ "ÄÚµå ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä."+"<br>" + "(ÄÚµå ¹øÈ£´Â 5ÀÚ¸® ¼ıÀÚÀÔ´Ï´Ù.)</html>"));
+        pScreen.add(new JLabel("<html>"+ "ì½”ë“œ ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”."+"<br>" + "(ì½”ë“œ ë²ˆí˜¸ëŠ” 5ìë¦¬ ìˆ«ìì…ë‹ˆë‹¤.)</html>"));
     }
 
     private void showCardInput(JPanel pScreen) {
         pScreen.setLayout(grid);
-        pScreen.add(new JLabel("<html>"+ "Ä«µå ÀÏ·Ã¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä."+"<br>" + "(¼º°ø ¹øÈ£: 1234 1234)</html>"));
+        pScreen.add(new JLabel("<html>"+ "ì¹´ë“œ ì¼ë ¨ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”."+"<br>" + "(ì„±ê³µ ë²ˆí˜¸: 1234 1234)</html>"));
     }
 
     private void showAccessibleDVMList(JPanel p2, String[] dvmList) {
@@ -367,19 +367,19 @@ class MyFrame extends JFrame {
     }
 
     private void proceedCurrentDrink(JPanel pScreen, int inputNum) {
-        int drink_status = controller.selectDrink(inputNum);
-        if(drink_status == 0){ // EMPTY_ALL_STOCK : ¸ğµç DVM ÀÇ Àç°í°¡ 0ÀÓ
-            JOptionPane.showMessageDialog(null, "¸ğµç DVM¿¡ ÇØ´ç À½·áÀÇ Àç°í°¡ ¾ø½À´Ï´Ù. ÃÊ±âÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
-            // ÀÎÁõ ÄÚµå ¸Ş½ÃÁö Ãâ·Â
+        int drink_status = controller.selectCurrentDrink(inputNum);
+        if(drink_status == 0){ // EMPTY_ALL_STOCK : ëª¨ë“  DVM ì˜ ì¬ê³ ê°€ 0ì„
+            JOptionPane.showMessageDialog(null, "ëª¨ë“  DVMì— í•´ë‹¹ ìŒë£Œì˜ ì¬ê³ ê°€ ì—†ìŠµë‹ˆë‹¤. ì´ˆê¸°í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+            // ì¸ì¦ ì½”ë“œ ë©”ì‹œì§€ ì¶œë ¥
             stage = 0;
             showAllDVMList(pScreen);
             pScreen.updateUI();
         }
-        else if(drink_status == 1){ // CUR_IN_STOCK : ÇöÀç ÀÚÆÇ±â¿¡ Àç°í°¡ ÀÖÀ½
+        else if(drink_status == 1){ // CUR_IN_STOCK : í˜„ì¬ ìíŒê¸°ì— ì¬ê³ ê°€ ìˆìŒ
             ArrayList<JLabel> pay_label = new ArrayList<>();
             pScreen.setLayout(grid);
-            pay_label.add(new JLabel("1. Ä«µå°áÁ¦",JLabel.CENTER));
-            pay_label.add(new JLabel("2. ÄÚµå°áÁ¦",JLabel.CENTER));
+            pay_label.add(new JLabel("1. ì¹´ë“œê²°ì œ",JLabel.CENTER));
+            pay_label.add(new JLabel("2. ì½”ë“œê²°ì œ",JLabel.CENTER));
 
             for (int i = 0; i < 2; i++) {
                 for(int j = 0; j < 1; j++) {
@@ -392,24 +392,24 @@ class MyFrame extends JFrame {
             }
             stage = 2;
         }
-        else{ // OTHER_IN_STOCK : ´Ù¸¥ ÀÚÆÇ±â¿¡ Àç°í°¡ ÀÖÀ½
-            JOptionPane.showMessageDialog(null, "ÇöÀç DVM¿¡ ÇØ´ç À½·áÀÇ Àç°í°¡ ¾øÁö¸¸ ´Ù¸¥ DVM¿¡ Àç°í°¡ Á¸ÀçÇÕ´Ï´Ù. ¼±°áÁ¦·Î ³Ñ¾î°©´Ï´Ù.");
+        else{ // OTHER_IN_STOCK : ë‹¤ë¥¸ ìíŒê¸°ì— ì¬ê³ ê°€ ìˆìŒ
+            JOptionPane.showMessageDialog(null, "í˜„ì¬ DVMì— í•´ë‹¹ ìŒë£Œì˜ ì¬ê³ ê°€ ì—†ì§€ë§Œ ë‹¤ë¥¸ DVMì— ì¬ê³ ê°€ ì¡´ì¬í•©ë‹ˆë‹¤. ì„ ê²°ì œë¡œ ë„˜ì–´ê°‘ë‹ˆë‹¤.");
             showCardInput(pScreen);
             stage = 5;
         }
     }
 
     private void proceedOtherDrink(JPanel pScreen, int inputNum) {
-        int drink_status = controller.selectDrink(inputNum);
-        if(drink_status == 0){ // ¸ğµç DVM¿¡ Àç°í°¡ ¾øÀ½
-            JOptionPane.showMessageDialog(null, "¸ğµç DVM¿¡ ÇØ´ç À½·áÀÇ Àç°í°¡ ¾ø½À´Ï´Ù. ÃÊ±âÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
-            // ÀÎÁõ ÄÚµå ¸Ş½ÃÁö Ãâ·Â
+        int drink_status = controller.selectOtherDrink(inputNum);
+        if(drink_status == 0){ // ëª¨ë“  DVMì— ì¬ê³ ê°€ ì—†ìŒ
+            JOptionPane.showMessageDialog(null, "ëª¨ë“  DVMì— í•´ë‹¹ ìŒë£Œì˜ ì¬ê³ ê°€ ì—†ìŠµë‹ˆë‹¤. ì´ˆê¸°í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+            // ì¸ì¦ ì½”ë“œ ë©”ì‹œì§€ ì¶œë ¥
             stage = 0;
             showAllDVMList(pScreen);
             pScreen.updateUI();
         }
-        else{ // OHTER_IN_STOCK : ´Ù¸¥ ÀÚÆÇ±â¿¡ Àç°í°¡ ÀÖÀ½
-            JOptionPane.showMessageDialog(null, "ÇöÀç DVM¿¡ ÇØ´ç À½·áÀÇ Àç°í°¡ ¾øÁö¸¸ ´Ù¸¥ DVM¿¡ Àç°í°¡ Á¸ÀçÇÕ´Ï´Ù. ¼±°áÁ¦·Î ³Ñ¾î°©´Ï´Ù.");
+        else{ // OHTER_IN_STOCK : ë‹¤ë¥¸ ìíŒê¸°ì— ì¬ê³ ê°€ ìˆìŒ
+            JOptionPane.showMessageDialog(null, "í˜„ì¬ DVMì— í•´ë‹¹ ìŒë£Œì˜ ì¬ê³ ê°€ ì—†ì§€ë§Œ ë‹¤ë¥¸ DVMì— ì¬ê³ ê°€ ì¡´ì¬í•©ë‹ˆë‹¤. ì„ ê²°ì œë¡œ ë„˜ì–´ê°‘ë‹ˆë‹¤.");
             showCardInput(pScreen);
             stage = 5;
         }
