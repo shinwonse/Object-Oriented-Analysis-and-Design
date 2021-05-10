@@ -19,7 +19,7 @@ public class Network {
         return address;
     }
 
-    // BroadCastMessage ¸¦ »ç¿ëÇÏ´Â ÄÉÀÌ½º´Â ½ÇÁúÀûÀ¸·Î Àç°í¿äÃ»¶§¹Û¿¡ ¾øÀ½
+    // BroadCastMessage ë¥¼ ì‚¬ìš©í•˜ëŠ” ì¼€ì´ìŠ¤ëŠ” ì‹¤ì§ˆì ìœ¼ë¡œ ì¬ê³ ìš”ì²­ë•Œë°–ì— ì—†ìŒ
     public ArrayList<DVM> requestBroadcastMessage(Message broadCastMessage) {
         int src_id = broadCastMessage.getSrc_id();
         int msg_type = broadCastMessage.getMsg_type();
@@ -37,8 +37,8 @@ public class Network {
             boolean isInStock = false;
             for(Drink drink: dvm.getDrink_list()){
                 if(drink.getName().equals(msg)){
-                    Message message = dvm.makeStockResponseMessage(src_id, drink.getStock()); // DVMÀÌ ÀÀ´ä ¸Ş¼¼Áö¸¦ ¸¸µë
-                    int stock = dvm.responseStockMessage(this, message); // DVMÀÌ Network¸¦ ÅëÇØ ÀÀ´ä¸Ş½ÃÁö¸¦ Àü´ŞÇÏ°í Network ³»ºÎ¿¡¼­ stock °ªÀ» Ã£¾Æ ¸®ÅÏÇØÁÜ
+                    Message message = dvm.makeStockResponseMessage(src_id, drink.getStock()); // DVMì´ ì‘ë‹µ ë©”ì„¸ì§€ë¥¼ ë§Œë“¬
+                    int stock = dvm.responseStockMessage(this, message); // DVMì´ Networkë¥¼ í†µí•´ ì‘ë‹µë©”ì‹œì§€ë¥¼ ì „ë‹¬í•˜ê³  Network ë‚´ë¶€ì—ì„œ stock ê°’ì„ ì°¾ì•„ ë¦¬í„´í•´ì¤Œ
                     if(stock != 0){
                         isInStock = true;
                         break;
