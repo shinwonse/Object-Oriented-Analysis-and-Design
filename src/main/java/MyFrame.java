@@ -13,7 +13,6 @@ class MyFrame extends JFrame {
     String[] num_list = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "°Á", "»Æ¿Œ"};
     JButton[] dialButton_list = new JButton[12];
     ArrayList<JLabel> labelList = new ArrayList<JLabel>();
-    String[] accessibleDVMList = {"dvm1", "dvm3", "dvm6", "", "", "", "", ""};
 
     /////////////// panel µÈ ///////////////
     JPanel pDial = new JPanel();
@@ -86,6 +85,7 @@ class MyFrame extends JFrame {
     }
 
     private void showAllDVMList(JPanel pScreen) {
+        String [] arr = controller.startService();
         pScreen.setLayout(grid);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
