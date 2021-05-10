@@ -103,7 +103,7 @@ class MyFrame extends JFrame {
                 //labelList.get(i * 4 + j).setHorizontalAlignment(SwingConstants.CENTER);
             }
         }
-        for (int i = 0; i < accessibleDVMList.length; i++) {
+        for (int i = 0; i < 8; i++) {
             pScreen.add(labelList.get(i));
         }
     }
@@ -365,7 +365,7 @@ class MyFrame extends JFrame {
     }
 
     private void proceedCurrentDrink(JPanel pScreen, int inputNum) {
-        int drink_status = controller.selectDrink(inputNum);
+        int drink_status = controller.selectCurrentDrink(inputNum);
         if(drink_status == 0){ // EMPTY_ALL_STOCK : 모든 DVM 의 재고가 0임
             JOptionPane.showMessageDialog(null, "모든 DVM에 해당 음료의 재고가 없습니다. 초기화면으로 돌아갑니다.");
             // 인증 코드 메시지 출력
@@ -398,7 +398,7 @@ class MyFrame extends JFrame {
     }
 
     private void proceedOtherDrink(JPanel pScreen, int inputNum) {
-        int drink_status = controller.selectDrink(inputNum);
+        int drink_status = controller.selectOtherDrink(inputNum);
         if(drink_status == 0){ // 모든 DVM에 재고가 없음
             JOptionPane.showMessageDialog(null, "모든 DVM에 해당 음료의 재고가 없습니다. 초기화면으로 돌아갑니다.");
             // 인증 코드 메시지 출력
