@@ -121,18 +121,15 @@ public class Controller {
 
     public ArrayList<ArrayList<Integer>> startService() {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> std = new ArrayList<Integer>();
         ArrayList<DVM> dvmList = otherDVMs.getDVMList();
         for(int i=0; i<dvmList.size(); i++){
+            ArrayList<Integer> std = new ArrayList<Integer>();
             std.add(dvmList.get(i).getId());
             std.add(dvmList.get(i).getAddress());
             result.add(std);
-            std.clear();
-//            System.out.println(std.get(0));
+
         }
-//        for(int i=0; i<dvmList.size(); i++) {
-//            System.out.println(result.get(i).get(0));
-//        }
-            return result;
+
+        return result;
     }
 }
