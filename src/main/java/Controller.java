@@ -11,11 +11,11 @@ public class Controller {
     CodePayment codePayment = new CodePayment();
 
     int selectCurrentDrink(int dialNum) {
-        final int EMPTY_ALL_STOCK = 0; // ¸ğµç DVMÀÇ Àç°í°¡ 0ÀÓ
-        final int CUR_IN_STOCK = 1;    // ÇöÀç DVM¿¡ Àç°í°¡ ÀÖÀ½
-        final int OTHER_IN_STOCK = 2;  // ´Ù¸¥ DVM¿¡ Àç°í°¡ ÀÖÀ½
+        final int EMPTY_ALL_STOCK = 0; // ëª¨ë“  DVMì˜ ì¬ê³ ê°€ 0ì„
+        final int CUR_IN_STOCK = 1;    // í˜„ì¬ DVMì— ì¬ê³ ê°€ ìˆìŒ
+        final int OTHER_IN_STOCK = 2;  // ë‹¤ë¥¸ DVMì— ì¬ê³ ê°€ ìˆìŒ
         DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
-        selected_drink = currentDVM.getDrink_list().get(dialNum - 1);   //selected_drink ¶ó´Â Àü¿ªº¯¼ö¿¡ ÀúÀå
+        selected_drink = currentDVM.getDrink_list().get(dialNum - 1);   //selected_drink ë¼ëŠ” ì „ì—­ë³€ìˆ˜ì— ì €ì¥
         boolean current_stock = otherDVMs.checkCurrentDVMsStock(selected_drink, currentDVM);
         if (current_stock) {
             return CUR_IN_STOCK;
@@ -29,9 +29,9 @@ public class Controller {
     }
 
     public int selectOtherDrink(int dialNum) {
-        final int EMPTY_ALL_STOCK = 0; // ¸ğµç DVMÀÇ Àç°í°¡ 0ÀÓ
-        final int CUR_IN_STOCK = 1;    // ÇöÀç DVM¿¡ Àç°í°¡ ÀÖÀ½
-        final int OTHER_IN_STOCK = 2;  // ´Ù¸¥ DVM¿¡ Àç°í°¡ ÀÖÀ½
+        final int EMPTY_ALL_STOCK = 0; // ëª¨ë“  DVMì˜ ì¬ê³ ê°€ 0ì„
+        final int CUR_IN_STOCK = 1;    // í˜„ì¬ DVMì— ì¬ê³ ê°€ ìˆìŒ
+        final int OTHER_IN_STOCK = 2;  // ë‹¤ë¥¸ DVMì— ì¬ê³ ê°€ ìˆìŒ
         DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
         selected_drink = currentDVM.getDrink_list().get(dialNum - 1);
         accessible_DVM_list = otherDVMs.checkOtherDVMsStock(selected_drink, currentDVM);
@@ -54,22 +54,22 @@ public class Controller {
         }
         card.updateBalance(price);
         if(isPrepayment){
-            Code code = cardPayment.generateCode(selected_drink); // ÄÚµå »ı¼º
+            Code code = cardPayment.generateCode(selected_drink); // ì½”ë“œ ìƒì„±
             addCode(code);
             DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
             String locationsListStr = otherDVMs.showAccessibleDVMsLocation(accessible_DVM_list, currentDVMIndex);
-            String result = "¼±°áÁ¦ ÁøÇà DVM: " + (currentDVM.getId() + 1)
-                    + "\n¼±°áÁ¦ÇÑ À½·á¼ö: " + selected_drink.getName()
-                    + "\nÀ½·á °¡°İ: " + selected_drink.getPrice()
-                    + "\n¼±°áÁ¦ ÈÄ Ä«µå ÀÜ°í: " + card.getBalance() + "¿ø"
-                    + "\n¹ß±Ş ÄÚµå: '" + code.getCode() + "'"
-                    + "\n\n<ÇØ´ç À½·á ±¸¸Å °¡´É DVM ¹× DVM À§Ä¡>"
+            String result = "ì„ ê²°ì œ ì§„í–‰ DVM: " + (currentDVM.getId() + 1)
+                    + "\nì„ ê²°ì œí•œ ìŒë£Œìˆ˜: " + selected_drink.getName()
+                    + "\nìŒë£Œ ê°€ê²©: " + selected_drink.getPrice()
+                    + "\nì„ ê²°ì œ í›„ ì¹´ë“œ ì”ê³ : " + card.getBalance() + "ì›"
+                    + "\në°œê¸‰ ì½”ë“œ: '" + code.getCode() + "'"
+                    + "\n\n<í•´ë‹¹ ìŒë£Œ êµ¬ë§¤ ê°€ëŠ¥ DVM ë° DVM ìœ„ì¹˜>"
                     +"\n " + locationsListStr;
             return result;
         }
         else{
             String result = otherDVMs.requestDrink(selected_drink, currentDVMIndex);
-            String result2 = result + "\n°áÁ¦ ÈÄ Ä«µå ÀÜ°í: " + card.getBalance() + "¿ø";
+            String result2 = result + "\nê²°ì œ í›„ ì¹´ë“œ ì”ê³ : " + card.getBalance() + "ì›";
             return result2;
         }
     }
@@ -88,7 +88,7 @@ public class Controller {
         Drink drink = codePayment.codePayment(code_info);
         String result = otherDVMs.requestDrink(drink, currentDVMIndex);
         deleteCode(code_info);
-        String result2 = result + "\nÄÚµå Á¤º¸: " + code_info.getCode();
+        String result2 = result + "\nì½”ë“œ ì •ë³´: " + code_info.getCode();
         return result2;
     }
 
@@ -120,10 +120,22 @@ public class Controller {
         return otherDVMs.getDVM(num - 1);
     }
 
-    public String[] startService() {
+    public ArrayList<ArrayList<Integer>> startService() {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> std = new ArrayList<Integer>();
         ArrayList<DVM> dvmList = otherDVMs.getDVMList();
-        //dvmList.get(0).
-        return null;
+
+        for(int i=0; i<dvmList.size(); i++){
+            std.add(dvmList.get(i).getId());
+            std.add(dvmList.get(i).getAddress());
+            result.add(std);
+            std.clear();
+//            System.out.println(std.get(0));
+        }
+//        for(int i=0; i<dvmList.size(); i++) {
+//            System.out.println(result.get(i).get(0));
+//        }
+            return result;
     }
 
 
