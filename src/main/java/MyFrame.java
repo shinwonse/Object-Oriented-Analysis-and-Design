@@ -85,15 +85,17 @@ class MyFrame extends JFrame {
     }
 
     private void showAllDVMList(JPanel pScreen) {
-        String [] arr = controller.startService();
+        ArrayList<ArrayList<Integer>> dvmInfo = controller.startService();
+
+
         pScreen.setLayout(grid);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/image/vm_image.png")
                         .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
                 int num = i * 4 + j;
-                int id = num + 1;
-                int address = dvmAddresses[num];
+                int id = dvmInfo.get(num).get(0);
+                int address = dvmInfo.get(num).get(1);
                 labelList.add(new JLabel("<html>"+ (num + 1) + ". DVM" + id + "<br>주소: " + address + "</html>", imageIcon, JLabel.CENTER));
             }
         }
@@ -103,7 +105,7 @@ class MyFrame extends JFrame {
                 //labelList.get(i * 4 + j).setHorizontalAlignment(SwingConstants.CENTER);
             }
         }
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < dvmInfo.size(); i++) {
             pScreen.add(labelList.get(i));
         }
     }
@@ -365,7 +367,7 @@ class MyFrame extends JFrame {
     }
 
     private void proceedCurrentDrink(JPanel pScreen, int inputNum) {
-        int drink_status = controller.selectCurrentDrink(inputNum);
+        int drink_status = controller.selectDrink(inputNum);
         if(drink_status == 0){ // EMPTY_ALL_STOCK : 모든 DVM 의 재고가 0임
             JOptionPane.showMessageDialog(null, "모든 DVM에 해당 음료의 재고가 없습니다. 초기화면으로 돌아갑니다.");
             // 인증 코드 메시지 출력
@@ -398,7 +400,7 @@ class MyFrame extends JFrame {
     }
 
     private void proceedOtherDrink(JPanel pScreen, int inputNum) {
-        int drink_status = controller.selectOtherDrink(inputNum);
+        int drink_status = controller.selectDrink(inputNum);
         if(drink_status == 0){ // 모든 DVM에 재고가 없음
             JOptionPane.showMessageDialog(null, "모든 DVM에 해당 음료의 재고가 없습니다. 초기화면으로 돌아갑니다.");
             // 인증 코드 메시지 출력

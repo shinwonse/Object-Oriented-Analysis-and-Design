@@ -10,35 +10,34 @@ public class Controller {
     CardPayment cardPayment = new CardPayment();
     CodePayment codePayment = new CodePayment();
 
-    int selectCurrentDrink(int dialNum) {
+    int selectDrink(int dialNum) {
         final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
         final int CUR_IN_STOCK = 1;    // 현재 DVM에 재고가 있음
         final int OTHER_IN_STOCK = 2;  // 다른 DVM에 재고가 있음
-        DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
-        selected_drink = currentDVM.getDrink_list().get(dialNum - 1);   //selected_drink 라는 전역변수에 저장
-        boolean current_stock = otherDVMs.checkCurrentDVMsStock(selected_drink, currentDVM);
-        if (current_stock) {
-            return CUR_IN_STOCK;
-        } else {
+        if(dialNum >= 1 && dialNum <= 7) {
+            DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
+            selected_drink = currentDVM.getDrink_list().get(dialNum - 1);   //selected_drink 라는 전역변수에 저장
+
+            boolean current_stock = otherDVMs.checkCurrentDVMsStock(selected_drink, currentDVM);
+            if (current_stock) {
+                return CUR_IN_STOCK;
+            } else {
+                accessible_DVM_list = otherDVMs.checkOtherDVMsStock(selected_drink, currentDVM);
+                if (accessible_DVM_list == null || accessible_DVM_list.size() == 0)
+                    return EMPTY_ALL_STOCK;
+                else
+                    return OTHER_IN_STOCK;
+            }
+        }
+        else{ // dialNum (8 ~ 20)
+            DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
+            selected_drink = currentDVM.getDrink_list().get(dialNum - 1);
             accessible_DVM_list = otherDVMs.checkOtherDVMsStock(selected_drink, currentDVM);
             if (accessible_DVM_list == null || accessible_DVM_list.size() == 0)
                 return EMPTY_ALL_STOCK;
             else
                 return OTHER_IN_STOCK;
         }
-    }
-
-    public int selectOtherDrink(int dialNum) {
-        final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
-        final int CUR_IN_STOCK = 1;    // 현재 DVM에 재고가 있음
-        final int OTHER_IN_STOCK = 2;  // 다른 DVM에 재고가 있음
-        DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
-        selected_drink = currentDVM.getDrink_list().get(dialNum - 1);
-        accessible_DVM_list = otherDVMs.checkOtherDVMsStock(selected_drink, currentDVM);
-        if (accessible_DVM_list == null || accessible_DVM_list.size() == 0)
-            return EMPTY_ALL_STOCK;
-        else
-            return OTHER_IN_STOCK;
     }
 
     String insertCard(int card_num, boolean isPrepayment){
@@ -120,11 +119,20 @@ public class Controller {
         return otherDVMs.getDVM(num - 1);
     }
 
-    public String[] startService() {
+    public ArrayList<ArrayList<Integer>> startService() {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> std = new ArrayList<Integer>();
         ArrayList<DVM> dvmList = otherDVMs.getDVMList();
-        //dvmList.get(0).
-        return null;
+        for(int i=0; i<dvmList.size(); i++){
+            std.add(dvmList.get(i).getId());
+            std.add(dvmList.get(i).getAddress());
+            result.add(std);
+            std.clear();
+//            System.out.println(std.get(0));
+        }
+//        for(int i=0; i<dvmList.size(); i++) {
+//            System.out.println(result.get(i).get(0));
+//        }
+            return result;
     }
-
-
 }
