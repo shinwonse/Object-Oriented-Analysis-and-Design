@@ -10,11 +10,6 @@ public class Controller {
     CardPayment cardPayment = new CardPayment();
     CodePayment codePayment = new CodePayment();
 
-    void displayDVMLIst(){
-        ArrayList<DVM> dvmList = otherDVMs.getDVMList();
-
-    }
-
     int selectDrink(int dialNum) {
         final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
         final int CUR_IN_STOCK = 1;    // 현재 DVM에 재고가 있음
@@ -46,11 +41,11 @@ public class Controller {
     }
 
     String insertCard(int card_num, boolean isPrepayment){
-        Card card = cardPayment.getCard(card_num);
-        Boolean card_available = card.getCard_available();
+        Boolean card_available = cardPayment.getCard_available(card_num);
         if(!card_available){
             return "";
         }
+        Card card = cardPayment.getCard(card_num);
         int balance = card.getBalance();
         int price = selected_drink.getPrice();
         if(balance < price){
@@ -110,15 +105,6 @@ public class Controller {
         return code_list;
     }
 
-    void outOfStockMsg(){
-        System.out.println("모든 DVM이 재고가 없습니다.");
-    }
-
-    void displayLocationList(ArrayList<Integer> locationList){
-        System.out.println("자판기 위치들입니다.");
-        //delay 5초
-    }
-
     public Boolean checkCodeAvailable(int code_num) {
         for (Code code : code_list) {
             if (code_num == code.getCode()) {
@@ -133,16 +119,8 @@ public class Controller {
         return otherDVMs.getDVM(num - 1);
     }
 
-    public int getCurrentDVMIndex() {
-        return currentDVMIndex;
+    public String[] startService() {
+        ArrayList<DVM> dvmList = otherDVMs.getDVMList();
+        dvmList.get(0).
     }
-
-    public int selectPayment(int inputNum) {
-        if(inputNum == 1){
-            return 1;
-        }
-        else
-            return 2;
-    }
-
 }

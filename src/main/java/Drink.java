@@ -20,10 +20,6 @@ public class Drink {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -36,27 +32,12 @@ public class Drink {
         return stock;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     public void updateStock(){
         this.stock--;
-    }
-
-    public int getStock(Drink drink_info){
-        return drink_info.stock;
-    }
-
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
     }
 
     public String getImgURL() {
         return imgURL;
     }
-
-//    public static List<Drink> drinkList = new ArrayList<Drink>();
-
 
 }

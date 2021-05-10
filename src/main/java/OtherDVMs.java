@@ -3,102 +3,7 @@ import java.util.Arrays;
 
 public class OtherDVMs {
     ArrayList<DVM> dvmList;
-    Network network = new Network();
-
-
-
-    public class Network {
-
-        public void responseMessage(Message stockBroadCastMessage) {
-            int src_id = stockBroadCastMessage.getSrc_id();
-            int dst_id = stockBroadCastMessage.getDst_id();
-            int msg_type = stockBroadCastMessage.getMsg_type();
-            String msg = stockBroadCastMessage.getMsg();
-//            if(dst_id == 0){
-//                responseBroadcastMessage(src_id, msg_type, msg);
-//            }
-//            else{
-//                responseNormalMessage(src_id, dst_id, msg_type, msg);
-//            }
-        }
-
-
-
-        private int requestNormalMessage(Message message) {
-            int address = -1;
-            int src_id = message.getSrc_id();
-            int dst_id = message.getDst_id();
-            int msg_type = message.getMsg_type();
-            String msg = message.getMsg();
-            if (msg_type == MsgType.REQUEST_LOCATION) {
-                address = handleLocationRequest(src_id, dst_id);
-            }
-            return address;
-        }
-
-        // BroadCastMessage 를 사용하는 케이스는 실질적으로 재고요청때밖에 없음
-        private ArrayList<DVM> requestBroadcastMessage(Message broadCastMessage) {
-            int src_id = broadCastMessage.getSrc_id();
-            int msg_type = broadCastMessage.getMsg_type();
-            String msg = broadCastMessage.getMsg();
-            if(msg_type == MsgType.REQUEST_STOCK){
-                ArrayList<DVM> accessibleDVMList = handleStockRequest(src_id, msg);
-                return accessibleDVMList;
-            }
-            return null;
-        }
-
-        private ArrayList<DVM> handleStockRequest(int src_id, String msg) {
-            ArrayList<DVM> accessibleDVMList = new ArrayList<>();
-            for(DVM dvm : dvmList){
-                boolean isInStock = false;
-                for(Drink drink: dvm.getDrink_list()){
-                    if(drink.getName().equals(msg)){
-                        Message message = dvm.makeStockResponseMessage(src_id, drink.getStock()); // DVM이 응답 메세지를 만듬
-                        int stock = dvm.responseStockMessage(this, message); // DVM이 Network를 통해 응답메시지를 전달하고 Network 내부에서 stock 값을 찾아 리턴해줌
-                        if(stock != 0){
-                            isInStock = true;
-                            break;
-                        }
-                    }
-                }
-                if(isInStock){
-                    accessibleDVMList.add(dvm);
-                }
-            }
-            return accessibleDVMList;
-        }
-
-        public int responseBroadcastMessage(Message message) {
-            int src_id = message.getSrc_id();
-            String msg = message.getMsg();
-            int stock = Integer.parseInt(msg);
-            return stock;
-        }
-
-        public int responseNormalMessage(Message message) {
-            int address = -1;
-            int msg_type = message.getMsg_type();
-            String msg = message.getMsg();
-            if (msg_type == MsgType.RESPONSE_LOCATION) {
-                address = Integer.parseInt(msg);
-            }
-            return address;
-        }
-
-        private int handleLocationRequest(int src_id, int dst_id) {
-            int address = -1;
-            for(DVM dvm : dvmList){
-                if(dvm.getId() == dst_id) {
-                    Message message = dvm.makeLocationResponseMessage(src_id);
-                    address = dvm.responseLocationMessage(this, message);
-                    break;
-                }
-            }
-            return address;
-        }
-    }
-
+    Network network;
 
 
     OtherDVMs(){
@@ -224,14 +129,14 @@ public class OtherDVMs {
         drinkArrayList3.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
         drinkArrayList3.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
 
-        DVM dvm1 = new DVM(true, drinkArrayList, 0, 101);
-        DVM dvm2 = new DVM(true, drinkArrayList2, 1, 202);
-        DVM dvm3 = new DVM(true, drinkArrayList3, 2, 303);
-        DVM dvm4 = new DVM(true, drinkArrayList3, 3, 404);
-        DVM dvm5 = new DVM(true, drinkArrayList3, 4, 505);
-        DVM dvm6 = new DVM(true, drinkArrayList3, 5, 606);
-        DVM dvm7 = new DVM(true, drinkArrayList3, 6, 707);
-        DVM dvm8 = new DVM(true, drinkArrayList3, 7, 808);
+        DVM dvm1 = new DVM(drinkArrayList, 0, 101);
+        DVM dvm2 = new DVM(drinkArrayList2, 1, 202);
+        DVM dvm3 = new DVM(drinkArrayList3, 2, 303);
+        DVM dvm4 = new DVM(drinkArrayList3, 3, 404);
+        DVM dvm5 = new DVM(drinkArrayList3, 4, 505);
+        DVM dvm6 = new DVM(drinkArrayList3, 5, 606);
+        DVM dvm7 = new DVM(drinkArrayList3, 6, 707);
+        DVM dvm8 = new DVM( drinkArrayList3, 7, 808);
         ArrayList<DVM> tempList = new ArrayList<DVM>();
         tempList.add(dvm1);
         tempList.add(dvm2);
@@ -242,5 +147,6 @@ public class OtherDVMs {
         tempList.add(dvm7);
         tempList.add(dvm8);
         dvmList = tempList;
+        network = new Network(dvmList);
     }
 }
