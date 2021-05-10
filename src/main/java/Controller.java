@@ -119,4 +119,8 @@ public class Controller {
         return otherDVMs.getDVM(num - 1);
     }
 
+    public String[] startService() {
+        ArrayList<DVM> dvmList = otherDVMs.getDVMList();
+        dvmList.get(0).
+    }
 }
