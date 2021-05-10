@@ -85,15 +85,17 @@ class MyFrame extends JFrame {
     }
 
     private void showAllDVMList(JPanel pScreen) {
-        String [] arr = controller.startService();
+        ArrayList<ArrayList<Integer>> dvmInfo = controller.startService();
+
+
         pScreen.setLayout(grid);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/image/vm_image.png")
                         .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
                 int num = i * 4 + j;
-                int id = num + 1;
-                int address = dvmAddresses[num];
+                int id = dvmInfo.get(num).get(0);
+                int address = dvmInfo.get(num).get(1);
                 labelList.add(new JLabel("<html>"+ (num + 1) + ". DVM" + id + "<br>аж╪р: " + address + "</html>", imageIcon, JLabel.CENTER));
             }
         }
@@ -103,7 +105,7 @@ class MyFrame extends JFrame {
                 //labelList.get(i * 4 + j).setHorizontalAlignment(SwingConstants.CENTER);
             }
         }
-        for (int i = 0; i < accessibleDVMList.length; i++) {
+        for (int i = 0; i < dvmInfo.size(); i++) {
             pScreen.add(labelList.get(i));
         }
     }
