@@ -40,10 +40,10 @@ public class OtherDVMs {
 
     public String requestDrink(Drink selected_drink, int currentDVMIndex) {
         dvmList.get(currentDVMIndex).updateStock(selected_drink);
-        String result = "       <À½·á ±¸¸Å ¿Ï·á>" +
-                "\n±¸¸Å ÁøÇàÇÑ DVM: DVM" + String.valueOf(currentDVMIndex + 1)
-                + "\n±¸¸ÅÇÑ À½·á: "+ selected_drink.getName()
-                + "\nÀ½·á °¡°İ: " + selected_drink.getPrice() + "¿ø";
+        String result = "       <ìŒë£Œ êµ¬ë§¤ ì™„ë£Œ>" +
+                "\nêµ¬ë§¤ ì§„í–‰í•œ DVM: DVM" + String.valueOf(currentDVMIndex + 1)
+                + "\nêµ¬ë§¤í•œ ìŒë£Œ: "+ selected_drink.getName()
+                + "\nìŒë£Œ ê°€ê²©: " + selected_drink.getPrice() + "ì›";
         return result;
     }
 
@@ -57,77 +57,77 @@ public class OtherDVMs {
         }
         StringBuilder locationListStr = new StringBuilder();
         for(int i = 0; i < accessibleDVMList.size(); i++){
-            locationListStr.append("DVM ¸í: DVM").append((accessibleDVMList.get(i).getId() + 1)).append(" / À§Ä¡: ").append(dvmLocationList.get(i)).append("\n");
+            locationListStr.append("DVM ëª…: DVM").append((accessibleDVMList.get(i).getId() + 1)).append(" / ìœ„ì¹˜: ").append(dvmLocationList.get(i)).append("\n");
         }
         return String.valueOf(locationListStr);
     }
 
     private void init() {
-        ArrayList<Drink> drinkArrayList = new ArrayList<>(); // ÀüÃ¼ À½·á¼ö ¸®½ºÆ®
-        drinkArrayList.add(new Drink("ÄÚÄ«Äİ¶ó", 1500, 10, "src/main/resources/image/1.jpg"));
-        drinkArrayList.add(new Drink("Æé½ÃÄİ¶ó", 1500, 11, "src/main/resources/image/2.jpg"));
-        drinkArrayList.add(new Drink("Ä¥¼º»çÀÌ´Ù", 1500, 0, "src/main/resources/image/3.jpg"));
-        drinkArrayList.add(new Drink("½ºÇÁ¶óÀÌÆ®", 1500, 10, "src/main/resources/image/4.jpg"));
-        drinkArrayList.add(new Drink("È¯Å¸¿À·»Áö", 1500, 8, "src/main/resources/image/5.jpg"));
-        drinkArrayList.add(new Drink("È¯Å¸Æ÷µµ", 1500, 1, "src/main/resources/image/6.jpg"));
-        drinkArrayList.add(new Drink("ÇÖ½Ä½º", 1500, 10, "src/main/resources/image/7.jpg"));
-        drinkArrayList.add(new Drink("·¹µåºÒ", 1500, 0, "src/main/resources/image/8.jpg"));
-        drinkArrayList.add(new Drink("¸ó½ºÅÍµå¸µÅ©", 1500, 0, "src/main/resources/image/9.jpg"));
-        drinkArrayList.add(new Drink("ºıÅÙ¼Ç", 1500, 0, "src/main/resources/image/10.jpg"));
-        drinkArrayList.add(new Drink("Æ÷Ä«¸®½º¿şÆ®", 1500, 0, "src/main/resources/image/11.jpg"));
-        drinkArrayList.add(new Drink("°ÔÅä·¹ÀÌ", 1500, 0, "src/main/resources/image/12.jpg"));
-        drinkArrayList.add(new Drink("ÆÄ¿ö¿¡ÀÌµå", 1500, 0, "src/main/resources/image/13.jpg"));
-        drinkArrayList.add(new Drink("¹ĞÅ°½º", 1500, 0, "src/main/resources/image/14.jpg"));
-        drinkArrayList.add(new Drink("·¹¾²ºñ", 1500, 0, "src/main/resources/image/15.jpg"));
-        drinkArrayList.add(new Drink("½ºÆÄÅ¬¸µ", 1500, 0, "src/main/resources/image/16.jpg"));
-        drinkArrayList.add(new Drink("ºñ¶ô½ÄÇı", 1500, 0, "src/main/resources/image/17.jpg"));
-        drinkArrayList.add(new Drink("¼ÖÀÇ´«", 1500, 0, "src/main/resources/image/18.jpg"));
-        drinkArrayList.add(new Drink("µ¥ÀÚ¿Í", 1500, 0, "src/main/resources/image/19.jpg"));
-        drinkArrayList.add(new Drink("¸¶¿îÆ¾µà", 1500, 0, "src/main/resources/image/20.jpg"));
+        ArrayList<Drink> drinkArrayList = new ArrayList<>(); // ì „ì²´ ìŒë£Œìˆ˜ ë¦¬ìŠ¤íŠ¸
+        drinkArrayList.add(new Drink("ì½”ì¹´ì½œë¼", 1500, 10, "src/main/resources/image/1.jpg"));
+        drinkArrayList.add(new Drink("í©ì‹œì½œë¼", 1500, 11, "src/main/resources/image/2.jpg"));
+        drinkArrayList.add(new Drink("ì¹ ì„±ì‚¬ì´ë‹¤", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList.add(new Drink("ìŠ¤í”„ë¼ì´íŠ¸", 1500, 10, "src/main/resources/image/4.jpg"));
+        drinkArrayList.add(new Drink("í™˜íƒ€ì˜¤ë Œì§€", 1500, 8, "src/main/resources/image/5.jpg"));
+        drinkArrayList.add(new Drink("í™˜íƒ€í¬ë„", 1500, 1, "src/main/resources/image/6.jpg"));
+        drinkArrayList.add(new Drink("í•«ì‹ìŠ¤", 1500, 10, "src/main/resources/image/7.jpg"));
+        drinkArrayList.add(new Drink("ë ˆë“œë¶ˆ", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList.add(new Drink("ëª¬ìŠ¤í„°ë“œë§í¬", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList.add(new Drink("ë¹¡í…ì…˜", 1500, 0, "src/main/resources/image/10.jpg"));
+        drinkArrayList.add(new Drink("í¬ì¹´ë¦¬ìŠ¤ì›¨íŠ¸", 1500, 0, "src/main/resources/image/11.jpg"));
+        drinkArrayList.add(new Drink("ê²Œí† ë ˆì´", 1500, 0, "src/main/resources/image/12.jpg"));
+        drinkArrayList.add(new Drink("íŒŒì›Œì—ì´ë“œ", 1500, 0, "src/main/resources/image/13.jpg"));
+        drinkArrayList.add(new Drink("ë°€í‚¤ìŠ¤", 1500, 0, "src/main/resources/image/14.jpg"));
+        drinkArrayList.add(new Drink("ë ˆì“°ë¹„", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList.add(new Drink("ìŠ¤íŒŒí´ë§", 1500, 0, "src/main/resources/image/16.jpg"));
+        drinkArrayList.add(new Drink("ë¹„ë½ì‹í˜œ", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList.add(new Drink("ì†”ì˜ëˆˆ", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList.add(new Drink("ë°ìì™€", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList.add(new Drink("ë§ˆìš´í‹´ë“€", 1500, 0, "src/main/resources/image/20.jpg"));
 
-        ArrayList<Drink> drinkArrayList2 = new ArrayList<>(); // ÀüÃ¼ À½·á¼ö ¸®½ºÆ®
-        drinkArrayList2.add(new Drink("ºıÅÙ¼Ç", 1500, 10, "src/main/resources/image/10.jpg"));
-        drinkArrayList2.add(new Drink("ÆÄ¿ö¿¡ÀÌµå", 1500, 10, "src/main/resources/image/13.jpg"));
-        drinkArrayList2.add(new Drink("¹ĞÅ°½º", 1500, 10, "src/main/resources/image/14.jpg"));
-        drinkArrayList2.add(new Drink("·¹¾²ºñ", 1500, 10, "src/main/resources/image/15.jpg"));
-        drinkArrayList2.add(new Drink("½ºÆÄÅ¬¸µ", 1500, 10, "src/main/resources/image/16.jpg"));
-        drinkArrayList2.add(new Drink("µ¥ÀÚ¿Í", 1500, 10, "src/main/resources/image/19.jpg"));
-        drinkArrayList2.add(new Drink("ÄÚÄ«Äİ¶ó", 1500, 10, "src/main/resources/image/1.jpg"));
-        drinkArrayList2.add(new Drink("Æé½ÃÄİ¶ó", 1500, 0, "src/main/resources/image/2.jpg"));
-        drinkArrayList2.add(new Drink("Ä¥¼º»çÀÌ´Ù", 1500, 0, "src/main/resources/image/3.jpg"));
-        drinkArrayList2.add(new Drink("½ºÇÁ¶óÀÌÆ®", 1500, 0, "src/main/resources/image/4.jpg"));
-        drinkArrayList2.add(new Drink("È¯Å¸¿À·»Áö", 1500, 0, "src/main/resources/image/5.jpg"));
-        drinkArrayList2.add(new Drink("È¯Å¸Æ÷µµ", 1500, 0, "src/main/resources/image/6.jpg"));
-        drinkArrayList2.add(new Drink("ÇÖ½Ä½º", 1500, 0, "src/main/resources/image/7.jpg"));
-        drinkArrayList2.add(new Drink("·¹µåºÒ", 1500, 0, "src/main/resources/image/8.jpg"));
-        drinkArrayList2.add(new Drink("¸ó½ºÅÍµå¸µÅ©", 1500, 0, "src/main/resources/image/9.jpg"));
-        drinkArrayList2.add(new Drink("Æ÷Ä«¸®½º¿şÆ®", 1500, 0, "src/main/resources/image/11.jpg"));
-        drinkArrayList2.add(new Drink("°ÔÅä·¹ÀÌ", 1500, 0, "src/main/resources/image/12.jpg"));
-        drinkArrayList2.add(new Drink("ºñ¶ô½ÄÇı", 1500, 0, "src/main/resources/image/17.jpg"));
-        drinkArrayList2.add(new Drink("¼ÖÀÇ´«", 1500, 0, "src/main/resources/image/18.jpg"));
-        drinkArrayList2.add(new Drink("¸¶¿îÆ¾µà", 1500, 0, "src/main/resources/image/20.jpg"));
+        ArrayList<Drink> drinkArrayList2 = new ArrayList<>(); // ì „ì²´ ìŒë£Œìˆ˜ ë¦¬ìŠ¤íŠ¸
+        drinkArrayList2.add(new Drink("ë¹¡í…ì…˜", 1500, 10, "src/main/resources/image/10.jpg"));
+        drinkArrayList2.add(new Drink("íŒŒì›Œì—ì´ë“œ", 1500, 10, "src/main/resources/image/13.jpg"));
+        drinkArrayList2.add(new Drink("ë°€í‚¤ìŠ¤", 1500, 10, "src/main/resources/image/14.jpg"));
+        drinkArrayList2.add(new Drink("ë ˆì“°ë¹„", 1500, 10, "src/main/resources/image/15.jpg"));
+        drinkArrayList2.add(new Drink("ìŠ¤íŒŒí´ë§", 1500, 10, "src/main/resources/image/16.jpg"));
+        drinkArrayList2.add(new Drink("ë°ìì™€", 1500, 10, "src/main/resources/image/19.jpg"));
+        drinkArrayList2.add(new Drink("ì½”ì¹´ì½œë¼", 1500, 10, "src/main/resources/image/1.jpg"));
+        drinkArrayList2.add(new Drink("í©ì‹œì½œë¼", 1500, 0, "src/main/resources/image/2.jpg"));
+        drinkArrayList2.add(new Drink("ì¹ ì„±ì‚¬ì´ë‹¤", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList2.add(new Drink("ìŠ¤í”„ë¼ì´íŠ¸", 1500, 0, "src/main/resources/image/4.jpg"));
+        drinkArrayList2.add(new Drink("í™˜íƒ€ì˜¤ë Œì§€", 1500, 0, "src/main/resources/image/5.jpg"));
+        drinkArrayList2.add(new Drink("í™˜íƒ€í¬ë„", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList2.add(new Drink("í•«ì‹ìŠ¤", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList2.add(new Drink("ë ˆë“œë¶ˆ", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList2.add(new Drink("ëª¬ìŠ¤í„°ë“œë§í¬", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList2.add(new Drink("í¬ì¹´ë¦¬ìŠ¤ì›¨íŠ¸", 1500, 0, "src/main/resources/image/11.jpg"));
+        drinkArrayList2.add(new Drink("ê²Œí† ë ˆì´", 1500, 0, "src/main/resources/image/12.jpg"));
+        drinkArrayList2.add(new Drink("ë¹„ë½ì‹í˜œ", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList2.add(new Drink("ì†”ì˜ëˆˆ", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList2.add(new Drink("ë§ˆìš´í‹´ë“€", 1500, 0, "src/main/resources/image/20.jpg"));
 
-        ArrayList<Drink> drinkArrayList3 = new ArrayList<>(); // ÀüÃ¼ À½·á¼ö ¸®½ºÆ®
-        drinkArrayList3.add(new Drink("È¯Å¸¿À·»Áö", 1500, 10, "src/main/resources/image/5.jpg"));
-        drinkArrayList3.add(new Drink("Æ÷Ä«¸®½º¿şÆ®", 1500, 10, "src/main/resources/image/11.jpg"));
-        drinkArrayList3.add(new Drink("·¹µåºÒ", 1500, 10, "src/main/resources/image/8.jpg"));
-        drinkArrayList3.add(new Drink("ºıÅÙ¼Ç", 1500, 10, "src/main/resources/image/10.jpg"));
-        drinkArrayList3.add(new Drink("ÆÄ¿ö¿¡ÀÌµå", 1500, 10, "src/main/resources/image/13.jpg"));
-        drinkArrayList3.add(new Drink("¹ĞÅ°½º", 1500, 10, "src/main/resources/image/14.jpg"));
-        drinkArrayList3.add(new Drink("°ÔÅä·¹ÀÌ", 1500, 20, "src/main/resources/image/12.jpg"));
-        drinkArrayList3.add(new Drink("ºñ¶ô½ÄÇı", 1500, 0, "src/main/resources/image/17.jpg"));
-        drinkArrayList3.add(new Drink("¼ÖÀÇ´«", 1500, 0, "src/main/resources/image/18.jpg"));
-        drinkArrayList3.add(new Drink("·¹¾²ºñ", 1500, 0, "src/main/resources/image/15.jpg"));
-        drinkArrayList3.add(new Drink("½ºÆÄÅ¬¸µ", 1500, 0, "src/main/resources/image/16.jpg"));
-        drinkArrayList3.add(new Drink("µ¥ÀÚ¿Í", 1500, 0, "src/main/resources/image/19.jpg"));
-        drinkArrayList3.add(new Drink("ÄÚÄ«Äİ¶ó", 1500, 0, "src/main/resources/image/1.jpg"));
-        drinkArrayList3.add(new Drink("Æé½ÃÄİ¶ó", 1500, 0, "src/main/resources/image/2.jpg"));
-        drinkArrayList3.add(new Drink("Ä¥¼º»çÀÌ´Ù", 1500, 0, "src/main/resources/image/3.jpg"));
-        drinkArrayList3.add(new Drink("½ºÇÁ¶óÀÌÆ®", 1500, 0, "src/main/resources/image/4.jpg"));
-        drinkArrayList3.add(new Drink("È¯Å¸Æ÷µµ", 1500, 0, "src/main/resources/image/6.jpg"));
-        drinkArrayList3.add(new Drink("ÇÖ½Ä½º", 1500, 0, "src/main/resources/image/7.jpg"));
-        drinkArrayList3.add(new Drink("¸ó½ºÅÍµå¸µÅ©", 1500, 0, "src/main/resources/image/9.jpg"));
-        drinkArrayList3.add(new Drink("¸¶¿îÆ¾µà", 1500, 0, "src/main/resources/image/20.jpg"));
+        ArrayList<Drink> drinkArrayList3 = new ArrayList<>(); // ì „ì²´ ìŒë£Œìˆ˜ ë¦¬ìŠ¤íŠ¸
+        drinkArrayList3.add(new Drink("í™˜íƒ€ì˜¤ë Œì§€", 1500, 10, "src/main/resources/image/5.jpg"));
+        drinkArrayList3.add(new Drink("í¬ì¹´ë¦¬ìŠ¤ì›¨íŠ¸", 1500, 10, "src/main/resources/image/11.jpg"));
+        drinkArrayList3.add(new Drink("ë ˆë“œë¶ˆ", 1500, 10, "src/main/resources/image/8.jpg"));
+        drinkArrayList3.add(new Drink("ë¹¡í…ì…˜", 1500, 10, "src/main/resources/image/10.jpg"));
+        drinkArrayList3.add(new Drink("íŒŒì›Œì—ì´ë“œ", 1500, 10, "src/main/resources/image/13.jpg"));
+        drinkArrayList3.add(new Drink("ë°€í‚¤ìŠ¤", 1500, 10, "src/main/resources/image/14.jpg"));
+        drinkArrayList3.add(new Drink("ê²Œí† ë ˆì´", 1500, 20, "src/main/resources/image/12.jpg"));
+        drinkArrayList3.add(new Drink("ë¹„ë½ì‹í˜œ", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList3.add(new Drink("ì†”ì˜ëˆˆ", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList3.add(new Drink("ë ˆì“°ë¹„", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList3.add(new Drink("ìŠ¤íŒŒí´ë§", 1500, 0, "src/main/resources/image/16.jpg"));
+        drinkArrayList3.add(new Drink("ë°ìì™€", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList3.add(new Drink("ì½”ì¹´ì½œë¼", 1500, 0, "src/main/resources/image/1.jpg"));
+        drinkArrayList3.add(new Drink("í©ì‹œì½œë¼", 1500, 0, "src/main/resources/image/2.jpg"));
+        drinkArrayList3.add(new Drink("ì¹ ì„±ì‚¬ì´ë‹¤", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList3.add(new Drink("ìŠ¤í”„ë¼ì´íŠ¸", 1500, 0, "src/main/resources/image/4.jpg"));
+        drinkArrayList3.add(new Drink("í™˜íƒ€í¬ë„", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList3.add(new Drink("í•«ì‹ìŠ¤", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList3.add(new Drink("ëª¬ìŠ¤í„°ë“œë§í¬", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList3.add(new Drink("ë§ˆìš´í‹´ë“€", 1500, 0, "src/main/resources/image/20.jpg"));
 
         DVM dvm1 = new DVM(drinkArrayList, 0, 101);
         DVM dvm2 = new DVM(drinkArrayList2, 1, 202);
