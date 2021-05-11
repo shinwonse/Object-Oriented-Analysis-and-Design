@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-class MyFrame extends JFrame {
+public class MyFrame extends JFrame {
 
     int stage = 0;
     int inputNum = 0;

@@ -14,7 +14,7 @@ public class OtherDVMs {
         return dvmList.get(index);
     }
 
-    ArrayList<DVM> getDVMList(){return dvmList;}
+    public ArrayList<DVM> getDVMList(){return dvmList;}
 
 
     public boolean checkCurrentDVMsStock(Drink selectedDrink, DVM currentDVM) {
