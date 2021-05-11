@@ -115,9 +115,21 @@ public class Controller {
         return false;
     }
 
-    public DVM selectDVM(int num) {
+    public ArrayList<ArrayList<String>> selectDVM(int num) {
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+
         currentDVMIndex = num - 1;
-        return otherDVMs.getDVM(num - 1);
+        DVM currentDVM = otherDVMs.getDVM(num - 1);
+        ArrayList<Drink> drinkList = currentDVM.getDrink_list();
+        for(int i = 0; i< drinkList.size(); i++){
+            ArrayList<String> temp = new ArrayList<String>();
+            temp.add(drinkList.get(i).getName());
+            temp.add(String.valueOf(drinkList.get(i).getPrice()));
+            temp.add(String.valueOf(drinkList.get(i).getStock()));
+            temp.add(drinkList.get(i).getImgURL());
+            result.add(temp);
+        }
+        return result;
     }
 
     public ArrayList<ArrayList<Integer>> startService() {

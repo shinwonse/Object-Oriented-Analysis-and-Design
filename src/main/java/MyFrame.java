@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MyFrame extends JFrame {
@@ -116,17 +117,17 @@ public class MyFrame extends JFrame {
     private void showDVMDrinkList(JPanel pScreen, int num) {
         ArrayList<JLabel> label_drink = new ArrayList<>();
         pScreen.setLayout(grid);
-        DVM currentDVM = controller.selectDVM(num);
-        ArrayList<Drink> currentDrinkList = currentDVM.getDrink_list();
+        ArrayList<ArrayList<String>> DrinkListInfo = controller.selectDVM(num);
+        // 이중리스트 내부에는 index 0:name 1:price 2:stock 3:imageURL 모두 string
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 int index = i * 5 + j;
-                Drink drink = currentDrinkList.get(index);
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(drink.getImgURL())
+
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(DrinkListInfo.get(index).get(3))
                         .getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT));
-                String name = drink.getName();
-                int price = drink.getPrice();
-                int stock = drink.getStock();
+                String name =DrinkListInfo.get(index).get(0);
+                String price = DrinkListInfo.get(index).get(1);
+                String stock = DrinkListInfo.get(index).get(2);
                 label_drink.add(new JLabel("<html>"+ (index + 1) + "." + name + "<br>" + price + "원 (" + stock + "개)</html>", imageIcon, JLabel.LEFT));
             }
         }
@@ -135,7 +136,7 @@ public class MyFrame extends JFrame {
                 gbc(label_drink.get(i * 5 + j), j, i, 1, 1);
             }
         }
-        for (int i = 0; i < currentDrinkList.size(); i++) {
+        for (int i = 0; i < DrinkListInfo.size(); i++) {
             pScreen.add(label_drink.get(i));
         }
     }
