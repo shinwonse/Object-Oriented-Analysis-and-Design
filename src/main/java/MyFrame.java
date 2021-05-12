@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MyFrame extends JFrame {
@@ -37,7 +36,7 @@ public class MyFrame extends JFrame {
 
 
     private void init() {
-        setTitle("초기화면");
+
         setLayout(new GridLayout(2, 1)); // 전체 화면을 그리드형태로 위(스크린) 아래(버튼) 분할
 
         pDial.setLayout(grid);
@@ -117,17 +116,17 @@ public class MyFrame extends JFrame {
     private void showDVMDrinkList(JPanel pScreen, int num) {
         ArrayList<JLabel> label_drink = new ArrayList<>();
         pScreen.setLayout(grid);
-        ArrayList<ArrayList<String>> DrinkListInfo = controller.selectDVM(num);
-        // 이중리스트 내부에는 index 0:name 1:price 2:stock 3:imageURL 모두 string
+        DVM currentDVM = controller.selectDVM(num);
+        ArrayList<Drink> currentDrinkList = currentDVM.getDrink_list();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 int index = i * 5 + j;
-
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(DrinkListInfo.get(index).get(3))
+                Drink drink = currentDrinkList.get(index);
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(drink.getImgURL())
                         .getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT));
-                String name =DrinkListInfo.get(index).get(0);
-                String price = DrinkListInfo.get(index).get(1);
-                String stock = DrinkListInfo.get(index).get(2);
+                String name = drink.getName();
+                int price = drink.getPrice();
+                int stock = drink.getStock();
                 label_drink.add(new JLabel("<html>"+ (index + 1) + "." + name + "<br>" + price + "원 (" + stock + "개)</html>", imageIcon, JLabel.LEFT));
             }
         }
@@ -136,7 +135,7 @@ public class MyFrame extends JFrame {
                 gbc(label_drink.get(i * 5 + j), j, i, 1, 1);
             }
         }
-        for (int i = 0; i < DrinkListInfo.size(); i++) {
+        for (int i = 0; i < currentDrinkList.size(); i++) {
             pScreen.add(label_drink.get(i));
         }
     }
