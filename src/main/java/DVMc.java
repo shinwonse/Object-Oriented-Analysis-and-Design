@@ -31,6 +31,8 @@ public class DVMc implements DVM{
     }
 
     public int responseStockMessage(Network network, Message message) {
+        String str = "ResponseBroadCastMessage == src_id: " + message.getSrc_id() + ", dst_id: " + message.getSrc_id() + ", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + message.getMsg();
+        System.out.println(str);
         return network.responseBroadcastMessage(message);
     }
 
@@ -49,6 +51,8 @@ public class DVMc implements DVM{
     }
 
     public int responseLocationMessage(Network network, Message message){
+        String str = "ResponseBroadCastMessage == src_id: " + message.getSrc_id() + ", dst_id: " + message.getSrc_id() + ", msg_type: " + MsgType.RESPONSE_LOCATION + ", msg: " + message.getMsg();
+        System.out.println(str);
         return network.responseNormalMessage(message);
     }
 
@@ -60,11 +64,12 @@ public class DVMc implements DVM{
 
     @Override
     public Object requestStockMessage(Network network, Message message) {
+        String str = "requestStockMessage == src_id: " + getId() + ", msg_type: " + MsgType.REQUEST_STOCK + ", msg: " + message.getMsg();
+        System.out.println(str);
         Object result = network.handleRequestMessage(message);
         if(result.getClass() == Integer.class){
             int stock = (int)result;
-            String str = "requestStockResopnseMessage == src_id: " + getId() + ", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + stock;
-            System.out.println(str);
+
             return stock;
         }
         else{
@@ -82,11 +87,11 @@ public class DVMc implements DVM{
 
     @Override
     public int requestLocationMessage(Network network, Message message) {
+        String str = "requestLocationMessage == src_id: " + message.getSrc_id()+ ",dst_id: "+message.getDst_id()
+                +", msg_type: " + MsgType.REQUEST_LOCATION + ", msg: " + message.getMsg();
+        System.out.println(str);
         int i = (int)network.handleRequestMessage(message);
 
-        String str = "requestLocationMessage == src_id: " + message.getSrc_id()+ ",dst_id: "+message.getDst_id()
-                +", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + i;
-        System.out.println(str);
 
         return i;
     }
