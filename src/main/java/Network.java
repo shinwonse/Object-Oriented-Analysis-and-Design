@@ -69,7 +69,10 @@ public class Network {
         int dst_id = message.getDst_id();
         String msg = message.getMsg();
         int stock = Integer.parseInt(msg);
+        String str = "ResopnseBroadCastMessage == src_id: " + src_id + ", dst_id: " + dst_id + ", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + stock;
+        System.out.println(str);
         return stock;
+
     }
 
     public int responseNormalMessage(Message message) {
@@ -82,6 +85,9 @@ public class Network {
         else if(msg_type == MsgType.RESPONSE_STOCK){
             data = Integer.parseInt(msg);
         }
+        String str = "ResopnseNormalMessage == src_id: " + message.getSrc_id() +
+                ", dst_id: " + message.getDst_id() + ", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + data;
+        System.out.println(str);
         return data;
     }
 

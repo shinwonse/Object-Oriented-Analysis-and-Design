@@ -2,25 +2,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OtherDVMs {
-    ArrayList<DVM> dvmList;
+    ArrayList<DVM> dvmList =new ArrayList<DVM>();
     Network network;
 
 
     OtherDVMs(){
         init();
-    }
-
-    public OtherDVMs(int i) {
-        ArrayList<Drink> drinkArrayList = new ArrayList<>(); // 전체 음료수 리스트
-        StubDVM stub1 = new StubDVM();
-        stub1.setId(111);
-        stub1.setAddress(999);
-        StubDVM stub2 = new StubDVM();
-        stub2.setId(222);
-        stub2.setAddress(99);
-        dvmList.add(stub1);
-        dvmList.add(stub2);
-        network = new Network(dvmList);
     }
 
     DVM getDVM(int index){
@@ -100,10 +87,10 @@ public class OtherDVMs {
 
         ArrayList<Drink> drinkArrayList2 = new ArrayList<>(); // 전체 음료수 리스트
         drinkArrayList2.add(new Drink("빡텐션", 1500, 10, "src/main/resources/image/10.jpg"));
-        drinkArrayList2.add(new Drink("파워에이드", 1500, 10, "src/main/resources/image/13.jpg"));
+        drinkArrayList2.add(new Drink("파워에이드", 1500, 120, "src/main/resources/image/13.jpg"));
         drinkArrayList2.add(new Drink("밀키스", 1500, 10, "src/main/resources/image/14.jpg"));
-        drinkArrayList2.add(new Drink("레쓰비", 1500, 10, "src/main/resources/image/15.jpg"));
-        drinkArrayList2.add(new Drink("스파클링", 1500, 10, "src/main/resources/image/16.jpg"));
+        drinkArrayList2.add(new Drink("레쓰비", 1500, 12, "src/main/resources/image/15.jpg"));
+        drinkArrayList2.add(new Drink("스파클링", 1500, 0, "src/main/resources/image/16.jpg"));
         drinkArrayList2.add(new Drink("데자와", 1500, 10, "src/main/resources/image/19.jpg"));
         drinkArrayList2.add(new Drink("코카콜라", 1500, 10, "src/main/resources/image/1.jpg"));
         drinkArrayList2.add(new Drink("펩시콜라", 1500, 0, "src/main/resources/image/2.jpg"));
@@ -123,8 +110,8 @@ public class OtherDVMs {
         ArrayList<Drink> drinkArrayList3 = new ArrayList<>(); // 전체 음료수 리스트
         drinkArrayList3.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
         drinkArrayList3.add(new Drink("포카리스웨트", 1500, 10, "src/main/resources/image/11.jpg"));
-        drinkArrayList3.add(new Drink("레드불", 1500, 10, "src/main/resources/image/8.jpg"));
-        drinkArrayList3.add(new Drink("빡텐션", 1500, 10, "src/main/resources/image/10.jpg"));
+        drinkArrayList3.add(new Drink("레드불", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList3.add(new Drink("빡텐션", 1500, 13, "src/main/resources/image/10.jpg"));
         drinkArrayList3.add(new Drink("파워에이드", 1500, 10, "src/main/resources/image/13.jpg"));
         drinkArrayList3.add(new Drink("밀키스", 1500, 10, "src/main/resources/image/14.jpg"));
         drinkArrayList3.add(new Drink("게토레이", 1500, 20, "src/main/resources/image/12.jpg"));
@@ -142,14 +129,127 @@ public class OtherDVMs {
         drinkArrayList3.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
         drinkArrayList3.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
 
+        ArrayList<Drink> drinkArrayList4 = new ArrayList<>(); // 전체 음료수 리스트
+        drinkArrayList4.add(new Drink("펩시콜라", 1500, 11, "src/main/resources/image/2.jpg"));
+        drinkArrayList4.add(new Drink("칠성사이다", 1500, 4, "src/main/resources/image/3.jpg"));
+        drinkArrayList4.add(new Drink("스프라이트", 1500, 8, "src/main/resources/image/4.jpg"));
+        drinkArrayList4.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
+        drinkArrayList4.add(new Drink("포카리스웨트", 1500, 10, "src/main/resources/image/11.jpg"));
+        drinkArrayList4.add(new Drink("스파클링", 1500, 4, "src/main/resources/image/16.jpg"));
+        drinkArrayList4.add(new Drink("게토레이", 1500, 21, "src/main/resources/image/12.jpg"));
+        drinkArrayList4.add(new Drink("비락식혜", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList4.add(new Drink("솔의눈", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList4.add(new Drink("레쓰비", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList4.add(new Drink("데자와", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList4.add(new Drink("코카콜라", 1500, 0, "src/main/resources/image/1.jpg"));
+        drinkArrayList4.add(new Drink("환타포도", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList4.add(new Drink("핫식스", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList4.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList4.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
+        drinkArrayList4.add(new Drink("밀키스", 1500, 0, "src/main/resources/image/14.jpg"));
+        drinkArrayList4.add(new Drink("레드불", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList4.add(new Drink("빡텐션", 1500, 0, "src/main/resources/image/10.jpg"));
+        drinkArrayList4.add(new Drink("파워에이드", 1500, 0, "src/main/resources/image/13.jpg"));
+
+        ArrayList<Drink> drinkArrayList5 = new ArrayList<>(); // 전체 음료수 리스트
+        drinkArrayList5.add(new Drink("레쓰비", 1500, 12, "src/main/resources/image/15.jpg"));
+        drinkArrayList5.add(new Drink("펩시콜라", 1500, 32, "src/main/resources/image/2.jpg"));
+        drinkArrayList5.add(new Drink("칠성사이다", 1500, 1, "src/main/resources/image/3.jpg"));
+        drinkArrayList5.add(new Drink("마운틴듀", 1500, 23, "src/main/resources/image/20.jpg"));
+        drinkArrayList5.add(new Drink("밀키스", 1500, 5, "src/main/resources/image/14.jpg"));
+        drinkArrayList5.add(new Drink("스프라이트", 1500, 7, "src/main/resources/image/4.jpg"));
+        drinkArrayList5.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
+        drinkArrayList5.add(new Drink("데자와", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList5.add(new Drink("코카콜라", 1500, 0, "src/main/resources/image/1.jpg"));
+        drinkArrayList5.add(new Drink("포카리스웨트", 1500, 0, "src/main/resources/image/11.jpg"));
+        drinkArrayList5.add(new Drink("스파클링", 1500, 0, "src/main/resources/image/16.jpg"));
+        drinkArrayList5.add(new Drink("게토레이", 1500, 0, "src/main/resources/image/12.jpg"));
+        drinkArrayList5.add(new Drink("비락식혜", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList5.add(new Drink("솔의눈", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList5.add(new Drink("환타포도", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList5.add(new Drink("핫식스", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList5.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList5.add(new Drink("레드불", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList5.add(new Drink("빡텐션", 1500, 0, "src/main/resources/image/10.jpg"));
+        drinkArrayList5.add(new Drink("파워에이드", 1500, 0, "src/main/resources/image/13.jpg"));
+
+        ArrayList<Drink> drinkArrayList6 = new ArrayList<>(); // 전체 음료수 리스트
+        drinkArrayList6.add(new Drink("스파클링", 1500, 9, "src/main/resources/image/16.jpg"));
+        drinkArrayList6.add(new Drink("레드불", 1500, 5, "src/main/resources/image/8.jpg"));
+        drinkArrayList6.add(new Drink("빡텐션", 1500, 10, "src/main/resources/image/10.jpg"));
+        drinkArrayList6.add(new Drink("코카콜라", 1500, 130, "src/main/resources/image/1.jpg"));
+        drinkArrayList6.add(new Drink("스프라이트", 1500, 22, "src/main/resources/image/4.jpg"));
+        drinkArrayList6.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
+        drinkArrayList6.add(new Drink("포카리스웨트", 1500, 10, "src/main/resources/image/11.jpg"));
+        drinkArrayList6.add(new Drink("게토레이", 1500, 0, "src/main/resources/image/12.jpg"));
+        drinkArrayList6.add(new Drink("비락식혜", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList6.add(new Drink("솔의눈", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList6.add(new Drink("펩시콜라", 1500, 0, "src/main/resources/image/2.jpg"));
+        drinkArrayList6.add(new Drink("칠성사이다", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList6.add(new Drink("레쓰비", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList6.add(new Drink("데자와", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList6.add(new Drink("환타포도", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList6.add(new Drink("핫식스", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList6.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList6.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
+        drinkArrayList6.add(new Drink("밀키스", 1500, 0, "src/main/resources/image/14.jpg"));
+
+        drinkArrayList6.add(new Drink("파워에이드", 1500, 0, "src/main/resources/image/13.jpg"));
+
+        ArrayList<Drink> drinkArrayList7 = new ArrayList<>(); // 전체 음료수 리스트
+        drinkArrayList7.add(new Drink("핫식스", 1500, 12, "src/main/resources/image/7.jpg"));
+        drinkArrayList7.add(new Drink("몬스터드링크", 1500, 32, "src/main/resources/image/9.jpg"));
+        drinkArrayList7.add(new Drink("파워에이드", 1500, 7, "src/main/resources/image/13.jpg"));
+        drinkArrayList7.add(new Drink("펩시콜라", 1500, 5, "src/main/resources/image/2.jpg"));
+        drinkArrayList7.add(new Drink("게토레이", 1500, 20, "src/main/resources/image/12.jpg"));
+        drinkArrayList7.add(new Drink("비락식혜", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList7.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
+        drinkArrayList7.add(new Drink("포카리스웨트", 1500, 0, "src/main/resources/image/11.jpg"));
+        drinkArrayList7.add(new Drink("스파클링", 1500, 0, "src/main/resources/image/16.jpg"));
+        drinkArrayList7.add(new Drink("데자와", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList7.add(new Drink("솔의눈", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList7.add(new Drink("레쓰비", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList7.add(new Drink("코카콜라", 1500, 0, "src/main/resources/image/1.jpg"));
+        drinkArrayList7.add(new Drink("환타포도", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList7.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
+        drinkArrayList7.add(new Drink("빡텐션", 1500, 0, "src/main/resources/image/10.jpg"));
+        drinkArrayList7.add(new Drink("밀키스", 1500, 0, "src/main/resources/image/14.jpg"));
+        drinkArrayList7.add(new Drink("레드불", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList7.add(new Drink("칠성사이다", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList7.add(new Drink("스프라이트", 1500, 0, "src/main/resources/image/4.jpg"));
+
+
+        ArrayList<Drink> drinkArrayList8 = new ArrayList<>(); // 전체 음료수 리스트
+
+        drinkArrayList8.add(new Drink("레드불", 1500, 20, "src/main/resources/image/8.jpg"));
+        drinkArrayList8.add(new Drink("빡텐션", 1500, 1, "src/main/resources/image/10.jpg"));
+        drinkArrayList8.add(new Drink("솔의눈", 1500, 2, "src/main/resources/image/18.jpg"));
+        drinkArrayList8.add(new Drink("레쓰비", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList8.add(new Drink("데자와", 1500, 6, "src/main/resources/image/19.jpg"));
+        drinkArrayList8.add(new Drink("코카콜라", 1500, 10, "src/main/resources/image/1.jpg"));
+        drinkArrayList8.add(new Drink("환타포도", 1500, 2, "src/main/resources/image/6.jpg"));
+        drinkArrayList8.add(new Drink("포카리스웨트", 1500, 0, "src/main/resources/image/11.jpg"));
+        drinkArrayList8.add(new Drink("스파클링", 1500, 0, "src/main/resources/image/16.jpg"));
+        drinkArrayList8.add(new Drink("게토레이", 1500, 0, "src/main/resources/image/12.jpg"));
+        drinkArrayList8.add(new Drink("비락식혜", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList8.add(new Drink("스프라이트", 1500, 0, "src/main/resources/image/4.jpg"));
+        drinkArrayList8.add(new Drink("환타오렌지", 1500, 0, "src/main/resources/image/5.jpg"));
+        drinkArrayList8.add(new Drink("핫식스", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList8.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList8.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
+        drinkArrayList8.add(new Drink("펩시콜라", 1500, 0, "src/main/resources/image/2.jpg"));
+        drinkArrayList8.add(new Drink("칠성사이다", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList8.add(new Drink("밀키스", 1500, 0, "src/main/resources/image/14.jpg"));
+        drinkArrayList8.add(new Drink("파워에이드", 1500, 0, "src/main/resources/image/13.jpg"));
+
         DVM dvm1 = new DVMc(drinkArrayList, 0, 101);
         DVM dvm2 = new DVMc(drinkArrayList2, 1, 202);
         DVM dvm3 = new DVMc(drinkArrayList3, 2, 303);
-        DVM dvm4 = new DVMc(drinkArrayList3, 3, 404);
-        DVM dvm5 = new DVMc(drinkArrayList3, 4, 505);
-        DVM dvm6 = new DVMc(drinkArrayList3, 5, 606);
-        DVM dvm7 = new DVMc(drinkArrayList3, 6, 707);
-        DVM dvm8 = new DVMc( drinkArrayList3, 7, 808);
+        DVM dvm4 = new DVMc(drinkArrayList4, 3, 404);
+        DVM dvm5 = new DVMc(drinkArrayList5, 4, 505);
+        DVM dvm6 = new DVMc(drinkArrayList6, 5, 606);
+        DVM dvm7 = new DVMc(drinkArrayList7, 6, 707);
+        DVM dvm8 = new DVMc(drinkArrayList8, 7, 808);
         ArrayList<DVM> tempList = new ArrayList<DVM>();
         tempList.add(dvm1);
         tempList.add(dvm2);

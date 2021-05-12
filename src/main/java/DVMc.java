@@ -55,7 +55,7 @@ public class DVMc implements DVM{
     @Override
     public Message makeStockRequestMessage(int dst_id, String drink_name) {
         Message message = new Message();
-        return message.createMessage(getId(), dst_id, MsgType.RESPONSE_LOCATION, drink_name);
+        return message.createMessage(getId(), dst_id, MsgType.REQUEST_STOCK, drink_name);
     }
 
     @Override
@@ -63,6 +63,8 @@ public class DVMc implements DVM{
         Object result = network.handleRequestMessage(message);
         if(result.getClass() == Integer.class){
             int stock = (int)result;
+            String str = "requestStockResopnseMessage == src_id: " + getId() + ", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + stock;
+            System.out.println(str);
             return stock;
         }
         else{
@@ -74,12 +76,18 @@ public class DVMc implements DVM{
     @Override
     public Message makeLocationRequestMessage(int dst_id) {
         Message message = new Message().createMessage(getId(), dst_id, MsgType.REQUEST_LOCATION);
+
         return message;
     }
 
     @Override
     public int requestLocationMessage(Network network, Message message) {
         int i = (int)network.handleRequestMessage(message);
+
+        String str = "requestLocationMessage == src_id: " + message.getSrc_id()+ ",dst_id: "+message.getDst_id()
+                +", msg_type: " + MsgType.RESPONSE_STOCK + ", msg: " + i;
+        System.out.println(str);
+
         return i;
     }
 }
