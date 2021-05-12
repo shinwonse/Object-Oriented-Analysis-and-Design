@@ -244,8 +244,7 @@ public class MyFrame extends JFrame {
                             else if(inputNum == 2){
                                 JOptionPane.showMessageDialog(null, "코드 결제를 선택하셨습니다.");
                                 pScreen.removeAll();
-                                MyFrame myFrame2 = new MyFrame();
-                                //showInputCode();
+                                showInputCode();
                                 pScreen.updateUI();
                                 stage = 4;
                             }
