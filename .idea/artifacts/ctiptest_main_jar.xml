@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="ctiptest.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ctiptest_main_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ctiptest.main.jar">
+        <element id="module-output" name="ctiptest.main" />
+      </element>
+    </root>
+  </artifact>
+</component>

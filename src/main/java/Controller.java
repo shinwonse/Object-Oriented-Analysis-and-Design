@@ -14,9 +14,7 @@ public class Controller {
         otherDVMs = new OtherDVMs();
     }
 
-    Controller(int i){
-        otherDVMs = new OtherDVMs(1);
-    }
+
 
     int selectCurrentDrink(int dialNum) {
         final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
@@ -52,13 +50,13 @@ public class Controller {
     String insertCard(int card_num, boolean isPrepayment){
         Boolean card_available = cardPayment.getCard_available(card_num);
         if(!card_available){
-            return "";
+            return "not available card";
         }
         Card card = cardPayment.getCard(card_num);
         int balance = card.getBalance();
         int price = selected_drink.getPrice();
         if(balance < price){
-            return "";
+            return "insufficient balance";
         }
         card.updateBalance(price);
         if(isPrepayment){
@@ -127,6 +125,7 @@ public class Controller {
         currentDVMIndex = num - 1;
         return otherDVMs.getDVM(num - 1);
     }
+
 
     public ArrayList<ArrayList<Integer>> startService() {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();

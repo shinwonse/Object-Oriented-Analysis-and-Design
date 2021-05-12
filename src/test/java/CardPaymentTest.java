@@ -74,30 +74,6 @@ class CardPaymentTest {
         assertEquals(myCard.getClass(), Card.class);
     }
 
-    @Test
-    void getCardTest4() {
-        ArrayList<Card> basicCardList;
-        int[] basicCardNameList = {12341234, 11111111, 10000000};
-        Card card1 = new Card(basicCardNameList[0], 10000);
-        Card card2 = new Card(basicCardNameList[1], 0);
-        Card card3 = new Card(basicCardNameList[2], 10000);
-        ArrayList<Card> tempList = new ArrayList<>();
-        tempList.add(card1);
-        tempList.add(card2);
-        tempList.add(card3);
-        basicCardList = tempList;           //미리 초기화 되어있는 basicCardList
-
-        int card_num = 00000000;            //Customer 가 입력한 카드번호
-
-        Card myCard = null;
-        for (Card card : basicCardList) {
-            if (card.getCard_num() == card_num)
-                myCard = card;
-            else
-                myCard = null;
-        }
-        assertNotEquals(myCard.getClass(), Card.class);
-    }
 }
 
 
