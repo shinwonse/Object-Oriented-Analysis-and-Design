@@ -232,7 +232,7 @@ public class MyFrame extends JFrame {
                                 pScreen.updateUI();
                             }
                             else
-                                JOptionPane.showMessageDialog(null, "번호를 잘못 입력했습니다. 1 or 2를 입력해주세요.");
+                                JOptionPane.showMessageDialog(null, "번호를 잘못 입력했습니다.1-20번의 음료를 선택하세요");
                             break;
                         case 2: // 결제방법 선택
                             if(inputNum == 1) {
@@ -256,8 +256,16 @@ public class MyFrame extends JFrame {
 //                            aa.showMessageDialog(null, "카드를 선택해주세요.");
                             // 카드 목록 출력
                             String result = controller.insertCard(inputNum, false);
-                            if(result.equals("")){
+                            if(result.equals("not available card")){
                                 JOptionPane.showMessageDialog(null, "유효하지 않은 카드입니다. 초기화면으로 돌아갑니다.");
+                                // 초기 화면으로 돌아감
+                                stage = 0;
+                                pScreen.removeAll();
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
+                            else if(result.equals("insufficient balance")){
+                                JOptionPane.showMessageDialog(null, "잔액이 부족합니다. 초기화면으로 돌아갑니다.");
                                 // 초기 화면으로 돌아감
                                 stage = 0;
                                 pScreen.removeAll();

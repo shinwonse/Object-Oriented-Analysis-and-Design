@@ -44,13 +44,13 @@ public class Controller {
     String insertCard(int card_num, boolean isPrepayment){
         Boolean card_available = cardPayment.getCard_available(card_num);
         if(!card_available){
-            return "";
+            return "not available card";
         }
         Card card = cardPayment.getCard(card_num);
         int balance = card.getBalance();
         int price = selected_drink.getPrice();
         if(balance < price){
-            return "";
+            return "insufficient balance";
         }
         card.updateBalance(price);
         if(isPrepayment){
