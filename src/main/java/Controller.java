@@ -5,10 +5,18 @@ public class Controller {
     int currentDVMIndex;
     ArrayList<DVM> accessible_DVM_list;
     Card card_info;
-    OtherDVMs otherDVMs = new OtherDVMs();
+    OtherDVMs otherDVMs;
     Drink selected_drink;
     CardPayment cardPayment = new CardPayment();
     CodePayment codePayment = new CodePayment();
+
+    Controller(){
+        otherDVMs = new OtherDVMs();
+    }
+
+    Controller(int i){
+        otherDVMs = new OtherDVMs(1);
+    }
 
     int selectCurrentDrink(int dialNum) {
         final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
@@ -115,21 +123,9 @@ public class Controller {
         return false;
     }
 
-    public ArrayList<ArrayList<String>> selectDVM(int num) {
-        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-
+    public DVM selectDVM(int num) {
         currentDVMIndex = num - 1;
-        DVM currentDVM = otherDVMs.getDVM(num - 1);
-        ArrayList<Drink> drinkList = currentDVM.getDrink_list();
-        for(int i = 0; i< drinkList.size(); i++){
-            ArrayList<String> temp = new ArrayList<String>();
-            temp.add(drinkList.get(i).getName());
-            temp.add(String.valueOf(drinkList.get(i).getPrice()));
-            temp.add(String.valueOf(drinkList.get(i).getStock()));
-            temp.add(drinkList.get(i).getImgURL());
-            result.add(temp);
-        }
-        return result;
+        return otherDVMs.getDVM(num - 1);
     }
 
     public ArrayList<ArrayList<Integer>> startService() {

@@ -1,56 +1,30 @@
 import java.util.ArrayList;
-import java.util.List;
 
-public class DVM {
+public interface DVM {
 
-    private ArrayList<Drink> drink_list;
-    private int id;
-    private int address;
+    //public DVM(ArrayList<Drink> drink_list, int id, int address);
 
-    public DVM(ArrayList<Drink> drink_list, int id, int address) {
-        this.drink_list = drink_list;
-        this.id = id;
-        this.address = address;
-    }
+    public ArrayList<Drink> getDrink_list();
 
-    public ArrayList<Drink> getDrink_list() {
-        return drink_list;
-    }
+    public int getId();
 
-    public int getId() {
-        return id;
-    }
+    public int getAddress();
 
-    public int getAddress() {
-        return address;
-    }
+    public Message makeStockResponseMessage(int dst_id, int stock);
 
-    public Message makeStockResponseMessage(int dst_id, int stock) {
-        Message message = new Message();
-        String stockMsg = Integer.toString(stock);
-        return message.createMessage(getId(), dst_id, MsgType.RESPONSE_STOCK, stockMsg);
-    }
+    public int responseStockMessage(Network network, Message message);
 
-    public int responseStockMessage(Network network, Message message) {
-        return network.responseBroadcastMessage(message);
-    }
+    public void updateStock(Drink selected_drink);
 
-    public void updateStock(Drink selected_drink) {
-        for(Drink drink : drink_list){
-            if(drink.getName().equals(selected_drink.getName())){
-                drink.updateStock();
-            }
-        }
-    }
+    public Message makeLocationResponseMessage(int src_id);
 
-    public Message makeLocationResponseMessage(int src_id) {
-        Message message = new Message();
-        int address = getAddress();
-        return message.createMessage(getId(), src_id, MsgType.RESPONSE_LOCATION, Integer.toString(address));
-    }
+    public int responseLocationMessage(Network network, Message message);
 
-    public int responseLocationMessage(Network network, Message message){
-        return network.responseNormalMessage(message);
-    }
+    public Message makeStockRequestMessage(int dst_id, String drink_name);
 
+    public Object requestStockMessage(Network network, Message message);
+
+    public Message makeLocationRequestMessage(int dst_id);
+
+    public int requestLocationMessage(Network network, Message message);
 }

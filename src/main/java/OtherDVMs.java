@@ -10,6 +10,19 @@ public class OtherDVMs {
         init();
     }
 
+    public OtherDVMs(int i) {
+        ArrayList<Drink> drinkArrayList = new ArrayList<>(); // 전체 음료수 리스트
+        StubDVM stub1 = new StubDVM();
+        stub1.setId(111);
+        stub1.setAddress(999);
+        StubDVM stub2 = new StubDVM();
+        stub2.setId(222);
+        stub2.setAddress(99);
+        dvmList.add(stub1);
+        dvmList.add(stub2);
+        network = new Network(dvmList);
+    }
+
     DVM getDVM(int index){
         return dvmList.get(index);
     }
@@ -32,8 +45,8 @@ public class OtherDVMs {
     }
 
     ArrayList<DVM> checkOtherDVMsStock(Drink drink_info, DVM currentDVM){
-        Message stockBroadCastMessage = new Message().createMessage(currentDVM.getId(), 0, 1, drink_info.getName());
-        ArrayList<DVM> accessible_DVM_list = network.requestBroadcastMessage(stockBroadCastMessage);
+        Message stockBroadCastMessage = currentDVM.makeStockRequestMessage(0, drink_info.getName());
+        ArrayList<DVM> accessible_DVM_list = (ArrayList<DVM>) currentDVM.requestStockMessage(network, stockBroadCastMessage);
 
         return accessible_DVM_list;
     }
@@ -51,8 +64,8 @@ public class OtherDVMs {
         ArrayList<Integer> dvmLocationList = new ArrayList<>();
         for(int i = 0; i < accessibleDVMList.size(); i++){
             DVM currentDVM = getDVM(currentDVMIndex);
-            Message locationRequestMessage = new Message().createMessage(currentDVM.getId(), accessibleDVMList.get(i).getId(), MsgType.REQUEST_LOCATION);
-            int address = network.requestNormalMessage(locationRequestMessage);
+            Message locationRequestMessage = currentDVM.makeLocationRequestMessage(accessibleDVMList.get(i).getId());
+            int address = currentDVM.requestLocationMessage(network, locationRequestMessage);
             dvmLocationList.add(address);
         }
         StringBuilder locationListStr = new StringBuilder();
@@ -129,14 +142,14 @@ public class OtherDVMs {
         drinkArrayList3.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
         drinkArrayList3.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
 
-        DVM dvm1 = new DVM(drinkArrayList, 0, 101);
-        DVM dvm2 = new DVM(drinkArrayList2, 1, 202);
-        DVM dvm3 = new DVM(drinkArrayList3, 2, 303);
-        DVM dvm4 = new DVM(drinkArrayList3, 3, 404);
-        DVM dvm5 = new DVM(drinkArrayList3, 4, 505);
-        DVM dvm6 = new DVM(drinkArrayList3, 5, 606);
-        DVM dvm7 = new DVM(drinkArrayList3, 6, 707);
-        DVM dvm8 = new DVM( drinkArrayList3, 7, 808);
+        DVM dvm1 = new DVMc(drinkArrayList, 0, 101);
+        DVM dvm2 = new DVMc(drinkArrayList2, 1, 202);
+        DVM dvm3 = new DVMc(drinkArrayList3, 2, 303);
+        DVM dvm4 = new DVMc(drinkArrayList3, 3, 404);
+        DVM dvm5 = new DVMc(drinkArrayList3, 4, 505);
+        DVM dvm6 = new DVMc(drinkArrayList3, 5, 606);
+        DVM dvm7 = new DVMc(drinkArrayList3, 6, 707);
+        DVM dvm8 = new DVMc( drinkArrayList3, 7, 808);
         ArrayList<DVM> tempList = new ArrayList<DVM>();
         tempList.add(dvm1);
         tempList.add(dvm2);
