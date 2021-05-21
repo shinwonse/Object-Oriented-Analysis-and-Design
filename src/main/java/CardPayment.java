@@ -16,7 +16,7 @@ public class CardPayment {
         int[] basicCardNameList = {12341234,11111111, 10000000};
         Card card1 = new Card(basicCardNameList[0], 10000);
         Card card2 = new Card(basicCardNameList[1], 0);
-        Card card3 = new Card(basicCardNameList[2], 10000);
+        Card card3 = new Card(basicCardNameList[2], 100000);
         ArrayList<Card> tempList = new ArrayList<>();
         tempList.add(card1);
         tempList.add(card2);
