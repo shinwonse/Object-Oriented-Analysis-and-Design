@@ -169,7 +169,7 @@ public class MyFrame extends JFrame {
         public void actionPerformed(ActionEvent event) {
             String eventText = event.getActionCommand();
 
-            if(inputTemp == 0){
+            if(inputTemp == 0 && stage == 0){
                 if(eventText.equals("확인")){
                     inputNum = inputTemp;
                     inputText.setText("");
@@ -229,7 +229,7 @@ public class MyFrame extends JFrame {
                                 pScreen.updateUI();
                             }
                             else
-                                JOptionPane.showMessageDialog(null, "잘못된  입력했습니다. 1~20번의 음료를 선택해주세요.");
+                                JOptionPane.showMessageDialog(null, "잘못된 번호를 입력했습니다. 1~20번의 음료를 선택해주세요.");
                             break;
                         case 2: // 결제방법 선택
                             if(inputNum == 1) {
@@ -300,11 +300,30 @@ public class MyFrame extends JFrame {
                             break;
                         case 5: // 선결제 진행
                             String prePaymentResult = controller.insertCard(inputNum, true);
-                            JOptionPane.showMessageDialog(null, prePaymentResult);
-                            stage = 0;
-                            pScreen.removeAll();
-                            showAllDVMList(pScreen);
-                            pScreen.updateUI();
+                            if(prePaymentResult.equals("not available card")){
+                                JOptionPane.showMessageDialog(null, "유효하지 않은 카드입니다. 초기화면으로 돌아갑니다.");
+                                // 초기 화면으로 돌아감
+                                stage = 0;
+                                pScreen.removeAll();
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
+                            else if(prePaymentResult.equals("insufficient balance"))
+                            {
+                                JOptionPane.showMessageDialog(null, "잔고가 부족합니다. 초기화면으로 돌아갑니다.");
+                                // 초기 화면으로 돌아감
+                                stage = 0;
+                                pScreen.removeAll();
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null, prePaymentResult);
+                                stage = 0;
+                                pScreen.removeAll();
+                                showAllDVMList(pScreen);
+                                pScreen.updateUI();
+                            }
                             break;
                         case 6: // 재고 있는 DVM 위치 출력
                             //showAccessibleDVMList(pScreen);
@@ -325,7 +344,16 @@ public class MyFrame extends JFrame {
                         inputText.setText(String.valueOf(inputTemp));
                 }else{                                                              //0~9 사이의 숫자 input
                     inputTemp = inputTemp*10 + Integer.parseInt(eventText);
-                    inputText.setText(String.valueOf(inputTemp));
+                    //숫자 10개 이상 클릭할 경우
+                    if(String.valueOf(inputTemp).length()>=10){
+//                       JOptionPane.showMessageDialog(null, "그만");
+                        inputTemp = 0;
+                        inputText.setText("");
+                    }
+
+                    else {
+                        inputText.setText(String.valueOf(inputTemp));
+                    }
 
                 }
             }
