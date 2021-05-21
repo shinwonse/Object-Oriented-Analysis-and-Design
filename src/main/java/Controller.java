@@ -55,6 +55,9 @@ public class Controller {
         card.updateBalance(price);
         if(isPrepayment){
             Code code = cardPayment.generateCode(selected_drink); // 코드 생성
+            if(code_list.contains(code.getCode())){
+                code = cardPayment.generateCode(selected_drink); // 이미 있는 번호라면 재생성
+            }
             addCode(code);
             DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
             String locationsListStr = otherDVMs.showAccessibleDVMsLocation(accessible_DVM_list, currentDVMIndex);
