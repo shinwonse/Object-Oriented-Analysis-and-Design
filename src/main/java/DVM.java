@@ -6,25 +6,19 @@ public interface DVM {
 
     public ArrayList<Drink> getDrink_list();
 
-    public int getId();
+    public int getDVMId();
 
     public int getAddress();
 
-    public Message makeStockResponseMessage(int dst_id, int stock);
+    public void setAddress(int address);
 
-    public int responseStockMessage(Network network, Message message);
+    public void responseStockMessage(Message message);
 
     public void updateStock(Drink selected_drink);
 
-    public Message makeLocationResponseMessage(int src_id);
+    public void responseLocationMessage(Message message);
 
-    public int responseLocationMessage(Network network, Message message);
+    public void run();
 
-    public Message makeStockRequestMessage(int dst_id, String drink_name);
-
-    public Object requestStockMessage(Network network, Message message);
-
-    public Message makeLocationRequestMessage(int dst_id);
-
-    public int requestLocationMessage(Network network, Message message);
+    public void responseSaleMessage(Message message);
 }

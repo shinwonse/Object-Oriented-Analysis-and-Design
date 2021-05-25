@@ -27,7 +27,6 @@ public class MyFrame extends JFrame {
 
     // controller 객체
     Controller controller = new Controller();
-    int[] dvmAddresses = {101, 202, 303, 404, 505, 606, 707, 808};
 
     MyFrame() {
         init();
@@ -93,7 +92,7 @@ public class MyFrame extends JFrame {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/image/vm_image.png")
                         .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
                 int num = i * 4 + j;
-                int id = dvmInfo.get(num).get(0)+1;
+                int id = dvmInfo.get(num).get(0);
                 int address = dvmInfo.get(num).get(1);
                 labelList.add(new JLabel("<html>"+ (num + 1) + ". DVM" + id + "<br>주소: " + address + "</html>", imageIcon, JLabel.CENTER));
             }

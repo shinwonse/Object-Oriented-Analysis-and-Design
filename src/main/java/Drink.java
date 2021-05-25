@@ -16,6 +16,12 @@ public class Drink {
         this.imgURL = imgURL;
     }
 
+    public Drink(String name, int price, String imgURL){
+        this.name = name;
+        this.price = price;
+        this.imgURL = imgURL;
+    }
+
     public String getName() {
         return name;
     }
@@ -30,6 +36,10 @@ public class Drink {
 
     public int getStock(){
         return stock;
+    }
+
+    public void setStock(int stock){
+        this.stock = stock;
     }
 
     public void updateStock(){

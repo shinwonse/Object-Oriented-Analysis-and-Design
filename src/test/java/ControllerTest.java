@@ -88,11 +88,13 @@ class ControllerTest {
     void enterCode() {
         otherDVMs = new OtherDVMs();
         currentDVMIndex = 1;
+        DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
+
         Code testCode = new Code(12345,new Drink("코카콜라",1000,10,""));
         code_list.add(testCode);
         Drink testDrink = codePayment.codePayment(testCode);
         assertEquals("코카콜라",testDrink.getName());
-        String testResult = otherDVMs.requestDrink(testDrink, currentDVMIndex);
+        String testResult = otherDVMs.requestDrink(testDrink, currentDVM);
         assertNotEquals("",testResult);
     }
 
@@ -146,8 +148,9 @@ class ControllerTest {
         currentDVMIndex = testNum-1;
         otherDVMs = new OtherDVMs();
         DVM testDVM = otherDVMs.getDVM(currentDVMIndex);
-        System.out.println(testDVM.getId());
-        assertEquals(0,testDVM.getId());
+        System.out.println(testDVM.getDVMId());
+        assertEquals(0,testDVM.getDVMId());
+
     }
 
     @Test
@@ -160,8 +163,10 @@ class ControllerTest {
         int testAddress = 101;
         for(int i=0; i<dvmList.size(); i++){
             ArrayList<Integer> std = new ArrayList<Integer>();
-            assertEquals(i,dvmList.get(i).getId());
-            std.add(dvmList.get(i).getId());
+
+            assertEquals(i,dvmList.get(i).getDVMId());
+            std.add(dvmList.get(i).getDVMId());
+
             assertEquals(testAddress,dvmList.get(i).getAddress());
             testAddress += 101;
             std.add(dvmList.get(i).getAddress());

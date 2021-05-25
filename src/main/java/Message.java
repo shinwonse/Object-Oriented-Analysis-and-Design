@@ -1,4 +1,6 @@
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
 
     private int src_id;
     private int dst_id;
@@ -37,21 +39,17 @@ public class Message {
         return this.msg;
     }
 
-    public Message createMessage(int src_id, int dst_id, int msg_type){
-        Message message = new Message();
-        message.setDst_id(dst_id);
-        message.setSrc_id(src_id);
-        message.setMsg_type(msg_type);
-        message.setMsg("");
-        return message;
+    public void createMessage(int src_id, int dst_id, int msg_type){
+        setDst_id(dst_id);
+        setSrc_id(src_id);
+        setMsg_type(msg_type);
+        setMsg("");
     }
 
-    public Message createMessage(int src_id, int dst_id, int msg_type, String msg){
-        Message message = new Message();
-        message.setDst_id(dst_id);
-        message.setSrc_id(src_id);
-        message.setMsg_type(msg_type);
-        message.setMsg(msg);
-        return message;
+    public void createMessage(int src_id, int dst_id, int msg_type, String msg){
+        setDst_id(dst_id);
+        setSrc_id(src_id);
+        setMsg_type(msg_type);
+        setMsg(msg);
     }
 }

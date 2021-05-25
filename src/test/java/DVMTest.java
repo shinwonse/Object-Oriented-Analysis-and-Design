@@ -77,14 +77,14 @@ class DVMTest {
     @Test
     void makeLocationResponseMessageTest1() {                                                //메시지 객제가 메시지를 만드는
         Message message = new Message();
-        message = message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
+        message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
 
         assertEquals(1,message.getSrc_id());
     }
     @Test
     void makeLocationResponseMessageTest2() {
         Message message = new Message();
-        message = message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
+        message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
 
         assertEquals("101",message.getMsg());
     }
@@ -92,7 +92,7 @@ class DVMTest {
     @Test
     void responseLocationMessageTest1() {
         Message message = new Message();
-        message = message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
+        message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
 
         int address = -1;
         int msg_type = 5;  //RESPONSE_LOCATION
@@ -107,7 +107,8 @@ class DVMTest {
     @Test
     void responseLocationMessageTest2() {
         Message message = new Message();
-        message = message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
+        message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
+
 
         int address = -1;
         int msg_type = 4;  //not RESPONSE_LOCATION

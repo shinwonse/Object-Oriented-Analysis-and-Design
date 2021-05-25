@@ -5,35 +5,57 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class DVMc extends Thread implements DVM {
+public class DVM3 extends Thread implements DVM {
 
     private ArrayList<Drink> drink_list;
     private int id;
     private int address;
     ServerSocket serverSocket = null;
     Socket receive_socket = null;
-    Socket send_socket = null;
-
-
     ObjectInputStream objectInputStream = null;
     ObjectOutputStream objectOutputStream = null;
 
-    public DVMc(ArrayList<Drink> drink_list, int id, int address) {
+    public DVM3(ArrayList<Drink> drink_list, int id, int address) {
         this.drink_list = drink_list;
         this.id = id;
         this.address = address;
     }
 
-    public DVMc(int id, int address){
+    public DVM3(ArrayList<Drink> drink_list, int id) {
+        this.drink_list = drink_list;
         this.id = id;
-        this.address = address;
     }
 
+    public static void main(String[] args) {
+        ArrayList<Drink> drinkArrayList3 = new ArrayList<>(); // 전체 음료수 리스트
+        drinkArrayList3.add(new Drink("환타오렌지", 1500, 10, "src/main/resources/image/5.jpg"));
+        drinkArrayList3.add(new Drink("포카리스웨트", 1500, 10, "src/main/resources/image/11.jpg"));
+        drinkArrayList3.add(new Drink("레드불", 1500, 0, "src/main/resources/image/8.jpg"));
+        drinkArrayList3.add(new Drink("빡텐션", 1500, 13, "src/main/resources/image/10.jpg"));
+        drinkArrayList3.add(new Drink("파워에이드", 1500, 10, "src/main/resources/image/13.jpg"));
+        drinkArrayList3.add(new Drink("밀키스", 1500, 10, "src/main/resources/image/14.jpg"));
+        drinkArrayList3.add(new Drink("게토레이", 1500, 20, "src/main/resources/image/12.jpg"));
+        drinkArrayList3.add(new Drink("비락식혜", 1500, 0, "src/main/resources/image/17.jpg"));
+        drinkArrayList3.add(new Drink("솔의눈", 1500, 0, "src/main/resources/image/18.jpg"));
+        drinkArrayList3.add(new Drink("레쓰비", 1500, 0, "src/main/resources/image/15.jpg"));
+        drinkArrayList3.add(new Drink("스파클링", 1500, 0, "src/main/resources/image/16.jpg"));
+        drinkArrayList3.add(new Drink("데자와", 1500, 0, "src/main/resources/image/19.jpg"));
+        drinkArrayList3.add(new Drink("코카콜라", 1500, 0, "src/main/resources/image/1.jpg"));
+        drinkArrayList3.add(new Drink("펩시콜라", 1500, 0, "src/main/resources/image/2.jpg"));
+        drinkArrayList3.add(new Drink("칠성사이다", 1500, 0, "src/main/resources/image/3.jpg"));
+        drinkArrayList3.add(new Drink("스프라이트", 1500, 0, "src/main/resources/image/4.jpg"));
+        drinkArrayList3.add(new Drink("환타포도", 1500, 0, "src/main/resources/image/6.jpg"));
+        drinkArrayList3.add(new Drink("핫식스", 1500, 0, "src/main/resources/image/7.jpg"));
+        drinkArrayList3.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
+        drinkArrayList3.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
+        DVM3 dvm3 = new DVM3(drinkArrayList3, 3, 303);
+        dvm3.run();
+    }
 
     public void run() {
         try {
-            serverSocket = new ServerSocket(8000 + getDVMId() + 1);
-            System.out.println("Server Running");
+            serverSocket = new ServerSocket(8000 + getDVMId());
+            System.out.println("[DVM" + getDVMId() + "] SERVER ON");
 
             while (true) {
                 receive_socket= serverSocket.accept();
@@ -42,7 +64,7 @@ public class DVMc extends Thread implements DVM {
                 objectInputStream = new ObjectInputStream(receive_socket.getInputStream());
                 Message msg = (Message) objectInputStream.readObject();
 
-                System.out.println("[DVM" + (getDVMId() + 1) + "] DVM" + msg.getSrc_id()
+                System.out.println("[DVM" + getDVMId() + "] DVM" + msg.getSrc_id()
                         + "로부터 메시지 수신(유형: " + msg.getMsg_type() + ", 내용: " + msg.getMsg()+ ")");
                 int type = msg.getMsg_type();
                 switch (type) {
@@ -82,9 +104,10 @@ public class DVMc extends Thread implements DVM {
     public int getAddress() {
         return address;
     }
-     
+
     public void setAddress(int address) {
         this.address = address;
+    }
 
     public void updateStock(Drink selected_drink) {
         for(Drink drink : drink_list){
@@ -101,7 +124,7 @@ public class DVMc extends Thread implements DVM {
             sendMsg1.createMessage(getDVMId(), msg.getSrc_id(), MsgType.RESPONSE_STOCK, getStock(msg.getMsg()));
             objectOutputStream.writeObject(sendMsg1);
             objectOutputStream.flush();
-            System.out.println("[DVM" + (getDVMId() + 1)+"] Controller"
+            System.out.println("[DVM" + getDVMId()+"] Controller"
                     + "에게 메시지 발신(유형: " + sendMsg1.getMsg_type() + "(재고 응답), 내용: " + sendMsg1.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +141,7 @@ public class DVMc extends Thread implements DVM {
             //sendMsg = new Msg(myID, msg.getSrc_id(), 5, "false");
             objectOutputStream.writeObject(sendMsg);
             objectOutputStream.flush();
-            System.out.println("[DVM" + (getDVMId() + 1)+"] Controller"
+            System.out.println("[DVM" + getDVMId()+"] Controller"
                     + "에게 메시지 발신(유형: " + sendMsg.getMsg_type() + "(위치 응답), 내용: " + sendMsg.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +163,7 @@ public class DVMc extends Thread implements DVM {
             sendMsg.createMessage(getDVMId(), message.getSrc_id(), MsgType.DRINK_SALE_RESPONSE, getStock(drinkName));
             objectOutputStream.writeObject(sendMsg);
             objectOutputStream.flush();
-            System.out.println("[DVM" + (getDVMId() + 1)+"] Controller"
+            System.out.println("[DVM" + getDVMId()+"] Controller"
                     + "에게 메시지 발신(유형: " + sendMsg.getMsg_type() + "(판매 확인 응답), 내용: " + sendMsg.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
