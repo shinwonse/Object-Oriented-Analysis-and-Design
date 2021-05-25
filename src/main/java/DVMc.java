@@ -82,9 +82,10 @@ public class DVMc extends Thread implements DVM {
     public int getAddress() {
         return address;
     }
-     
+
     public void setAddress(int address) {
         this.address = address;
+    }
 
     public void updateStock(Drink selected_drink) {
         for(Drink drink : drink_list){
@@ -101,7 +102,7 @@ public class DVMc extends Thread implements DVM {
             sendMsg1.createMessage(getDVMId(), msg.getSrc_id(), MsgType.RESPONSE_STOCK, getStock(msg.getMsg()));
             objectOutputStream.writeObject(sendMsg1);
             objectOutputStream.flush();
-            System.out.println("[DVM" + (getDVMId() + 1)+"] Controller"
+            System.out.println("[DVM" + getDVMId()+"] Controller"
                     + "에게 메시지 발신(유형: " + sendMsg1.getMsg_type() + "(재고 응답), 내용: " + sendMsg1.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +119,7 @@ public class DVMc extends Thread implements DVM {
             //sendMsg = new Msg(myID, msg.getSrc_id(), 5, "false");
             objectOutputStream.writeObject(sendMsg);
             objectOutputStream.flush();
-            System.out.println("[DVM" + (getDVMId() + 1)+"] Controller"
+            System.out.println("[DVM" + getDVMId()+"] Controller"
                     + "에게 메시지 발신(유형: " + sendMsg.getMsg_type() + "(위치 응답), 내용: " + sendMsg.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +141,7 @@ public class DVMc extends Thread implements DVM {
             sendMsg.createMessage(getDVMId(), message.getSrc_id(), MsgType.DRINK_SALE_RESPONSE, getStock(drinkName));
             objectOutputStream.writeObject(sendMsg);
             objectOutputStream.flush();
-            System.out.println("[DVM" + (getDVMId() + 1)+"] Controller"
+            System.out.println("[DVM" + getDVMId()+"] Controller"
                     + "에게 메시지 발신(유형: " + sendMsg.getMsg_type() + "(판매 확인 응답), 내용: " + sendMsg.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();

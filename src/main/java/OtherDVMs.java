@@ -77,7 +77,7 @@ public class OtherDVMs extends Thread{
         }
         StringBuilder locationListStr = new StringBuilder();
         for(int i = 0; i < accessibleDVMList.size(); i++){
-            locationListStr.append("DVM 명: DVM").append((accessibleDVMList.get(i).getId() + 1)).append(" / 위치: ").append(dvmLocationList.get(i)).append("\n");
+            locationListStr.append("DVM 명: DVM").append((accessibleDVMList.get(i).getDVMId() + 1)).append(" / 위치: ").append(dvmLocationList.get(i)).append("\n");
         }
         return String.valueOf(locationListStr);
     }
