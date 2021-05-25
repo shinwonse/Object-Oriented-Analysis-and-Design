@@ -27,8 +27,11 @@ class MyFrame extends JFrame {
 
     // controller 객체
     Controller controller = new Controller();
+<<<<<<< Updated upstream
 
     int[] dvmAddresses = {101, 202, 303, 404, 505, 606, 707, 808};
+=======
+>>>>>>> Stashed changes
 
     MyFrame() {
         init();

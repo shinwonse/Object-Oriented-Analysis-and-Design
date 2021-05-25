@@ -10,6 +10,34 @@ public class Controller {
     CardPayment cardPayment = new CardPayment();
     CodePayment codePayment = new CodePayment();
 
+<<<<<<< Updated upstream
+=======
+    Controller(){
+        otherDVMs = new OtherDVMs();
+    }
+
+    public ArrayList<ArrayList<Integer>> startService() {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<DVM> dvmList = otherDVMs.getDVMList();
+
+        for(int i=0; i<dvmList.size(); i++){
+            ArrayList<Integer> std = new ArrayList<Integer>();
+            std.add(dvmList.get(i).getDVMId());
+            std.add(dvmList.get(i).getAddress());
+            result.add(std);
+
+        }
+
+        return result;
+    }
+
+    public DVM selectDVM(int num) {
+        currentDVMIndex = num - 1;
+
+        return otherDVMs.getDVM(num - 1);
+    }
+
+>>>>>>> Stashed changes
     int selectCurrentDrink(int dialNum) {
         final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
         final int CUR_IN_STOCK = 1;    // 현재 DVM에 재고가 있음
@@ -43,6 +71,7 @@ public class Controller {
 
     String insertCard(int card_num, boolean isPrepayment){
         Boolean card_available = cardPayment.getCard_available(card_num);
+        DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
         if(!card_available){
             return "";
         }
@@ -56,9 +85,8 @@ public class Controller {
         if(isPrepayment){
             Code code = cardPayment.generateCode(selected_drink); // 코드 생성
             addCode(code);
-            DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
-            String locationsListStr = otherDVMs.showAccessibleDVMsLocation(accessible_DVM_list, currentDVMIndex);
-            String result = "선결제 진행 DVM: " + (currentDVM.getId() + 1)
+            String locationsListStr = otherDVMs.showAccessibleDVMsLocation(accessible_DVM_list, currentDVM);
+            String result = "선결제 진행 DVM: " + (currentDVM.getDVMId() + 1)
                     + "\n선결제한 음료수: " + selected_drink.getName()
                     + "\n음료 가격: " + selected_drink.getPrice()
                     + "\n선결제 후 카드 잔고: " + card.getBalance() + "원"
@@ -68,7 +96,7 @@ public class Controller {
             return result;
         }
         else{
-            String result = otherDVMs.requestDrink(selected_drink, currentDVMIndex);
+            String result = otherDVMs.requestDrink(selected_drink, currentDVM);
             String result2 = result + "\n결제 후 카드 잔고: " + card.getBalance() + "원";
             return result2;
         }
@@ -81,12 +109,13 @@ public class Controller {
 
     String enterCode(int code_num) {
         Boolean codeAvailable = checkCodeAvailable(code_num);
+        DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
         if(!codeAvailable){
             return "";
         }
         Code code_info = getCodeInfo(code_num);
         Drink drink = codePayment.codePayment(code_info);
-        String result = otherDVMs.requestDrink(drink, currentDVMIndex);
+        String result = otherDVMs.requestDrink(drink, currentDVM);
         deleteCode(code_info);
         String result2 = result + "\n코드 정보: " + code_info.getCode();
         return result2;
@@ -115,6 +144,7 @@ public class Controller {
         return false;
     }
 
+<<<<<<< Updated upstream
     public DVM selectDVM(int num) {
         currentDVMIndex = num - 1;
         return otherDVMs.getDVM(num - 1);
@@ -140,3 +170,6 @@ public class Controller {
 
 
 }
+=======
+}
+>>>>>>> Stashed changes
