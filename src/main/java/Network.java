@@ -6,38 +6,15 @@ import java.util.ArrayList;
 
 public class Network extends Thread {
     ArrayList<DVM> dvmList;
-
     Network(ArrayList<DVM> dvmList){
         this.dvmList = dvmList;
     }
-
-<<<<<<< Updated upstream
-    public int requestNormalMessage(Message message) {
-        int address = -1;
-=======
     // ë©”ì‹œì§€ ì¢…í•© í•¸ë“¤ëŸ¬
     public Object handleRequestMessage(Message message){
->>>>>>> Stashed changes
         int src_id = message.getSrc_id();
         int dst_id = message.getDst_id();
         int msg_type = message.getMsg_type();
         String msg = message.getMsg();
-<<<<<<< Updated upstream
-        if (msg_type == MsgType.REQUEST_LOCATION) {
-            address = handleLocationRequest(src_id, dst_id);
-        }
-        return address;
-    }
-
-    // BroadCastMessage ¸¦ »ç¿ëÇÏ´Â ÄÉÀÌ½º´Â ½ÇÁúÀûÀ¸·Î Àç°í¿äÃ»¶§¹Û¿¡ ¾øÀ½
-    public ArrayList<DVM> requestBroadcastMessage(Message broadCastMessage) {
-        int src_id = broadCastMessage.getSrc_id();
-        int msg_type = broadCastMessage.getMsg_type();
-        String msg = broadCastMessage.getMsg();
-        if(msg_type == MsgType.REQUEST_STOCK){
-            ArrayList<DVM> accessibleDVMList = handleStockRequest(src_id, msg);
-            return accessibleDVMList;
-=======
         switch(msg_type){
             case MsgType.REQUEST_STOCK:
                 if(dst_id == 0){
@@ -56,29 +33,40 @@ public class Network extends Thread {
             case MsgType.DRINK_SALE_CHECK:
                 int remainedStock = (int)handleSaleRequest(src_id, dst_id, msg);
                 return remainedStock;
-
->>>>>>> Stashed changes
-        }
         return null;
     }
 
-<<<<<<< Updated upstream
-    private ArrayList<DVM> handleStockRequest(int src_id, String msg) {
+    private Object handleStockRequest(int src_id, int dst_id, String msg) {
         ArrayList<DVM> accessibleDVMList = new ArrayList<>();
-        for(DVM dvm : dvmList){
-            boolean isInStock = false;
-            for(Drink drink: dvm.getDrink_list()){
-                if(drink.getName().equals(msg)){
-                    Message message = dvm.makeStockResponseMessage(src_id, drink.getStock()); // DVMÀÌ ÀÀ´ä ¸Ş¼¼Áö¸¦ ¸¸µë
-                    int stock = dvm.responseStockMessage(this, message); // DVMÀÌ Network¸¦ ÅëÇØ ÀÀ´ä¸Ş½ÃÁö¸¦ Àü´ŞÇÏ°í Network ³»ºÎ¿¡¼­ stock °ªÀ» Ã£¾Æ ¸®ÅÏÇØÁÜ
-                    if(stock != 0){
-                        isInStock = true;
-                        break;
+        if(dst_id == 0){
+            for(DVM dvm : dvmList){
+                boolean isInStock = false;
+                for(Drink drink: dvm.getDrink_list()){
+                    if(drink.getName().equals(msg)){
+                        Message message = dvm.makeStockResponseMessage(src_id, drink.getStock()); // DVMì´ ì‘ë‹µ ë©”ì„¸ì§€ë¥¼ ë§Œë“¬
+                        int stock = dvm.responseStockMessage(this, message); // DVMì´ Networkë¥¼ í†µí•´ ì‘ë‹µë©”ì‹œì§€ë¥¼ ì „ë‹¬í•˜ê³  Network ë‚´ë¶€ì—ì„œ stock ê°’ì„ ì°¾ì•„ ë¦¬í„´í•´ì¤Œ
+                        if(stock != 0){
+                            isInStock = true;
+                            break;
+                        }
                     }
                 }
+                if(isInStock){
+                    accessibleDVMList.add(dvm);
+                }
             }
-            if(isInStock){
-                accessibleDVMList.add(dvm);
+        }
+        else{
+            for(DVM dvm : dvmList) {
+                if (dvm.getId() == dst_id){
+                    for (Drink drink : dvm.getDrink_list()) {
+                        if (drink.getName().equals(msg)) {
+                            Message message = dvm.makeStockResponseMessage(src_id, drink.getStock()); // DVMì´ ì‘ë‹µ ë©”ì„¸ì§€ë¥¼ ë§Œë“¬
+                            int stock = dvm.responseStockMessage(this, message); // DVMì´ Networkë¥¼ í†µí•´ ì‘ë‹µë©”ì‹œì§€ë¥¼ ì „ë‹¬í•˜ê³  Network ë‚´ë¶€ì—ì„œ stock ê°’ì„ ì°¾ì•„ ë¦¬í„´í•´ì¤Œ
+                            return stock;
+                        }
+                    }
+                }
             }
         }
         return accessibleDVMList;
@@ -86,20 +74,22 @@ public class Network extends Thread {
 
     public int responseBroadcastMessage(Message message) {
         int src_id = message.getSrc_id();
+        int dst_id = message.getDst_id();
         String msg = message.getMsg();
         int stock = Integer.parseInt(msg);
+
         return stock;
+
     }
 
     public int responseNormalMessage(Message message) {
-        int address = -1;
+        int data = -1;
         int msg_type = message.getMsg_type();
         String msg = message.getMsg();
         if (msg_type == MsgType.RESPONSE_LOCATION) {
-            address = Integer.parseInt(msg);
+            data = Integer.parseInt(msg);
         }
-        return address;
-=======
+      
     // íŒë§¤ í™•ì¸ ìš”ì²­
     private Object handleSaleRequest(int src_id, int dst_id, String msg) {
         int remainedStock = 0;
@@ -180,7 +170,6 @@ public class Network extends Thread {
             }
             return stock;
         }
->>>>>>> Stashed changes
     }
 
     //ìœ„ì¹˜ í™•ì¸ ìš”ì²­

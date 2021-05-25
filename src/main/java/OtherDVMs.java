@@ -1,13 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-<<<<<<< Updated upstream
-public class OtherDVMs {
-    ArrayList<DVM> dvmList;
-=======
 public class OtherDVMs extends Thread{
     ArrayList<DVM> dvmList =new ArrayList<DVM>();
->>>>>>> Stashed changes
     Network network;
 
 
@@ -26,9 +21,6 @@ public class OtherDVMs extends Thread{
         return currentDVM;
     }
 
-<<<<<<< Updated upstream
-    ArrayList<DVM> getDVMList(){return dvmList;}
-=======
     public ArrayList<DVM> getDVMList(){
         for(DVM dvm : dvmList){
             Message message = new Message();
@@ -38,8 +30,6 @@ public class OtherDVMs extends Thread{
         }
         return dvmList;
     }
->>>>>>> Stashed changes
-
 
     public boolean checkCurrentDVMsStock(Drink selectedDrink, DVM currentDVM) {
         ArrayList<Drink> drink_list = currentDVM.getDrink_list();
@@ -56,28 +46,13 @@ public class OtherDVMs extends Thread{
     }
 
     ArrayList<DVM> checkOtherDVMsStock(Drink drink_info, DVM currentDVM){
-<<<<<<< Updated upstream
-        Message stockBroadCastMessage = new Message().createMessage(currentDVM.getId(), 0, 1, drink_info.getName());
-        ArrayList<DVM> accessible_DVM_list = network.requestBroadcastMessage(stockBroadCastMessage);
-=======
-        //Message stockBroadCastMessage = currentDVM.makeStockRequestMessage(0, drink_info.getName());
         Message message = new Message();
         message.createMessage(currentDVM.getDVMId(), 0, MsgType.REQUEST_STOCK, drink_info.getName());
         ArrayList<DVM> accessible_DVM_list = (ArrayList<DVM>) network.handleRequestMessage(message);
-        //ArrayList<DVM> accessible_DVM_list = (ArrayList<DVM>) currentDVM.requestStockMessage(network, stockBroadCastMessage);
->>>>>>> Stashed changes
 
         return accessible_DVM_list;
     }
 
-<<<<<<< Updated upstream
-    public String requestDrink(Drink selected_drink, int currentDVMIndex) {
-        dvmList.get(currentDVMIndex).updateStock(selected_drink);
-        String result = "       <À½·á ±¸¸Å ¿Ï·á>" +
-                "\n±¸¸Å ÁøÇàÇÑ DVM: DVM" + String.valueOf(currentDVMIndex + 1)
-                + "\n±¸¸ÅÇÑ À½·á: "+ selected_drink.getName()
-                + "\nÀ½·á °¡°Ý: " + selected_drink.getPrice() + "¿ø";
-=======
     public String requestDrink(Drink selected_drink, DVM currentDVM) {
         Message message = new Message();
 
@@ -89,113 +64,25 @@ public class OtherDVMs extends Thread{
                 + "\nêµ¬ë§¤í•œ ìŒë£Œ: "+ selected_drink.getName()
                 + "\nìŒë£Œ ê°€ê²©: " + selected_drink.getPrice() + "ì›"
                 + "\nìž”ì—¬ ìž¬ê³ : " + remainedStock + "ê°œ";
->>>>>>> Stashed changes
         return result;
     }
 
     String showAccessibleDVMsLocation(ArrayList<DVM> accessibleDVMList, DVM currentDVM){
         ArrayList<Integer> dvmLocationList = new ArrayList<>();
-<<<<<<< Updated upstream
-        for(int i = 0; i < accessibleDVMList.size(); i++){
-            DVM currentDVM = getDVM(currentDVMIndex);
-            Message locationRequestMessage = new Message().createMessage(currentDVM.getId(), accessibleDVMList.get(i).getId(), MsgType.REQUEST_LOCATION);
-            int address = network.requestNormalMessage(locationRequestMessage);
-=======
         for(int i = 0; i < accessibleDVMList.size(); i++) {
             Message message = new Message();
             message.createMessage(currentDVM.getDVMId(), accessibleDVMList.get(i).getDVMId(), MsgType.REQUEST_LOCATION);
             int address = (int)network.handleRequestMessage(message);
->>>>>>> Stashed changes
             dvmLocationList.add(address);
         }
         StringBuilder locationListStr = new StringBuilder();
         for(int i = 0; i < accessibleDVMList.size(); i++){
-<<<<<<< Updated upstream
-            locationListStr.append("DVM ¸í: DVM").append((accessibleDVMList.get(i).getId() + 1)).append(" / À§Ä¡: ").append(dvmLocationList.get(i)).append("\n");
-=======
-            locationListStr.append("DVM ëª…: DVM").append((accessibleDVMList.get(i).getDVMId() + 1)).append(" / ìœ„ì¹˜: ").append(dvmLocationList.get(i)).append("\n");
->>>>>>> Stashed changes
+            locationListStr.append("DVM ëª…: DVM").append((accessibleDVMList.get(i).getId() + 1)).append(" / ìœ„ì¹˜: ").append(dvmLocationList.get(i)).append("\n");
         }
         return String.valueOf(locationListStr);
     }
 
     private void init() {
-<<<<<<< Updated upstream
-        ArrayList<Drink> drinkArrayList = new ArrayList<>(); // ÀüÃ¼ À½·á¼ö ¸®½ºÆ®
-        drinkArrayList.add(new Drink("ÄÚÄ«ÄÝ¶ó", 1500, 10, "src/main/resources/image/1.jpg"));
-        drinkArrayList.add(new Drink("Æé½ÃÄÝ¶ó", 1500, 11, "src/main/resources/image/2.jpg"));
-        drinkArrayList.add(new Drink("Ä¥¼º»çÀÌ´Ù", 1500, 0, "src/main/resources/image/3.jpg"));
-        drinkArrayList.add(new Drink("½ºÇÁ¶óÀÌÆ®", 1500, 10, "src/main/resources/image/4.jpg"));
-        drinkArrayList.add(new Drink("È¯Å¸¿À·»Áö", 1500, 8, "src/main/resources/image/5.jpg"));
-        drinkArrayList.add(new Drink("È¯Å¸Æ÷µµ", 1500, 1, "src/main/resources/image/6.jpg"));
-        drinkArrayList.add(new Drink("ÇÖ½Ä½º", 1500, 10, "src/main/resources/image/7.jpg"));
-        drinkArrayList.add(new Drink("·¹µåºÒ", 1500, 0, "src/main/resources/image/8.jpg"));
-        drinkArrayList.add(new Drink("¸ó½ºÅÍµå¸µÅ©", 1500, 0, "src/main/resources/image/9.jpg"));
-        drinkArrayList.add(new Drink("ºýÅÙ¼Ç", 1500, 0, "src/main/resources/image/10.jpg"));
-        drinkArrayList.add(new Drink("Æ÷Ä«¸®½º¿þÆ®", 1500, 0, "src/main/resources/image/11.jpg"));
-        drinkArrayList.add(new Drink("°ÔÅä·¹ÀÌ", 1500, 0, "src/main/resources/image/12.jpg"));
-        drinkArrayList.add(new Drink("ÆÄ¿ö¿¡ÀÌµå", 1500, 0, "src/main/resources/image/13.jpg"));
-        drinkArrayList.add(new Drink("¹ÐÅ°½º", 1500, 0, "src/main/resources/image/14.jpg"));
-        drinkArrayList.add(new Drink("·¹¾²ºñ", 1500, 0, "src/main/resources/image/15.jpg"));
-        drinkArrayList.add(new Drink("½ºÆÄÅ¬¸µ", 1500, 0, "src/main/resources/image/16.jpg"));
-        drinkArrayList.add(new Drink("ºñ¶ô½ÄÇý", 1500, 0, "src/main/resources/image/17.jpg"));
-        drinkArrayList.add(new Drink("¼ÖÀÇ´«", 1500, 0, "src/main/resources/image/18.jpg"));
-        drinkArrayList.add(new Drink("µ¥ÀÚ¿Í", 1500, 0, "src/main/resources/image/19.jpg"));
-        drinkArrayList.add(new Drink("¸¶¿îÆ¾µà", 1500, 0, "src/main/resources/image/20.jpg"));
-
-        ArrayList<Drink> drinkArrayList2 = new ArrayList<>(); // ÀüÃ¼ À½·á¼ö ¸®½ºÆ®
-        drinkArrayList2.add(new Drink("ºýÅÙ¼Ç", 1500, 10, "src/main/resources/image/10.jpg"));
-        drinkArrayList2.add(new Drink("ÆÄ¿ö¿¡ÀÌµå", 1500, 10, "src/main/resources/image/13.jpg"));
-        drinkArrayList2.add(new Drink("¹ÐÅ°½º", 1500, 10, "src/main/resources/image/14.jpg"));
-        drinkArrayList2.add(new Drink("·¹¾²ºñ", 1500, 10, "src/main/resources/image/15.jpg"));
-        drinkArrayList2.add(new Drink("½ºÆÄÅ¬¸µ", 1500, 10, "src/main/resources/image/16.jpg"));
-        drinkArrayList2.add(new Drink("µ¥ÀÚ¿Í", 1500, 10, "src/main/resources/image/19.jpg"));
-        drinkArrayList2.add(new Drink("ÄÚÄ«ÄÝ¶ó", 1500, 10, "src/main/resources/image/1.jpg"));
-        drinkArrayList2.add(new Drink("Æé½ÃÄÝ¶ó", 1500, 0, "src/main/resources/image/2.jpg"));
-        drinkArrayList2.add(new Drink("Ä¥¼º»çÀÌ´Ù", 1500, 0, "src/main/resources/image/3.jpg"));
-        drinkArrayList2.add(new Drink("½ºÇÁ¶óÀÌÆ®", 1500, 0, "src/main/resources/image/4.jpg"));
-        drinkArrayList2.add(new Drink("È¯Å¸¿À·»Áö", 1500, 0, "src/main/resources/image/5.jpg"));
-        drinkArrayList2.add(new Drink("È¯Å¸Æ÷µµ", 1500, 0, "src/main/resources/image/6.jpg"));
-        drinkArrayList2.add(new Drink("ÇÖ½Ä½º", 1500, 0, "src/main/resources/image/7.jpg"));
-        drinkArrayList2.add(new Drink("·¹µåºÒ", 1500, 0, "src/main/resources/image/8.jpg"));
-        drinkArrayList2.add(new Drink("¸ó½ºÅÍµå¸µÅ©", 1500, 0, "src/main/resources/image/9.jpg"));
-        drinkArrayList2.add(new Drink("Æ÷Ä«¸®½º¿þÆ®", 1500, 0, "src/main/resources/image/11.jpg"));
-        drinkArrayList2.add(new Drink("°ÔÅä·¹ÀÌ", 1500, 0, "src/main/resources/image/12.jpg"));
-        drinkArrayList2.add(new Drink("ºñ¶ô½ÄÇý", 1500, 0, "src/main/resources/image/17.jpg"));
-        drinkArrayList2.add(new Drink("¼ÖÀÇ´«", 1500, 0, "src/main/resources/image/18.jpg"));
-        drinkArrayList2.add(new Drink("¸¶¿îÆ¾µà", 1500, 0, "src/main/resources/image/20.jpg"));
-
-        ArrayList<Drink> drinkArrayList3 = new ArrayList<>(); // ÀüÃ¼ À½·á¼ö ¸®½ºÆ®
-        drinkArrayList3.add(new Drink("È¯Å¸¿À·»Áö", 1500, 10, "src/main/resources/image/5.jpg"));
-        drinkArrayList3.add(new Drink("Æ÷Ä«¸®½º¿þÆ®", 1500, 10, "src/main/resources/image/11.jpg"));
-        drinkArrayList3.add(new Drink("·¹µåºÒ", 1500, 10, "src/main/resources/image/8.jpg"));
-        drinkArrayList3.add(new Drink("ºýÅÙ¼Ç", 1500, 10, "src/main/resources/image/10.jpg"));
-        drinkArrayList3.add(new Drink("ÆÄ¿ö¿¡ÀÌµå", 1500, 10, "src/main/resources/image/13.jpg"));
-        drinkArrayList3.add(new Drink("¹ÐÅ°½º", 1500, 10, "src/main/resources/image/14.jpg"));
-        drinkArrayList3.add(new Drink("°ÔÅä·¹ÀÌ", 1500, 20, "src/main/resources/image/12.jpg"));
-        drinkArrayList3.add(new Drink("ºñ¶ô½ÄÇý", 1500, 0, "src/main/resources/image/17.jpg"));
-        drinkArrayList3.add(new Drink("¼ÖÀÇ´«", 1500, 0, "src/main/resources/image/18.jpg"));
-        drinkArrayList3.add(new Drink("·¹¾²ºñ", 1500, 0, "src/main/resources/image/15.jpg"));
-        drinkArrayList3.add(new Drink("½ºÆÄÅ¬¸µ", 1500, 0, "src/main/resources/image/16.jpg"));
-        drinkArrayList3.add(new Drink("µ¥ÀÚ¿Í", 1500, 0, "src/main/resources/image/19.jpg"));
-        drinkArrayList3.add(new Drink("ÄÚÄ«ÄÝ¶ó", 1500, 0, "src/main/resources/image/1.jpg"));
-        drinkArrayList3.add(new Drink("Æé½ÃÄÝ¶ó", 1500, 0, "src/main/resources/image/2.jpg"));
-        drinkArrayList3.add(new Drink("Ä¥¼º»çÀÌ´Ù", 1500, 0, "src/main/resources/image/3.jpg"));
-        drinkArrayList3.add(new Drink("½ºÇÁ¶óÀÌÆ®", 1500, 0, "src/main/resources/image/4.jpg"));
-        drinkArrayList3.add(new Drink("È¯Å¸Æ÷µµ", 1500, 0, "src/main/resources/image/6.jpg"));
-        drinkArrayList3.add(new Drink("ÇÖ½Ä½º", 1500, 0, "src/main/resources/image/7.jpg"));
-        drinkArrayList3.add(new Drink("¸ó½ºÅÍµå¸µÅ©", 1500, 0, "src/main/resources/image/9.jpg"));
-        drinkArrayList3.add(new Drink("¸¶¿îÆ¾µà", 1500, 0, "src/main/resources/image/20.jpg"));
-
-        DVM dvm1 = new DVM(drinkArrayList, 0, 101);
-        DVM dvm2 = new DVM(drinkArrayList2, 1, 202);
-        DVM dvm3 = new DVM(drinkArrayList3, 2, 303);
-        DVM dvm4 = new DVM(drinkArrayList3, 3, 404);
-        DVM dvm5 = new DVM(drinkArrayList3, 4, 505);
-        DVM dvm6 = new DVM(drinkArrayList3, 5, 606);
-        DVM dvm7 = new DVM(drinkArrayList3, 6, 707);
-        DVM dvm8 = new DVM( drinkArrayList3, 7, 808);
-=======
         /*
         * ì´ ê³³ì— ì •ì˜ëœ Drinkë“¤ê³¼ Drinkë¦¬ìŠ¤íŠ¸ë“¤ì€ ìž¬ê³ ì— ëŒ€í•œ ì •ë³´ë¥¼ ë‹´ì§€ ì•Šê³  ìžˆìŒ
         * ìž¬ê³  ì •ë³´ëŠ” ë°˜ë“œì‹œ ë„¤íŠ¸ì›Œí‚¹ì„ í†µí•´ì„œë§Œ ì „ë‹¬ë°›ì„ ìˆ˜ ìžˆìŒ
@@ -391,7 +278,6 @@ public class OtherDVMs extends Thread{
         DVM dvm7 = new DVM7(drinkArrayList7, 7);
         DVM dvm8 = new DVM8(drinkArrayList8, 8);
 
->>>>>>> Stashed changes
         ArrayList<DVM> tempList = new ArrayList<DVM>();
         tempList.add(dvm1);
         tempList.add(dvm2);

@@ -82,10 +82,9 @@ public class DVMc extends Thread implements DVM {
     public int getAddress() {
         return address;
     }
-
+     
     public void setAddress(int address) {
         this.address = address;
-    }
 
     public void updateStock(Drink selected_drink) {
         for(Drink drink : drink_list){

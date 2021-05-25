@@ -5,13 +5,11 @@ public class Controller {
     int currentDVMIndex;
     ArrayList<DVM> accessible_DVM_list;
     Card card_info;
-    OtherDVMs otherDVMs = new OtherDVMs();
+    OtherDVMs otherDVMs;
     Drink selected_drink;
     CardPayment cardPayment = new CardPayment();
     CodePayment codePayment = new CodePayment();
 
-<<<<<<< Updated upstream
-=======
     Controller(){
         otherDVMs = new OtherDVMs();
     }
@@ -37,7 +35,6 @@ public class Controller {
         return otherDVMs.getDVM(num - 1);
     }
 
->>>>>>> Stashed changes
     int selectCurrentDrink(int dialNum) {
         final int EMPTY_ALL_STOCK = 0; // 모든 DVM의 재고가 0임
         final int CUR_IN_STOCK = 1;    // 현재 DVM에 재고가 있음
@@ -73,17 +70,20 @@ public class Controller {
         Boolean card_available = cardPayment.getCard_available(card_num);
         DVM currentDVM = otherDVMs.getDVM(currentDVMIndex);
         if(!card_available){
-            return "";
+            return "not available card";
         }
         Card card = cardPayment.getCard(card_num);
         int balance = card.getBalance();
         int price = selected_drink.getPrice();
         if(balance < price){
-            return "";
+            return "insufficient balance";
         }
         card.updateBalance(price);
         if(isPrepayment){
             Code code = cardPayment.generateCode(selected_drink); // 코드 생성
+            if(code_list.contains(code.getCode())){ //코드리스트에 있는지 확인, 있으면 재생성
+                code = cardPayment.generateCode(selected_drink);
+            }
             addCode(code);
             String locationsListStr = otherDVMs.showAccessibleDVMsLocation(accessible_DVM_list, currentDVM);
             String result = "선결제 진행 DVM: " + (currentDVM.getDVMId() + 1)
@@ -143,33 +143,4 @@ public class Controller {
         }
         return false;
     }
-
-<<<<<<< Updated upstream
-    public DVM selectDVM(int num) {
-        currentDVMIndex = num - 1;
-        return otherDVMs.getDVM(num - 1);
-    }
-
-    public ArrayList<ArrayList<Integer>> startService() {
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> std = new ArrayList<Integer>();
-        ArrayList<DVM> dvmList = otherDVMs.getDVMList();
-
-        for(int i=0; i<dvmList.size(); i++){
-            std.add(dvmList.get(i).getId());
-            std.add(dvmList.get(i).getAddress());
-            result.add(std);
-            std.clear();
-//            System.out.println(std.get(0));
-        }
-//        for(int i=0; i<dvmList.size(); i++) {
-//            System.out.println(result.get(i).get(0));
-//        }
-            return result;
-    }
-
-
 }
-=======
-}
->>>>>>> Stashed changes

@@ -16,7 +16,7 @@ public class CardPayment {
         int[] basicCardNameList = {12341234,11111111, 10000000};
         Card card1 = new Card(basicCardNameList[0], 10000);
         Card card2 = new Card(basicCardNameList[1], 0);
-        Card card3 = new Card(basicCardNameList[2], 10000);
+        Card card3 = new Card(basicCardNameList[2], 100000);
         ArrayList<Card> tempList = new ArrayList<>();
         tempList.add(card1);
         tempList.add(card2);
@@ -25,7 +25,7 @@ public class CardPayment {
     }
 
     public Code generateCode(Drink selected_drink){
-        //5ÀÚ¸® ÄÚµå »ı¼º ÈÄ, À½·á °´Ã¼¶û ÇÕÃÄ¼­ ÄÚµå °´Ã¼ »ı¼º
+        //5ìë¦¬ ì½”ë“œ ìƒì„± í›„, ìŒë£Œ ê°ì²´ë‘ í•©ì³ì„œ ì½”ë“œ ê°ì²´ ìƒì„±
         drink_info = selected_drink;
         int generatedCodeNum = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
         Code generatedCode = new Code(generatedCodeNum, drink_info);

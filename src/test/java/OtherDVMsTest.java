@@ -43,6 +43,7 @@ class OtherDVMsTest {
     void requestDrinkTest() {
         Drink drink = new Drink("코카콜라", 0, 0, "");
         String s = otherDVMs.requestDrink(drink, otherDVMs.getDVM(0));
+
         assertNotEquals(s, "");
 
     }
@@ -59,6 +60,7 @@ class OtherDVMsTest {
         accessibleList.add(dvm2);
 
         String s = otherDVMs.showAccessibleDVMsLocation(accessibleList, otherDVMs.getDVM(0));
+
         String expectedString = "DVM 명: DVM1 / 위치: 101\nDVM 명: DVM2 / 위치: 202\n";
 
         assertEquals(expectedString, s);

@@ -109,6 +109,7 @@ class DVMTest {
         Message message = new Message();
         message.createMessage(1, 2, MsgType.RESPONSE_LOCATION, "101");
 
+
         int address = -1;
         int msg_type = 4;  //not RESPONSE_LOCATION
         String msg = message.getMsg();
