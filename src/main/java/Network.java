@@ -48,11 +48,11 @@ public class Network extends Thread {
             message.createMessage(src_id, dst_id, MsgType.DRINK_SALE_CHECK, msg);
             objectOutputStream.writeObject(message);
             objectOutputStream.flush();
-            System.out.println("[Controller] DVM" + (dst_id + 1)
+            System.out.println("[Controller] DVM" + dst_id
                     + "에게 메시지 발신(유형: " + message.getMsg_type() + "(판매 확인 요청), 내용: " + message.getMsg() + ")");
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             Message receivedMsg = (Message) objectInputStream.readObject();
-            System.out.println("[Controller] DVM" + (receivedMsg.getSrc_id() + 1)
+            System.out.println("[Controller] DVM" + receivedMsg.getSrc_id()
                     + "으로부터 메시지 수신(유형: " + receivedMsg.getMsg_type() + "(판매 확인 응답), 내용: " + receivedMsg.getMsg() + ")");
             remainedStock = Integer.parseInt(receivedMsg.getMsg());
 

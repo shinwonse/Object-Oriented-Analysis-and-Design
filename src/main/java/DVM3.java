@@ -14,6 +14,7 @@ public class DVM3 extends Thread implements DVM {
     Socket receive_socket = null;
     ObjectInputStream objectInputStream = null;
     ObjectOutputStream objectOutputStream = null;
+    private final int STUB_TEST_ID = 999;
 
     public DVM3(ArrayList<Drink> drink_list, int id, int address) {
         this.drink_list = drink_list;
@@ -117,54 +118,64 @@ public class DVM3 extends Thread implements DVM {
         }
     }
 
-    public void responseStockMessage(Message msg) {
+    public void responseStockMessage(Message receivedMessage) {
         try{
             objectOutputStream = new ObjectOutputStream(receive_socket.getOutputStream());
-            Message sendMsg1 = new Message();
-            sendMsg1.createMessage(getDVMId(), msg.getSrc_id(), MsgType.RESPONSE_STOCK, getStock(msg.getMsg()));
-            objectOutputStream.writeObject(sendMsg1);
+            Message message = new Message();
+            message.createMessage(getDVMId(), receivedMessage.getSrc_id(), MsgType.RESPONSE_STOCK, getStock(receivedMessage.getMsg()));
+            objectOutputStream.writeObject(message);
             objectOutputStream.flush();
-            System.out.println("[DVM" + getDVMId()+"] Controller"
-                    + "에게 메시지 발신(유형: " + sendMsg1.getMsg_type() + "(재고 응답), 내용: " + sendMsg1.getMsg() + ")");
+            if(receivedMessage.getSrc_id() == STUB_TEST_ID)
+                System.out.println("[DVM" + getDVMId() + "] StubTest"
+                        + "에게 메시지 발신(유형: " + message.getMsg_type() + "(재고 응답), 내용: " + message.getMsg() + ")");
+            else
+                System.out.println("[DVM" + getDVMId() + "] Controller"
+                        + "에게 메시지 발신(유형: " + message.getMsg_type() + "(재고 응답), 내용: " + message.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public void responseLocationMessage(Message message){
+    public void responseLocationMessage(Message receivedMessage){
         try{
             objectOutputStream = new ObjectOutputStream(receive_socket.getOutputStream());
-            /* Stub true/false 수정 가능 */
-            Message sendMsg = new Message();
-            sendMsg.createMessage(getDVMId(), message.getSrc_id(), MsgType.RESPONSE_LOCATION, String.valueOf(getAddress()));
-            //sendMsg = new Msg(myID, msg.getSrc_id(), 5, "false");
-            objectOutputStream.writeObject(sendMsg);
+            Message message = new Message();
+            message.createMessage(getDVMId(), receivedMessage.getSrc_id(), MsgType.RESPONSE_LOCATION, String.valueOf(getAddress()));
+            objectOutputStream.writeObject(message);
             objectOutputStream.flush();
-            System.out.println("[DVM" + getDVMId()+"] Controller"
-                    + "에게 메시지 발신(유형: " + sendMsg.getMsg_type() + "(위치 응답), 내용: " + sendMsg.getMsg() + ")");
+            if(receivedMessage.getSrc_id() == STUB_TEST_ID)
+                System.out.println("[DVM" + getDVMId() + "] StubTest"
+                        + "에게 메시지 발신(유형: " + message.getMsg_type() + "(위치 응답), 내용: " + message.getMsg() + ")");
+            else
+                System.out.println("[DVM" + getDVMId() + "] Controller"
+                        + "에게 메시지 발신(유형: " + message.getMsg_type() + "(위치 응답), 내용: " + message.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void responseSaleMessage(Message message) {
+    public void responseSaleMessage(Message receivedMessage) {
         try{
             objectOutputStream = new ObjectOutputStream(receive_socket.getOutputStream());
-            String drinkName = message.getMsg();
+            String drinkName = receivedMessage.getMsg();
             for(Drink drink: drink_list){
                 if(drink.getName().equals(drinkName)){
                     drink.updateStock();
                     break;
                 }
             }
-            Message sendMsg = new Message();
-            sendMsg.createMessage(getDVMId(), message.getSrc_id(), MsgType.DRINK_SALE_RESPONSE, getStock(drinkName));
-            objectOutputStream.writeObject(sendMsg);
+            Message message = new Message();
+            message.createMessage(getDVMId(), receivedMessage.getSrc_id(), MsgType.DRINK_SALE_RESPONSE, getStock(drinkName));
+            objectOutputStream.writeObject(message);
             objectOutputStream.flush();
-            System.out.println("[DVM" + getDVMId()+"] Controller"
-                    + "에게 메시지 발신(유형: " + sendMsg.getMsg_type() + "(판매 확인 응답), 내용: " + sendMsg.getMsg() + ")");
+            if(receivedMessage.getSrc_id() == STUB_TEST_ID)
+                System.out.println("[DVM" + getDVMId() + "] StubTest"
+                        + "에게 메시지 발신(유형: " + message.getMsg_type() + "(판매 확인 응답), 내용: " + message.getMsg() + ")");
+            else
+                System.out.println("[DVM" + getDVMId() + "] Controller"
+                        + "에게 메시지 발신(유형: " + message.getMsg_type() + "(판매 확인 응답), 내용: " + message.getMsg() + ")");
         }catch (Exception e) {
             e.printStackTrace();
         }
