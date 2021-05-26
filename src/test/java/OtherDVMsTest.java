@@ -54,8 +54,8 @@ class OtherDVMsTest {
         Drink drink = new Drink("코카콜라", 0, 0, "");
         ArrayList<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
-        DVM dvm1 = new DVMc(drinks, 0, 101);
-        DVM dvm2 = new DVMc(drinks, 1, 202);
+        DVM dvm1 = new DVM1(drinks, 0, 101);
+        DVM dvm2 = new DVM2(drinks, 1, 202);
         accessibleList.add(dvm1);
         accessibleList.add(dvm2);
 
