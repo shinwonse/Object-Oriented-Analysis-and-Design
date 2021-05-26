@@ -10,14 +10,14 @@ class OtherDVMsTest {
     @Test
     void getDVMTest() {
         DVM dvm = otherDVMs.getDVM(0);
-        assertEquals(0, dvm.getDVMId());
+        assertEquals(1, dvm.getDVMId());
     }
 
     @Test
     void getDVMListTest() {
         ArrayList<DVM> dvmList = otherDVMs.getDVMList();
         assertEquals(8, dvmList.size());
-        assertEquals(7, dvmList.get(dvmList.size() - 1).getDVMId());
+        assertEquals(8, dvmList.get(dvmList.size() - 1).getDVMId());
     }
 
     @Test
@@ -51,11 +51,11 @@ class OtherDVMsTest {
     @Test
     void showAccessibleDVMsLocationTest() {
         ArrayList<DVM> accessibleList = new ArrayList<>();
-        Drink drink = new Drink("코카콜라", 0, 0, "");
+        Drink drink = new Drink("코카콜라", 0, 1, "");
         ArrayList<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
-        DVM dvm1 = new DVMc(drinks, 0, 101);
-        DVM dvm2 = new DVMc(drinks, 1, 202);
+        DVM dvm1 = new DVM1(drinks, 1, 101);
+        DVM dvm2 = new DVM2(drinks, 2, 202);
         accessibleList.add(dvm1);
         accessibleList.add(dvm2);
 
@@ -64,6 +64,5 @@ class OtherDVMsTest {
         String expectedString = "DVM 명: DVM1 / 위치: 101\nDVM 명: DVM2 / 위치: 202\n";
 
         assertEquals(expectedString, s);
-
     }
 }
