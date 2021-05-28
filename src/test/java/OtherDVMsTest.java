@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ class OtherDVMsTest {
     }
 
     @Test
+    @Disabled
     void checkOtherDVMsStockTest() {
         Drink drink = new Drink("빡텐션", 0, 0, "");
 
@@ -49,6 +51,7 @@ class OtherDVMsTest {
     }
 
     @Test
+    @Disabled
     void showAccessibleDVMsLocationTest() {
         ArrayList<DVM> accessibleList = new ArrayList<>();
         Drink drink = new Drink("코카콜라", 0, 1, "");

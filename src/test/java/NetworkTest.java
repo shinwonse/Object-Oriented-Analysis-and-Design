@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NetworkTest {
 
     @Test
+    @Disabled
     void handleRequestMessageTest(){
         ArrayList<Drink> drinks = new ArrayList<>();
         Drink drink = new Drink("코카콜라", 0, 10, "");
