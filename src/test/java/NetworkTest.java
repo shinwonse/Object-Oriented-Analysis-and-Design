@@ -25,6 +25,7 @@ class NetworkTest {
         Object o0 = network.handleRequestMessage(msg0);
         assertEquals(Integer.class, o0.getClass());
         assertEquals(11, (int)o0);
+        
         //재고 확인 메세지 테스트
         Message msg1 = new Message();
         msg1.createMessage(1,2,MsgType.REQUEST_STOCK, "펩시콜라");
