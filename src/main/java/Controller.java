@@ -86,7 +86,7 @@ public class Controller {
             }
             addCode(code);
             String locationsListStr = otherDVMs.showAccessibleDVMsLocation(accessible_DVM_list, currentDVM);
-            String result = "선결제 진행 DVM: " + (currentDVM.getDVMId() + 1)
+            String result = "선결제 진행 DVM: " + (currentDVM.getDVMId())
                     + "\n선결제한 음료수: " + selected_drink.getName()
                     + "\n음료 가격: " + selected_drink.getPrice()
                     + "\n선결제 후 카드 잔고: " + card.getBalance() + "원"
