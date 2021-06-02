@@ -78,6 +78,8 @@ public class DVM5 extends Thread implements DVM {
                     case MsgType.DRINK_SALE_CHECK:
                         responseSaleMessage(msg);
                         break;
+                    default:
+                        System.out.println("잘못된 메시지 유형입니다.");
                 }
                 receive_socket.close();
             }
