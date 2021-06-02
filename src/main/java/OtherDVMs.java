@@ -60,7 +60,7 @@ public class OtherDVMs extends Thread{
         int remainedStock = (int)network.handleRequestMessage(message);
 //        dvmList.get(currentDVMIndex).updateStock(selected_drink);
         String result = "       <음료 구매 완료>" +
-                "\n구매 진행한 DVM: DVM" + (currentDVM.getDVMId() + 1)
+                "\n구매 진행한 DVM: DVM" + (currentDVM.getDVMId())
                 + "\n구매한 음료: "+ selected_drink.getName()
                 + "\n음료 가격: " + selected_drink.getPrice() + "원"
                 + "\n잔여 재고: " + remainedStock + "개";
