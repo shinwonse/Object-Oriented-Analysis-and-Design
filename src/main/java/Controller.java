@@ -1,14 +1,40 @@
 import java.util.ArrayList;
 
 public class Controller {
-    ArrayList<Code> code_list = new ArrayList<Code>();
-    int currentDVMIndex;
-    ArrayList<DVM> accessible_DVM_list;
-    Card card_info;
-    OtherDVMs otherDVMs;
-    Drink selected_drink;
-    CardPayment cardPayment = new CardPayment();
-    CodePayment codePayment = new CodePayment();
+    private ArrayList<Code> code_list = new ArrayList<Code>();
+    private int currentDVMIndex;
+    private ArrayList<DVM> accessible_DVM_list;
+    private Card card_info;
+    private OtherDVMs otherDVMs;
+    private Drink selected_drink;
+    private CardPayment cardPayment = new CardPayment();
+    private CodePayment codePayment = new CodePayment();
+
+    public ArrayList<Code> getCodeList(){
+        return code_list;
+    }
+    public int getCurrentDVMIndex(){
+        return currentDVMIndex;
+    }
+    public ArrayList<DVM> getAccessible_DVM_list(){
+        return accessible_DVM_list;
+    }
+    public Card getCard_info(){
+        return card_info;
+    }
+    public OtherDVMs getOtherDVMs(){
+        return otherDVMs;
+    }
+    public Drink getSelected_drink(){
+        return selected_drink;
+    }
+    public CardPayment getCardPayment(){
+        return cardPayment;
+    }
+    public CodePayment getCodePayment(){
+        return codePayment;
+    }
+
 
     Controller(){
         otherDVMs = new OtherDVMs();
