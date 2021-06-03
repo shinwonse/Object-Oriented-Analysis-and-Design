@@ -2,8 +2,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OtherDVMs extends Thread{
-    ArrayList<DVM> dvmList =new ArrayList<DVM>();
-    Network network;
+    private ArrayList<DVM> dvmList =new ArrayList<DVM>();
+    private Network network;
+
+    public ArrayList<DVM> getDvmList(){
+        return dvmList;
+    }
+    public Network getNetwork(){
+        return network;
+    }
 
 
     OtherDVMs(){

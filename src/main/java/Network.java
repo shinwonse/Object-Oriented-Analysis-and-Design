@@ -9,7 +9,7 @@ public class Network extends Thread {
     public ArrayList<DVM> getDvmList(){
         return dvmList;
     }
-    
+
     Network(ArrayList<DVM> dvmList){
         this.dvmList = dvmList;
     }
