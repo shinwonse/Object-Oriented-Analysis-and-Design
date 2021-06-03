@@ -5,7 +5,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Network extends Thread {
-    ArrayList<DVM> dvmList;
+    private ArrayList<DVM> dvmList;
+    public ArrayList<DVM> getDvmList(){
+        return dvmList;
+    }
+    
     Network(ArrayList<DVM> dvmList){
         this.dvmList = dvmList;
     }
