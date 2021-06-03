@@ -1,7 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JComponent;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Image;
+
 import java.util.ArrayList;
 
 public class MyFrame extends JFrame {
@@ -57,13 +73,13 @@ public class MyFrame extends JFrame {
         // 루트 프레임에 button들 JPanel add
 
         pInput.setLayout(new BorderLayout());
-        pInput.add(inputText,BorderLayout.CENTER);
+        pInput.add(inputText, BorderLayout.CENTER);
 
         gbc(pTemp, 0, 0, 4, 1);
         gbc(pInput, 0, 1, 4, 1);
         gbc(pDial, 0, 2, 4, 4);
 
-        pInput.setBackground(Color.GRAY);
+        pInput.setBackground( Color.GRAY);
 
         panelDown.add(pTemp);
         panelDown.add(pInput);
