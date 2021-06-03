@@ -6,7 +6,7 @@ public class CardPayment {
     private Card card_info;
     private Drink drink_info;
     private boolean isPrePayment;
-    ArrayList<Card> basicCardList;
+    private ArrayList<Card> basicCardList;
 
     public CardPayment() {
         init();
@@ -47,5 +47,9 @@ public class CardPayment {
                 return true;
         }
         return false;
+    }
+
+    public ArrayList<Card> getBasicCardList(){
+        return basicCardList;
     }
 }
