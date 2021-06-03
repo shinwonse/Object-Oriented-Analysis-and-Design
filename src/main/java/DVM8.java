@@ -16,6 +16,19 @@ public class DVM8 extends Thread implements DVM {
     private ObjectOutputStream objectOutputStream = null;
     private final int STUB_TEST_ID = 999;
 
+    public ServerSocket getServerSocket(){
+        return serverSocket;
+    }
+    public Socket getReceive_socket(){
+        return receive_socket;
+    }
+    public ObjectInputStream getObjectInputStream(){
+        return objectInputStream;
+    }
+    public ObjectOutputStream getObjectOutputStream(){
+        return objectOutputStream;
+    }
+
     public DVM8(ArrayList<Drink> drink_list, int id, int address) {
         this.drink_list = drink_list;
         this.id = id;
