@@ -10,10 +10,10 @@ public class DVM6 extends Thread implements DVM {
     private ArrayList<Drink> drink_list;
     private int id;
     private int address;
-    ServerSocket serverSocket = null;
-    Socket receive_socket = null;
-    ObjectInputStream objectInputStream = null;
-    ObjectOutputStream objectOutputStream = null;
+    private ServerSocket serverSocket = null;
+    private Socket receive_socket = null;
+    private ObjectInputStream objectInputStream = null;
+    private ObjectOutputStream objectOutputStream = null;
     private final int STUB_TEST_ID = 999;
 
     public DVM6(ArrayList<Drink> drink_list, int id, int address) {
