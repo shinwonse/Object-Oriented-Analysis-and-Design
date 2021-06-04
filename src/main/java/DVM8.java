@@ -13,7 +13,7 @@ public class DVM8 extends Thread implements DVM {
     private Socket receive_socket = null;
     private ObjectInputStream objectInputStream = null;
     private ObjectOutputStream objectOutputStream = null;
-    private final int STUB_TEST_ID = 999;
+    private static final int STUB_TEST_ID = 999;
 
     public ServerSocket getServerSocket(){
         return serverSocket;
