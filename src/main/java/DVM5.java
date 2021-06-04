@@ -62,7 +62,7 @@ public class DVM5 extends Thread implements DVM {
         drinkArrayList5.add(new Drink("빡텐션", 1500, 0, "src/main/resources/image/10.jpg"));
         drinkArrayList5.add(new Drink("파워에이드", 1500, 0, "src/main/resources/image/13.jpg"));
         DVM1 dvm5 = new DVM1(drinkArrayList5, 5, 505);
-        dvm5.run();
+        dvm5.start();
     }
 
     public void run() {

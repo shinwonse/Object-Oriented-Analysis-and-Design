@@ -62,7 +62,7 @@ public class DVM3 extends Thread implements DVM {
         drinkArrayList3.add(new Drink("몬스터드링크", 1500, 0, "src/main/resources/image/9.jpg"));
         drinkArrayList3.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
         DVM3 dvm3 = new DVM3(drinkArrayList3, 3, 303);
-        dvm3.run();
+        dvm3.start();
     }
 
     public void run() {
