@@ -19,8 +19,7 @@ public class CodePayment {
         isCodeAvailable = codeAvailable;
     }
     public Drink codePayment(Code code_info){
-        Drink drink_info = code_info.getDrink();
-        return drink_info;
+        return code_info.getDrink();
     }
 
 
