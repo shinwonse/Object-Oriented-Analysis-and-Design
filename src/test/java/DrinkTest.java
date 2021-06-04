@@ -17,73 +17,53 @@ class DrinkTest {
     @Test
     void getName() {
         assertEquals("코카콜라", drink1.getName());
-
         assertEquals("펩시콜라", drink2.getName());
-
         assertEquals("칠성사이다", drink3.getName());
-
         assertEquals("스프라이트", drink4.getName());
-
         assertEquals("환타오렌지", drink5.getName());
-
         assertEquals("환타포도", drink6.getName());
-
         assertEquals("핫식스", drink7.getName());
-
         assertEquals("레드불", drink8.getName());
-
         assertEquals("몬스터드링크", drink9.getName());
-
         assertEquals("빡텐션", drink10.getName());
     }
 
     @Test
     void getPrice() {
         assertEquals(1500, drink1.getPrice());
-
         assertEquals(1500, drink2.getPrice());
-
         assertEquals(1500, drink3.getPrice());
-
         assertEquals(1500, drink4.getPrice());
-
         assertEquals(1500, drink5.getPrice());
-
         assertEquals(1500, drink6.getPrice());
-
         assertEquals(1500, drink7.getPrice());
-
         assertEquals(1500, drink8.getPrice());
-
         assertEquals(1500, drink9.getPrice());
-
         assertEquals(1500, drink10.getPrice());
     }
+    @Test
+    void setStock(){
+        drink1.setStock(8);
+        assertEquals(8,drink1.getStock());
 
-//    @Test
-//    void setPrice() {
-//    }
+        drink2.setStock(8);
+        assertEquals(8,drink2.getStock());
 
+        drink3.setStock(3);
+        assertEquals(3,drink3.getStock());
+
+    }
     @Test
     void getStock() {
         assertEquals(10, drink1.getStock());
-
         assertEquals(11, drink2.getStock());
-
         assertEquals(0, drink3.getStock());
-
         assertEquals(10, drink4.getStock());
-
         assertEquals(8, drink5.getStock());
-
         assertEquals(1, drink6.getStock());
-
         assertEquals(10, drink7.getStock());
-
         assertEquals(0, drink8.getStock());
-
         assertEquals(0, drink9.getStock());
-
         assertEquals(0, drink10.getStock());
     }
 
@@ -123,23 +103,14 @@ class DrinkTest {
     @Test
     void getImgURL() {
         assertEquals("src/main/resources/image/1.jpg",drink1.getImgURL());
-
         assertEquals("src/main/resources/image/2.jpg",drink2.getImgURL());
-
         assertEquals("src/main/resources/image/3.jpg",drink3.getImgURL());
-
         assertEquals("src/main/resources/image/4.jpg",drink4.getImgURL());
-
         assertEquals("src/main/resources/image/5.jpg",drink5.getImgURL());
-
         assertEquals("src/main/resources/image/6.jpg",drink6.getImgURL());
-
         assertEquals("src/main/resources/image/7.jpg",drink7.getImgURL());
-
         assertEquals("src/main/resources/image/8.jpg",drink8.getImgURL());
-
         assertEquals("src/main/resources/image/9.jpg",drink9.getImgURL());
-
         assertEquals("src/main/resources/image/10.jpg",drink10.getImgURL());
     }
 }
