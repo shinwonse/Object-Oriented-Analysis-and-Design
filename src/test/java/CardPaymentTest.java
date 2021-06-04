@@ -24,7 +24,6 @@ class CardPaymentTest {
         assertEquals(Code.class, generatedCode.getClass());
     }
 
-
     @Test
     void getCardTest1() {
         Card card1 = new Card(12341234, 10000);
@@ -72,6 +71,42 @@ class CardPaymentTest {
 
         }
         assertEquals(myCard.getClass(), Card.class);
+    }
+
+    @Test
+    void getCardTest4() { // 잔액 확인
+        ArrayList<Card> basicCardList;
+        int[] basicCardNameList = {12341234, 11111111, 10000000};
+        Card card1 = new Card(basicCardNameList[0], 10000);
+        Card card2 = new Card(basicCardNameList[1], 0);
+        Card card3 = new Card(basicCardNameList[2], 10000);
+        ArrayList<Card> tempList = new ArrayList<>();
+        tempList.add(card1);
+        tempList.add(card2);
+        tempList.add(card3);
+        basicCardList = tempList;
+
+        assertEquals(basicCardList.get(0).getBalance(), card1.getBalance());
+    }
+
+    @Test
+    void getCardTest5() { // 카드 넘버 확인
+        ArrayList<Card> basicCardList;
+        int[] basicCardNameList = {12341234, 11111111, 10000000};
+        Card card1 = new Card(basicCardNameList[0], 10000);
+        Card card2 = new Card(basicCardNameList[1], 0);
+        Card card3 = new Card(basicCardNameList[2], 10000);
+        ArrayList<Card> tempList = new ArrayList<>();
+        tempList.add(card1);
+        tempList.add(card2);
+        tempList.add(card3);
+        basicCardList = tempList;
+        int[] card_numList;
+
+        for (int i = 0; i < 3; i++) {
+            int temp_num = basicCardList.get(i).getCard_num();
+            assertEquals(temp_num, basicCardList.get(i).getCard_num());
+        }
     }
 
 }
