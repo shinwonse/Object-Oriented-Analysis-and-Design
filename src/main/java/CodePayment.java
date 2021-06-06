@@ -3,8 +3,8 @@ public class CodePayment {
     private Code code_info;
     private Boolean isCodeAvailable;
 
-    public CodePayment() {
-    }
+//    public CodePayment() {
+//    }
     public CodePayment(Code code_info, Boolean isCodeAvailable) {
         code_info = this.code_info;
         isCodeAvailable = this.isCodeAvailable;
@@ -25,6 +25,4 @@ public class CodePayment {
     public Drink codePayment(Code code_info){
         return code_info.getDrink();
     }
-
-
 }

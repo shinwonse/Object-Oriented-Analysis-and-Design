@@ -1,10 +1,10 @@
 
 public class Drink {
 
-    private String name;
+    private final String name;
     private int price;
     private int stock;
-    private String imgURL;
+    private final String imgURL;
 
     public Drink(String name, int price, int stock, String imgURL){
         super();

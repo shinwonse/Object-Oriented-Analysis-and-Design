@@ -1,7 +1,7 @@
 public class Code {
 
     private int code;
-    private Drink drink;
+    private final Drink drink;
 
     public Code(int code, Drink drink_info) {
         this.code = code;

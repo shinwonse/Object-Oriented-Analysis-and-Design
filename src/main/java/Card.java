@@ -1,5 +1,5 @@
 public class Card {
-    private int card_num;
+    private final int card_num;
     private int balance;
 
     public Card(int card_num, int balance) {
