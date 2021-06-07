@@ -81,6 +81,8 @@ public class StubTest {
                     case MsgType.DRINK_SALE_RESPONSE:
                         System.out.println("[StubTest] 발신 완료");
                         break;
+                    default:
+                        System.out.println("잘못된 메시지 타입입니다.");
                 }
                 socket.close();
             }catch(Exception e){
