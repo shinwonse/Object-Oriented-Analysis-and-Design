@@ -398,7 +398,8 @@ public class MyFrame extends JFrame {
                             showAllDVMList(pScreen);
                             pScreen.updateUI();
                             break;
-
+                        default:
+                            System.out.println("잘못된 접근입니다.(MyFrame Stage 관련)");
                     }
                 }else if(eventText.equals("←")) {
 //                    int tmp= inputTemp % 10;
