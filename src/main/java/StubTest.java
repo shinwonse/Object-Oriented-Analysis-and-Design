@@ -4,6 +4,10 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class StubTest {
+
+    public StubTest() {
+    }
+
     public static void main(String[] args){
         final int STUB_TEST_ID = 999;
         StubTest stubTest = new StubTest();

@@ -4,7 +4,7 @@ public class Controller {
     private ArrayList<Code> code_list = new ArrayList<Code>();
     private int currentDVMIndex;
     private ArrayList<DVM> accessible_DVM_list;
-    private Card card_info;
+//    private Card card_info;
     private OtherDVMs otherDVMs;
     private Drink selected_drink;
     private CardPayment cardPayment = new CardPayment();
@@ -19,9 +19,9 @@ public class Controller {
     public ArrayList<DVM> getAccessible_DVM_list(){
         return accessible_DVM_list;
     }
-    public Card getCard_info(){
-        return card_info;
-    }
+//    public Card getCard_info(){
+//        return card_info;
+//    }
     public OtherDVMs getOtherDVMs(){
         return otherDVMs;
     }

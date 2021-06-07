@@ -5,10 +5,10 @@ public class CodePayment {
 
 //    public CodePayment() {
 //    }
-    public CodePayment(Code code_info, Boolean isCodeAvailable) {
-        code_info = this.code_info;
-        isCodeAvailable = this.isCodeAvailable;
-    }
+//    public CodePayment(Code code_info, Boolean isCodeAvailable) {
+//        code_info = this.code_info;
+//        isCodeAvailable = this.isCodeAvailable;
+//    }
 
     public Code getCode_info() {
         return code_info;

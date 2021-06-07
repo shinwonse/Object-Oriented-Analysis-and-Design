@@ -16,7 +16,7 @@ public class Message implements Serializable {
         this.msg_type = msg_type;
         this.msg = msg;
     }
-    
+
     public int getSrc_id() {
         return this.src_id;
     }
