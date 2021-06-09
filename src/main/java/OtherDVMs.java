@@ -38,7 +38,7 @@ public class OtherDVMs {
     }
 
     public boolean checkCurrentDVMsStock(Drink selectedDrink, DVM currentDVM) {
-        ArrayList<Drink> drink_list = currentDVM.getDrink_list();
+        ArrayList<Drink> drink_list = (ArrayList<Drink>) currentDVM.getDrink_list();
         int dvmStock = 0;
         for(int i = 0; i < drink_list.size(); i++){
             if(drink_list.get(i).getName().equals(selectedDrink.getName())){
