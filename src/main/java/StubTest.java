@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -9,7 +10,7 @@ public class StubTest {
     }
 
     public static void main(String[] args){
-        final int STUB_TEST_ID = 999;
+        int STUB_TEST_ID = 999;
         StubTest stubTest = new StubTest();
         while(true) {
             Scanner scan = new Scanner(System.in);
@@ -20,8 +21,8 @@ public class StubTest {
             int msgType = scan.nextInt();
             System.out.print("메시지 내용: ");
             Scanner scan2 = new Scanner(System.in);
+            if(dstId == -1) break;
             String msg = scan2.nextLine();
-
             stubTest.test(STUB_TEST_ID, dstId, msgType, msg);
         }
     }
@@ -31,21 +32,20 @@ public class StubTest {
         message.createMessage(src_id, dst_id, msg_type, msg);
         if(dst_id == 0){
             for(int i = 1; i <= 8; i++){
-                try{
-                    Socket socket = new Socket("localhost", 8000 + i);
+                try (Socket socket = new Socket("localhost", 8000 + i)) {
                     ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                     objectOutputStream.writeObject(message);
                     objectOutputStream.flush();
                     System.out.println("[StubTest] DVM" + i
-                            + "에게 메시지 발신(메시지 유형: " + message.getMsg_type() + ", 메시지 내용: "+message.getMsg() + ")");
-                    switch (message.getMsg_type()){
+                            + "에게 메시지 발신(메시지 유형: " + message.getMsg_type() + ", 메시지 내용: " + message.getMsg() + ")");
+                    switch (message.getMsg_type()) {
                         case MsgType.REQUEST_STOCK:
                         case MsgType.REQUEST_LOCATION:
                         case MsgType.DRINK_SALE_CHECK:
                             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                            Message temp = (Message)objectInputStream.readObject();
+                            Message temp = (Message) objectInputStream.readObject();
                             System.out.println("[StubTest] DVM" + temp.getSrc_id()
-                                    + "로부터 메시지 수신(메시지 유형: " + temp.getMsg_type() + ", 메시지 내용: "+temp.getMsg() + ")");
+                                    + "로부터 메시지 수신(메시지 유형: " + temp.getMsg_type() + ", 메시지 내용: " + temp.getMsg() + ")");
                             break;
                         case MsgType.RESPONSE_STOCK:
                         case MsgType.RESPONSE_LOCATION:
@@ -55,8 +55,7 @@ public class StubTest {
                         default:
                             System.out.println("잘못된 메시지 타입입니다.");
                     }
-                    socket.close();
-                }catch(Exception e){
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -87,7 +86,7 @@ public class StubTest {
                         System.out.println("잘못된 메시지 타입입니다.");
                 }
                 socket.close();
-            }catch(Exception e){
+            }catch(IOException | ClassNotFoundException e){
                 e.printStackTrace();
             }
         }

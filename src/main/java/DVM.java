@@ -1,10 +1,10 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DVM {
 
     //public DVM(ArrayList<Drink> drink_list, int id, int address);
 
-    public ArrayList<Drink> getDrink_list();
+    public List<Drink> getDrink_list();
 
     public int getDVMId();
 
