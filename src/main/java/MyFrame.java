@@ -181,7 +181,7 @@ public class MyFrame extends JFrame {
         ArrayList<JLabel> label_drink = new ArrayList<>();
         pScreen.setLayout(grid);
         DVM currentDVM = controller.selectDVM(num);
-        ArrayList<Drink> currentDrinkList = currentDVM.getDrink_list();
+        ArrayList<Drink> currentDrinkList = (ArrayList<Drink>) currentDVM.getDrink_list();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 int index = i * 5 + j;
