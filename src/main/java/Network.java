@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Network extends Thread {
+public class Network {
     private ArrayList<DVM> dvmList;
     public ArrayList<DVM> getDvmList(){
         return dvmList;
@@ -28,7 +29,6 @@ public class Network extends Thread {
                     int stock = (int)handleStockRequest(src_id, dst_id, msg);
                     return stock;
                 }
-
             case MsgType.REQUEST_LOCATION:
                 int address = handleLocationRequest(src_id, dst_id);
                 return address;
@@ -36,15 +36,15 @@ public class Network extends Thread {
             case MsgType.DRINK_SALE_CHECK:
                 int remainedStock = (int)handleSaleRequest(src_id, dst_id, msg);
                 return remainedStock;
+            default:
+                return null;
         }
-        return null;
     }
 
     // 판매 확인 요청
     private Object handleSaleRequest(int src_id, int dst_id, String msg) {
         int remainedStock = 0;
-        try {
-            Socket socket = new Socket("localhost", 8000 + dst_id);
+        try (Socket socket = new Socket("localhost", 8000 + dst_id)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
             Message message = new Message();
@@ -59,8 +59,8 @@ public class Network extends Thread {
                     + "으로부터 메시지 수신(유형: " + receivedMsg.getMsg_type() + "(판매 확인 응답), 내용: " + receivedMsg.getMsg() + ")");
             remainedStock = Integer.parseInt(receivedMsg.getMsg());
 
-            socket.close();
-        } catch (Exception e) {
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return remainedStock;
@@ -72,8 +72,7 @@ public class Network extends Thread {
         int stock = 0;
         if(dst_id == 0){
             for(int i = 1; i <= dvmList.size(); i++){
-                try {
-                    Socket socket = new Socket("localhost", 8000 + i);
+                try (Socket socket = new Socket("localhost", 8000 + i)) {
                     ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
                     Message message = new Message();
@@ -87,19 +86,17 @@ public class Network extends Thread {
                     System.out.println("[Controller] DVM" + receivedMsg.getSrc_id()
                             + "으로부터 메시지 수신(유형: " + receivedMsg.getMsg_type() + ", 내용: " + receivedMsg.getMsg() + ")");
                     stock = Integer.parseInt(receivedMsg.getMsg());
-                    if(stock > 0){
+                    if (stock > 0) {
                         accessibleDVMList.add(dvmList.get(i - 1));
                     }
-                    socket.close();
-                } catch (Exception e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
             return accessibleDVMList;
         }
         else{
-            try {
-                Socket socket = new Socket("localhost", 8000 + dst_id);
+            try (Socket socket = new Socket("localhost", 8000 + dst_id)) {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 Message message = new Message();
                 message.createMessage(src_id, dst_id, MsgType.REQUEST_STOCK, msg);
@@ -115,7 +112,7 @@ public class Network extends Thread {
                         + "으로부터 메시지 수신(유형: " + receivedMsg.getMsg_type() + "(재고 응답), 내용: " + receivedMsg.getMsg() + ")");
                 stock = Integer.parseInt(receivedMsg.getMsg());
                 socket.close();
-            } catch (Exception e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
             return stock;
@@ -125,8 +122,7 @@ public class Network extends Thread {
     //위치 확인 요청
     private int handleLocationRequest(int src_id, int dst_id) {
         int address = -1;
-        try {
-            Socket socket = new Socket("localhost", 8000 + dst_id);
+        try (Socket socket = new Socket("localhost", 8000 + dst_id)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             Message message = new Message();
             message.createMessage(src_id, dst_id, MsgType.REQUEST_LOCATION);
@@ -141,7 +137,7 @@ public class Network extends Thread {
                     + "으로부터 메시지 수신(유형: " + receivedMsg.getMsg_type() + "(위치 응답), 내용: " + receivedMsg.getMsg() + ")");
             address = Integer.parseInt(receivedMsg.getMsg());
             socket.close();
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return address;

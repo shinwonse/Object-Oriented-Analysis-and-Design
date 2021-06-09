@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -39,7 +40,7 @@ public class DVM2 extends Thread implements DVM {
         this.id = id;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ArrayList<Drink> drinkArrayList2 = new ArrayList<>(); // 전체 음료수 리스트
         drinkArrayList2.add(new Drink("빡텐션", 1500, 10, "src/main/resources/image/10.jpg"));
         drinkArrayList2.add(new Drink("파워에이드", 1500, 120, "src/main/resources/image/13.jpg"));
@@ -62,23 +63,34 @@ public class DVM2 extends Thread implements DVM {
         drinkArrayList2.add(new Drink("솔의눈", 1500, 0, "src/main/resources/image/18.jpg"));
         drinkArrayList2.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
         DVM2 dvm2 = new DVM2(drinkArrayList2, 2, 202);
+        dvm2.setServerPort();
         dvm2.run();
+    }
+
+    public void setServerPort() throws IOException {
+        serverSocket = new ServerSocket(8000 + getDVMId());
+    }
+
+    public void closeServerPort() throws IOException {
+        serverSocket.close();
     }
 
     public void run() {
         try {
-            serverSocket = new ServerSocket(8000 + getDVMId());
             System.out.println("[DVM" + getDVMId() + "] SERVER ON");
-
-            while (true) {
+            boolean flag = true;
+            while (flag) {
                 receive_socket= serverSocket.accept();
                 //System.out.println("Client connected");
 
                 objectInputStream = new ObjectInputStream(receive_socket.getInputStream());
                 Message msg = (Message) objectInputStream.readObject();
-
-                System.out.println("[DVM" + getDVMId() + "] DVM" + msg.getSrc_id()
-                        + "로부터 메시지 수신(유형: " + msg.getMsg_type() + ", 내용: " + msg.getMsg()+ ")");
+                if(msg.getSrc_id() == STUB_TEST_ID)
+                    System.out.println("[DVM" + getDVMId() + "] StubTest"
+                            + "로부터 메시지 수신(유형: " + msg.getMsg_type() + ", 내용: " + msg.getMsg()+ ")");
+                else
+                    System.out.println("[DVM" + getDVMId() + "] DVM" + msg.getSrc_id()
+                            + "로부터 메시지 수신(유형: " + msg.getMsg_type() + ", 내용: " + msg.getMsg()+ ")");
                 int type = msg.getMsg_type();
                 switch (type) {
                     case MsgType.REQUEST_STOCK:
@@ -90,12 +102,18 @@ public class DVM2 extends Thread implements DVM {
                     case MsgType.DRINK_SALE_CHECK:
                         responseSaleMessage(msg);
                         break;
+                    case 999:
+                        flag = false;
+                        break;
                     default:
                         System.out.println("잘못된 메시지 유형입니다.");
                 }
-                receive_socket.close();
+                if(!flag) {
+                    receive_socket.close();
+                    break;
+                }
             }
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -145,7 +163,7 @@ public class DVM2 extends Thread implements DVM {
             else
                 System.out.println("[DVM" + getDVMId() + "] Controller"
                         + "에게 메시지 발신(유형: " + message.getMsg_type() + "(재고 응답), 내용: " + message.getMsg() + ")");
-        }catch (Exception e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -164,7 +182,7 @@ public class DVM2 extends Thread implements DVM {
             else
                 System.out.println("[DVM" + getDVMId() + "] Controller"
                         + "에게 메시지 발신(유형: " + message.getMsg_type() + "(위치 응답), 내용: " + message.getMsg() + ")");
-        }catch (Exception e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -190,7 +208,7 @@ public class DVM2 extends Thread implements DVM {
             else
                 System.out.println("[DVM" + getDVMId() + "] Controller"
                         + "에게 메시지 발신(유형: " + message.getMsg_type() + "(판매 확인 응답), 내용: " + message.getMsg() + ")");
-        }catch (Exception e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }

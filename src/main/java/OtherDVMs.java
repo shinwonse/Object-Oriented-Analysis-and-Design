@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class OtherDVMs extends Thread{
+public class OtherDVMs {
     private ArrayList<DVM> dvmList =new ArrayList<DVM>();
     private Network network;
 
@@ -16,7 +16,7 @@ public class OtherDVMs extends Thread{
         init();
     }
 
-    DVM getDVM(int index){
+    public DVM getDVM(int index){
         DVM currentDVM = dvmList.get(index);
         for(Drink drink : currentDVM.getDrink_list()){
             Message message = new Message();

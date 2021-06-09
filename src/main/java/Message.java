@@ -6,6 +6,7 @@ public class Message implements Serializable {
     private int dst_id;
     private int msg_type;
     private String msg;
+    public static final long serialVersionUID = 42L;
 
     public int getSrc_id() {
         return this.src_id;
