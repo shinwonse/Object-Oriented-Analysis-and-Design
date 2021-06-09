@@ -240,7 +240,7 @@ public class MyFrame extends JFrame {
                     inputNum = inputTemp;
                     inputText.setText("");
                     // 선택완료 메시지
-                    JOptionPane aa=new JOptionPane();
+//                    JOptionPane aa=new JOptionPane();
                     if(inputNum >=1 && inputNum <= 8) {
                         JOptionPane.showMessageDialog(null, inputNum + "번 DVM을 선택하셨습니다.");
                         pScreen.removeAll();
@@ -398,7 +398,8 @@ public class MyFrame extends JFrame {
                             showAllDVMList(pScreen);
                             pScreen.updateUI();
                             break;
-
+                        default:
+                            System.out.println("잘못된 접근입니다.(MyFrame Stage 관련)");
                     }
                 }else if(eventText.equals("←")) {
 //                    int tmp= inputTemp % 10;

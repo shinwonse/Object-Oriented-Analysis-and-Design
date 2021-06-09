@@ -31,51 +31,42 @@ class CodeTest {
     @Test
     void getCode() { // 코드가 맞게 반환되는지
         assertEquals(11111, code1.getCode());
-
         assertEquals(22222, code2.getCode());
-
         assertEquals(33333, code3.getCode());
-
         assertEquals(44444, code4.getCode());
-
         assertEquals(55555, code5.getCode());
-
         assertEquals(66666, code6.getCode());
-
         assertEquals(77777, code7.getCode());
-
         assertEquals(88888, code8.getCode());
-
         assertEquals(99999, code9.getCode());
-
         assertEquals(00000, code10.getCode());
     }
+    @Test
+    void setCode(){
+        int testCode = 12345;
+        code1.setCode(testCode);
+        assertEquals(testCode, code1.getCode());
 
-//    @Test // 안 썼고
-//    void setCode() {
-//    }
+        int testCode2 = 54321;
+        code2.setCode(testCode2);
+        assertEquals(testCode2, code2.getCode());
+
+        int testCode3 = 11111;
+        code3.setCode(testCode2);
+        assertNotEquals(testCode3, code3.getCode());
+    }
 
     @Test
     void getDrink() { // 음료 정보가 맞게 반환되는지
-
         assertEquals(drink1, code1.getDrink());
-
         assertEquals(drink2, code2.getDrink());
-
         assertEquals(drink3, code3.getDrink());
-
         assertEquals(drink4, code4.getDrink());
-
         assertEquals(drink5, code5.getDrink());
-
         assertEquals(drink6, code6.getDrink());
-
         assertEquals(drink7, code7.getDrink());
-
         assertEquals(drink8, code8.getDrink());
-
         assertEquals(drink9, code9.getDrink());
-
         assertEquals(drink10, code10.getDrink());
     }
 }

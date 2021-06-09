@@ -1,7 +1,7 @@
 public class Code {
 
     private int code;
-    private Drink drink;
+    private final Drink drink;
 
     public Code(int code, Drink drink_info) {
         this.code = code;
@@ -11,11 +11,9 @@ public class Code {
     public int getCode() {
         return code;
     }
-
     public void setCode(int code) {
         this.code = code;
     }
-
     public Drink getDrink() {
         return drink;
     }
