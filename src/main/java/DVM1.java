@@ -14,7 +14,7 @@ public class DVM1 extends Thread implements DVM {
     private Socket receive_socket = null;
     private ObjectInputStream objectInputStream = null;
     private ObjectOutputStream objectOutputStream = null;
-    private final int STUB_TEST_ID = 999;
+    private static final int STUB_TEST_ID = 999;
 
     public ServerSocket getServerSocket(){
         return serverSocket;
@@ -64,7 +64,7 @@ public class DVM1 extends Thread implements DVM {
         drinkArrayList.add(new Drink("마운틴듀", 1500, 0, "src/main/resources/image/20.jpg"));
         DVM1 dvm1 = new DVM1(drinkArrayList, 1, 101);
         dvm1.setServerPort();
-        dvm1.run();
+        dvm1.start();
     }
 
     public void setServerPort() throws IOException {

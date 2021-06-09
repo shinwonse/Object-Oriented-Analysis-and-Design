@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CardPayment {
 
-    private Card card_info;
+//    private Card card_info;
     private Drink drink_info;
-    private boolean isPrePayment;
+//    private boolean isPrePayment;
     private ArrayList<Card> basicCardList;
 
     public CardPayment() {
@@ -26,7 +27,8 @@ public class CardPayment {
     public Code generateCode(Drink selected_drink){
         //5자리 코드 생성 후, 음료 객체랑 합쳐서 코드 객체 생성
         drink_info = selected_drink;
-        int generatedCodeNum = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
+        Random random = new Random();
+        int generatedCodeNum = (int)(random.nextInt(99999)+10000);
         Code generatedCode = new Code(generatedCodeNum, drink_info);
         return generatedCode;
     }
