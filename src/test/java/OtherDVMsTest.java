@@ -1,71 +1,97 @@
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OtherDVMsTest {
-    Controller controller = new Controller();
-    OtherDVMs otherDVMs = new OtherDVMs();
+    OtherDVMs otherDVMs;
+
+
+    OtherDVMsTest() throws IOException {
+    }
+
+    @BeforeEach
+    void dvmOn() throws IOException {
+        otherDVMs = new OtherDVMs();
+    }
+
+    @AfterEach
+    void dvmOff() throws IOException{
+        for(DVM dvm : otherDVMs.getDVMList()){
+            dvm.stop();
+            dvm.closeServerPort();
+        }
+    }
+
     @Test
-    void getDVMTest() {
+    void getDVMTest(){
         DVM dvm = otherDVMs.getDVM(0);
+
         assertEquals(1, dvm.getDVMId());
+        assertEquals(101, dvm.getAddress());
+        assertEquals(10, dvm.getDrink_list().get(0).getStock());
     }
 
     @Test
-    void getDVMListTest() {
+    void getDVMListTest(){
         ArrayList<DVM> dvmList = otherDVMs.getDVMList();
-        assertEquals(8, dvmList.size());
-        assertEquals(8, dvmList.get(dvmList.size() - 1).getDVMId());
+
+        assertEquals(1, dvmList.get(0).getDVMId());
+        assertEquals(101, dvmList.get(0).getAddress());
+        assertEquals(10, dvmList.get(0).getDrink_list().get(0).getStock());
     }
 
     @Test
-    void checkCurrentDVMsStockTest() {
-        Drink drink = new Drink("빡텐션", 0, 0, "");
+    void checkCurrentDVMsStockTest1(){
+        Drink drink = otherDVMs.getDVM(0).getDrink_list().get(0);
         DVM currentDVM = otherDVMs.getDVM(0);
 
-        boolean b = otherDVMs.checkCurrentDVMsStock(drink, currentDVM);
-        assertFalse(b);
+        boolean result = otherDVMs.checkCurrentDVMsStock(drink, currentDVM);
+
+        assertTrue(result);
     }
 
     @Test
-    @Disabled
-    void checkOtherDVMsStockTest() {
-        Drink drink = new Drink("빡텐션", 0, 0, "");
+    void checkCurrentDVMsStockTest2(){
+        Drink drink = otherDVMs.getDVM(0).getDrink_list().get(15);
+        DVM dvm = otherDVMs.getDVM(0);
 
-        DVM currentDVM = otherDVMs.getDVM(0);
-        ArrayList<DVM> dvms = otherDVMs.checkOtherDVMsStock(drink, currentDVM);
+        boolean result = otherDVMs.checkCurrentDVMsStock(drink, dvm);
 
-        assertNotEquals(dvms.size(), 0);
+        assertFalse(result);
     }
 
     @Test
-    void requestDrinkTest() {
-        Drink drink = new Drink("코카콜라", 0, 0, "");
-        String s = otherDVMs.requestDrink(drink, otherDVMs.getDVM(0));
+    void requestDrinkTest(){
+        Drink drink = otherDVMs.getDVM(0).getDrink_list().get(0);
+        DVM dvm = otherDVMs.getDVM(0);
 
-        assertNotEquals(s, "");
+        String result = otherDVMs.requestDrink(drink, dvm);
 
+        String expectedResult = "       <음료 구매 완료>" +
+                "\n구매 진행한 DVM: DVM1"
+                + "\n구매한 음료: 코카콜라"
+                + "\n음료 가격: 1500원"
+                + "\n잔여 재고: 9개";
+        assertEquals(expectedResult, result);
     }
 
     @Test
-    @Disabled
-    void showAccessibleDVMsLocationTest() {
-        ArrayList<DVM> accessibleList = new ArrayList<>();
-        Drink drink = new Drink("코카콜라", 0, 1, "");
-        ArrayList<Drink> drinks = new ArrayList<>();
-        drinks.add(drink);
-        DVM dvm1 = new DVM1(drinks, 1, 101);
-        DVM dvm2 = new DVM2(drinks, 2, 202);
-        accessibleList.add(dvm1);
-        accessibleList.add(dvm2);
+    void showAccessibleDVMsLocationTest(){
+        ArrayList<DVM> dvmList = new ArrayList<>();
+        dvmList.add(otherDVMs.getDVM(0));
+        dvmList.add(otherDVMs.getDVM(1));
+        DVM dvm = otherDVMs.getDVM(0);
 
-        String s = otherDVMs.showAccessibleDVMsLocation(accessibleList, otherDVMs.getDVM(0));
+        String result = otherDVMs.showAccessibleDVMsLocation(dvmList, dvm);
 
-        String expectedString = "DVM 명: DVM1 / 위치: 101\nDVM 명: DVM2 / 위치: 202\n";
-
-        assertEquals(expectedString, s);
+        String expectedResult = "DVM 명: DVM1 / 위치: 101\nDVM 명: DVM2 / 위치: 202\n";
+        assertEquals(expectedResult, result);
     }
 }
