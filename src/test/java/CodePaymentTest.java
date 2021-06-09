@@ -33,11 +33,14 @@ class CodePaymentTest {
     void getCode_info() {
         CodePayment codePayment2 = new CodePayment();
         codePayment2.setCode_info(code_info1);
-        assertEquals(code_info1,codePayment2.getCode_info());
 
-        assertEquals(code_info3, codePayment1.getCode_info());
+        Code code = codePayment2.getCode_info();
+
+        assertEquals(code_info1, code);
+        assertEquals(code_info1.getCode(), code.getCode());
+        assertEquals(code_info1.getDrink(), code.getDrink());
     }
-//
+
     @Test
     void setCode_info() {
         CodePayment codePayment = new CodePayment();
@@ -54,7 +57,9 @@ class CodePaymentTest {
 
     @Test
     void getCodeAvailable() {
-        assertEquals(true,codePayment1.getCodeAvailable());
+        codePayment1.setCode_info(code_info3);
+        codePayment1.setCodeAvailable(true);
+        assertTrue(codePayment1.getCodeAvailable());
     }
 
     @Test
@@ -88,8 +93,12 @@ class CodePaymentTest {
 
     @Test
     void CodePayment2(){
-        CodePayment cp1 = new CodePayment(code_info1, true);
-        CodePayment cp2 = new CodePayment(code_info2, false);
+        CodePayment cp1 = new CodePayment();
+        CodePayment cp2 = new CodePayment();
+        cp1.setCodeAvailable(true);
+        cp1.setCode_info(code_info1);
+        cp2.setCodeAvailable(false);
+        cp2.setCode_info(code_info2);
 
         assertEquals(true, cp1.getCodeAvailable());
         assertEquals(false, cp2.getCodeAvailable());

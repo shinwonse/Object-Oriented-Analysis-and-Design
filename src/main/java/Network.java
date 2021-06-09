@@ -111,7 +111,6 @@ public class Network {
                 System.out.println("[Controller] DVM" + receivedMsg.getSrc_id()
                         + "으로부터 메시지 수신(유형: " + receivedMsg.getMsg_type() + "(재고 응답), 내용: " + receivedMsg.getMsg() + ")");
                 stock = Integer.parseInt(receivedMsg.getMsg());
-                socket.close();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

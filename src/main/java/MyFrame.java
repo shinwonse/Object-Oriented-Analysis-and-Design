@@ -18,6 +18,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MyFrame extends JFrame {
@@ -95,7 +97,7 @@ public class MyFrame extends JFrame {
     }
 
 
-    MyFrame() {
+    MyFrame() throws IOException {
         init();
     }
 
@@ -156,8 +158,13 @@ public class MyFrame extends JFrame {
         pScreen.setLayout(grid);
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/main/resources/image/vm_image.png")
-                        .getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                URL imageURL = getClass().getClassLoader().getResource("image/vm_image.png");
+                ImageIcon imageIcon = new ImageIcon(imageURL);
+                Image image = imageIcon.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT);
+                imageIcon.setImage(image);
+//                ImageIcon imageIcon = new ImageIcon("image/vm_image.png");
+//                Image image = imageIcon.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT);
+//                imageIcon.setImage(image);
                 int num = i * 4 + j;
                 int id = dvmInfo.get(num).get(0);
                 int address = dvmInfo.get(num).get(1);
@@ -186,8 +193,10 @@ public class MyFrame extends JFrame {
             for (int j = 0; j < 5; j++) {
                 int index = i * 5 + j;
                 Drink drink = currentDrinkList.get(index);
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(drink.getImgURL())
-                        .getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT));
+                URL imageURL = getClass().getClassLoader().getResource(drink.getImgURL());
+                ImageIcon imageIcon = new ImageIcon(imageURL);
+                Image image = imageIcon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                imageIcon.setImage(image);
                 String name = drink.getName();
                 int price = drink.getPrice();
                 int stock = drink.getStock();

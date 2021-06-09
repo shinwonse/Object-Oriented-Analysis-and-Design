@@ -10,77 +10,25 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ControllerTest extends Thread {
+class ControllerTest {
 
-    ArrayList<Code> code_list = new ArrayList<Code>();
-    int currentDVMIndex;
-    ArrayList<DVM> accessible_DVM_list;
-    Card card_info;
-    OtherDVMs otherDVMs;
-    Drink selected_drink;
-    CardPayment cardPayment = new CardPayment();
-    CodePayment codePayment = new CodePayment();
-
-    Code testCode = new Code(12345,new Drink("코카콜라",1000,10,""));
-    Controller controller = new Controller();
+    Controller controller;
     ArrayList<Drink> drinkArrayList = new ArrayList<>(); // 전체 음료수 리스트
     ArrayList<Drink> drinkArrayList2 = new ArrayList<>(); // 전체 음료수 리스트
-    DVM1 dvm1;
-    DVM2 dvm2;
-    DVM3 dvm3;
-    DVM4 dvm4;
-    DVM5 dvm5;
-    DVM6 dvm6;
-    DVM7 dvm7;
-    DVM8 dvm8;
 
+    ControllerTest() throws IOException {
+    }
     @BeforeEach
-    void dvmOn() throws IOException {
-        initDrinkList();
-        dvm1 = new DVM1(drinkArrayList, 1, 101);
-        dvm1.setServerPort();
-        dvm2 = new DVM2(drinkArrayList2, 2, 202);
-        dvm2.setServerPort();
-        dvm3 = new DVM3(drinkArrayList, 3, 303);
-        dvm3.setServerPort();
-        dvm4 = new DVM4(drinkArrayList, 4, 404);
-        dvm4.setServerPort();
-        dvm5 = new DVM5(drinkArrayList2, 5, 505);
-        dvm5.setServerPort();
-        dvm6 = new DVM6(drinkArrayList, 6, 606);
-        dvm6.setServerPort();
-        dvm7 = new DVM7(drinkArrayList2, 7, 707);
-        dvm7.setServerPort();
-        dvm8 = new DVM8(drinkArrayList, 8, 808);
-        dvm8.setServerPort();
-        dvm1.start();
-        dvm2.start();
-        dvm3.start();
-        dvm4.start();
-        dvm5.start();
-        dvm6.start();
-        dvm7.start();
-        dvm8.start();
+    void networkOn() throws IOException {
+        controller = new Controller();
     }
 
     @AfterEach
-    void dvmOff() throws IOException{
-        dvm1.stop();
-        dvm1.closeServerPort();
-        dvm2.stop();
-        dvm2.closeServerPort();
-        dvm3.stop();
-        dvm3.closeServerPort();
-        dvm4.stop();
-        dvm4.closeServerPort();
-        dvm5.stop();
-        dvm5.closeServerPort();
-        dvm6.stop();
-        dvm6.closeServerPort();
-        dvm7.stop();
-        dvm7.closeServerPort();
-        dvm8.stop();
-        dvm8.closeServerPort();
+    void networkOff() throws IOException{
+        for(DVM dvm : controller.getOtherDVMs().getDVMList()){
+            dvm.stop();
+            dvm.closeServerPort();
+        }
     }
 
     void initDrinkList(){
@@ -160,7 +108,7 @@ class ControllerTest extends Thread {
         assertEquals(0, currentDVM.getDrink_list().get(2).getStock());
         assertEquals(10, currentDVM.getDrink_list().get(3).getStock());
         assertEquals(8, currentDVM.getDrink_list().get(4).getStock());
-        assertEquals(1, currentDVM.getDrink_list().get(5).getStock());
+        assertEquals(0, currentDVM.getDrink_list().get(5).getStock());
         assertEquals(10, currentDVM.getDrink_list().get(6).getStock());
         assertEquals(0, currentDVM.getDrink_list().get(7).getStock());
         assertEquals(0, currentDVM.getDrink_list().get(8).getStock());
@@ -207,7 +155,7 @@ class ControllerTest extends Thread {
         final int CUR_IN_STOCK = 1;    // 현재 DVM에 재고가 있음
         final int OTHER_IN_STOCK = 2;  // 다른 DVM에 재고가 있음
 
-        int result = controller.selectCurrentDrink(18);
+        int result = controller.selectCurrentDrink(6);
 
         assertEquals(EMPTY_ALL_STOCK, result);
     }
@@ -220,7 +168,7 @@ class ControllerTest extends Thread {
         final int OTHER_IN_STOCK = 2;  // 다른 DVM에 재고가 있음
         controller.selectDVM(1);
 
-        int result = controller.selectOtherDrink(20);
+        int result = controller.selectOtherDrink(14);
 
         assertEquals(OTHER_IN_STOCK, result);
     }
@@ -232,7 +180,7 @@ class ControllerTest extends Thread {
         final int OTHER_IN_STOCK = 2;  // 다른 DVM에 재고가 있음
         controller.selectDVM(1);
 
-        int result = controller.selectOtherDrink(19);
+        int result = controller.selectOtherDrink(20);
 
         assertEquals(EMPTY_ALL_STOCK, result);
     }
@@ -281,39 +229,38 @@ class ControllerTest extends Thread {
     @Test // 4. 선결제 성공
     void insertCardTest4() {
         controller.selectDVM(1); // 1번 DVM 선택
-        controller.selectCurrentDrink(20);
+        controller.selectCurrentDrink(15);
 
         String result = controller.insertCard(12341234, true);
 
         Code code = controller.getCodeList().get(0);
         String expectedResult = "선결제 진행 DVM: 1"
-                + "\n선결제한 음료수: 마운틴듀"
+                + "\n선결제한 음료수: 레쓰비"
                 + "\n음료 가격: 1500"
                 + "\n선결제 후 카드 잔고: 8500원"
                 + "\n발급 코드: '" + code.getCode() + "'"
                 + "\n\n<해당 음료 구매 가능 DVM 및 DVM 위치>"
-                +"\n " + "DVM 명: DVM2 / 위치: 202"
-                +"\n" + "DVM 명: DVM5 / 위치: 505"
-                +"\n" + "DVM 명: DVM7 / 위치: 707\n";
+                +"\n " + "DVM 명: DVM2 / 위치: 202" +
+                "\nDVM 명: DVM5 / 위치: 505\n";
         assertEquals(expectedResult, result);
     }
 
     @Test // 1. 정상 코드 구매
     void enterCodeTest1(){
         controller.selectDVM(1); // 1번 DVM 선택
-        controller.selectCurrentDrink(20);
+        controller.selectCurrentDrink(10);
         controller.insertCard(12341234, true);
 
         int code = controller.getCodeList().get(0).getCode();
         controller.selectDVM(2); // 1번 DVM 선택
-        controller.selectCurrentDrink(20);
+        controller.selectCurrentDrink(1);
         String result = controller.enterCode(code);
 
         String expectedResult = "       <음료 구매 완료>" +
                 "\n구매 진행한 DVM: DVM2"
-                + "\n구매한 음료: 마운틴듀"
+                + "\n구매한 음료: 빡텐션"
                 + "\n음료 가격: 1500원"
-                + "\n잔여 재고: 998개"
+                + "\n잔여 재고: 9개"
                 + "\n코드 정보: " + code;
 
         assertEquals(expectedResult, result);

@@ -3,12 +3,12 @@ public class CodePayment {
     private Code code_info;
     private Boolean isCodeAvailable;
 
-//    public CodePayment() {
-//    }
-//    public CodePayment(Code code_info, Boolean isCodeAvailable) {
-//        code_info = this.code_info;
-//        isCodeAvailable = this.isCodeAvailable;
-//    }
+    public CodePayment() {
+    }
+    public CodePayment(Code code_info, Boolean isCodeAvailable) {
+        code_info = this.code_info;
+        isCodeAvailable = this.isCodeAvailable;
+    }
 
     public Code getCode_info() {
         return code_info;
