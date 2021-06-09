@@ -88,8 +88,12 @@ class CodePaymentTest {
 
     @Test
     void CodePayment2(){
-        CodePayment cp1 = new CodePayment(code_info1, true);
-        CodePayment cp2 = new CodePayment(code_info2, false);
+        CodePayment cp1 = new CodePayment();
+        CodePayment cp2 = new CodePayment();
+        cp1.setCodeAvailable(true);
+        cp1.setCode_info(code_info1);
+        cp2.setCodeAvailable(false);
+        cp2.setCode_info(code_info2);
 
         assertEquals(true, cp1.getCodeAvailable());
         assertEquals(false, cp2.getCodeAvailable());
